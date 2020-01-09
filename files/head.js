@@ -3355,7 +3355,7 @@ function ClickB_Enemy(){
       myInnerHtml("B_3","<b>"+(ZokuseiOBJ[w]+n_B[3]%10)+"</b>",0),
     myInnerHtml("B_4",SizeOBJ[n_B[4]],0),
     n_B[27]+=n_B_manual[37],
-    1==document.calcForm.A8_Skill14.value&&(n_Ses=1),
+    1==document.calcForm.A8_Skill14.value?(n_Ses=1):(n_Ses=0),
     n_Ses&&(n_B[27]=Math.floor(.8*n_B[27])),
     n_B_DEF2 = [0, 0, 0],
     n_B_DEF2[2] = n_B[23],
