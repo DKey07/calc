@@ -1204,7 +1204,7 @@ ItemOBJ=[
  ,[1201,999,0,0,0,0,25,1,"Small Fishing..?",0,"[description translation missing - ItemID: 1201]",0]
  ,[1202,100,0,0,0,0,0,0,"SET: Blush & Necktie",0,"",12,3,73,3,0]
  ,[1203,100,0,0,0,0,0,0,"SET: Dragon Vest & Manteau",0,"",2,5,9,15,0]
- ,[1204,50,0,2,0,1,50,1,"Necromancer Hood",0,"",193,1,221,112,0]
+ ,[1204,50,0,2,0,1,10,10,"Necromancer's Hood",0,"",200,1,221,112,0]
  ,[1205,50,0,5,0,0,60,20,"Wandering Wolf Hat",0,"",193,1,3,5,9,10,0]
  ,[1206,50,1,2,0,1,50,30,"Frog Prince Hat",0,"",193,1,2,1,0]
  ,[1207,51,0,0,0,0,30,50,"Jaguar Face",0,"",43,5,0]
@@ -1847,6 +1847,9 @@ ItemOBJ=[
  ,[1844,50,0,0,0,1,35,10,"White Paw Topper",0,"",6,1,15,3,0]
  ,[1845,50,0,2,0,1,30,10,"Zealotus Doll",0,"",37,3,57,3,0]
  ,[1846,50,0,3,0,0,15,10,"Boneboy's Cap",0,"",10,9,0]
+ ,[1847,52,0,0,0,0,10,0,"Rudolph's Red Nose (FreeRO)",0,"0.90% chance to drop a [Cookie Bag] item when killing a monster.",154,30,0]
+ ,[1848,52,0,0,0,0,20,0,"Long Tongue (FreeRO)",0,"",0]
+ ,[1849,100,0,0,0,0,0,0,"SET: Sting Hat + Long Tongue",0,"Juice recovery rate +200%",0]
 //[itemID,pos,reqJob,atk/def,wpnLv,slot,weight,reqLv,"name",0,"desc"{,bonusNum,bonusValue},0]
 //  pos: 0-empty,1-dagger,2-sword,3-2h sword,4-spear,5-2h spear,6-axe,7-2h axe,8-mace,9-staff(both),10-bow,11-katar,12-book,13-knuckle,14-instrument,15-whip,16-huuma,17-handgun,18-rifle,19-shotgun,20-gatling,21-launcher
 //       50-upper head,51-middle head,52-lower head,60-armor,61-shield,62-garment,63-boots,64-accessory
@@ -2299,6 +2302,7 @@ w_SE=[
  ,[1828,1827,1772,"NULL"]
  ,[1829,1827,1830,"NULL"]
  ,[1833,1832,1800,"NULL"]
+ ,[1849,1420,1848,"NULL"]
 // [itemID,itemID,itemID{,itemID},"NULL"]
 //   first pos - ID of SET description
 ];
