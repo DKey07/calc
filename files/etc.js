@@ -355,12 +355,14 @@ ITEM_SP_TIME_OBJ=[
  ,[65,"Pervomai Hat","ATK +50",1,1818,17,50,0]
  ,[66,"Pervomai Hat","MATK +40",1,1818,88,40,0]
  ,[67,"Pumpkin Head","All stats +2, MDEF +7",1,1830,7,2,19,7,0]
+ ,[68,"Awakened Bad Grader Cap (Autumn)","STR +2, DEX +1",1,1766,1,2,5,1,0]
+ ,[69,"Awakened Brighthead Cap (Autumn)","DEX +1, Experience gained +3%",1,1767,5,2,120,4,121,4,122,4,123,4,124,4,125,4,126,4,127,4,128,4,129,4,0]
 //[tempID,"name","description",slot,slotID,{,bonusNum,bonusValue},0]
 //  slot: 2-cardOBJ,1-ItemOBJ
 //  slotID: cardID/itemID determined by slot
 ];
 // ITEM_SP_TIME_OBJ_SORT --> Sort list for temporary effects
-ITEM_SP_TIME_OBJ_SORT=[0,5,10,4,27,3,44,63,64,30,31,26,39,45,46,18,59,48,55,61,15,11,12,14,13,17,32,2,1,7,47,56,35,60,33,21,16,40,28,65,66,67,49,53,54,34,38,42,19,52,22,23,24,36,41,25,50,51,9,6,20,8,29,43,37,58,62,57];
+ITEM_SP_TIME_OBJ_SORT=[0,5,10,4,27,3,68,69,30,26,39,18,48,15,11,12,14,13,32,2,1,7,35,33,21,16,40,65,66,67,34,19,52,22,23,24,36,25,9,6,20,8,29];
 
 // 'Other Info' Creation rate calc
 Potion_Type=[
