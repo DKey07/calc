@@ -901,8 +901,8 @@ ItemOBJ=[
  ,[898,1,0,120,3,0,0,80,"Valorous Assassin Damascus",0,"When performing an ATK based attack, 1% chance to endow the weapon with Occult impaction/Icepick effect for 6 seconds.<br><b>[Ninja Class, Rogue or Stalker]</b><br>MATK +15%",194,1,1,1,2,1,37,75,0]
  ,[899,2,0,115,3,0,0,80,"Valorous Gladiator Blade",0,"",194,1,1,1,5,1,37,75,307,20,0]
  ,[900,2,0,115,3,0,0,80,"Brave Gladiator Blade",0,"",194,1,1,1,5,1,37,75,89,10,0]
- ,[901,3,51,200,3,0,0,80,"Valorous Assault Katzbalger",0,"",194,1,1,2,37,55,307,20,0]
- ,[902,3,51,200,3,0,0,80,"Brave Assault Katzbalger",0,"",194,1,10,20,37,55,70,20,0]
+ ,[901,3,51,200,3,0,0,80,"Valorous Assault Katzbalger",0,"",194,1,10,20,37,55,70,20,0]
+ ,[902,3,51,200,3,0,0,80,"Brave Assault Katzbalger",0,"",194,1,1,2,37,55,307,20,0]
  ,[903,4,51,60,3,0,0,80,"Assaulter Spear",0,"<b>[Crusader or Paladin]</b><br>ASPD +20%",194,1,1,2,37,95,307,20,0]
  ,[904,5,0,160,3,0,0,80,"Assaulter Lance",0,"",194,1,1,2,37,25,187,1,0]
  ,[905,7,1,200,3,0,0,80,"Valorous Insane Battle Axe",0,"",194,1,1,3,37,55,307,20,0]
@@ -1406,7 +1406,7 @@ ItemOBJ=[
  ,[1403,50,0,3,0,1,30,85,"Crown of Deceit",0,"",4,4,19,10,73,-10,0]
  ,[1404,51,0,1,0,0,10,70,"Filir's Pinions",0,"",12,2,74,2,0]
  ,[1405,50,0,2,0,0,20,1,"Advanced Mini Propeller",0,"",2,2,5,1,9,10,0]
- ,[1406,50,0,4,0,1,30,1,"Snowman Hat",0,"<br>10% chance to obtain a [Buche De Noel] item when killing a monster<br>10% chance to obtain a [Candy Cane] item when killing a monster<br><br><b>[Refine Rate 8~10]</b><br>Casts [Frost Joker] Lv 5 instead",19,3,1,1,4,1,61,7,221,130,0]
+ ,[1406,50,0,4,0,1,30,1,"Snowman Hat",0,"10% chance to obtain a [Buche De Noel] item when killing a monster<br>10% chance to obtain a [Candy Cane] item when killing a monster<br><br><b>[Refine Rate 8~10]</b><br>Casts [Frost Joker] Lv 5 instead",19,3,1,1,4,1,61,7,221,130,0]
  ,[1407,50,0,0,0,1,60,1,"Red Wing Hat",0,"<b>[Refine Rate 7~10]</b><br>ATK +2%, MATK +2%<br><b>[Refine Rate 9~10]</b><br>Additional ATK+2% and MATK +2%",0]
  ,[1408,50,0,2,0,0,20,1,"Valentine Hat (fRO)",0,"",193,1,15,7,16,7,0]
  ,[1409,50,0,0,0,0,10,1,"Victory Hairband",0,"",0]
@@ -1850,6 +1850,7 @@ ItemOBJ=[
  ,[1847,52,0,0,0,0,10,0,"Rudolph's Red Nose (FreeRO)",0,"0.90% chance to drop a [Cookie Bag] item when killing a monster.",154,30,0]
  ,[1848,52,0,0,0,0,20,0,"Long Tongue (FreeRO)",0,"",0]
  ,[1849,100,0,0,0,0,0,0,"SET: Sting Hat + Long Tongue",0,"Juice recovery rate +200%",0]
+ ,[1850,50,0,3,0,1,10,30,"Luxury Hat",0,"Low chance to obtain a [Blue Herb] item when killing an ["+SyuzokuOBJ[3]+"] race monster.",0]
 //[itemID,pos,reqJob,atk/def,wpnLv,slot,weight,reqLv,"name",0,"desc"{,bonusNum,bonusValue},0]
 //  pos: 0-empty,1-dagger,2-sword,3-2h sword,4-spear,5-2h spear,6-axe,7-2h axe,8-mace,9-staff(both),10-bow,11-katar,12-book,13-knuckle,14-instrument,15-whip,16-huuma,17-handgun,18-rifle,19-shotgun,20-gatling,21-launcher
 //       50-upper head,51-middle head,52-lower head,60-armor,61-shield,62-garment,63-boots,64-accessory

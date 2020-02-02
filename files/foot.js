@@ -1,30 +1,23 @@
 function StCalc(nSC){
   with(document.calcForm){
-    for(
-      n_A_STR=eval(A_STR.value),
-      n_A_AGI=eval(A_AGI.value),
-      n_A_VIT=eval(A_VIT.value),
-      n_A_DEX=eval(A_DEX.value),
-      n_A_INT=eval(A_INT.value),
-      n_A_LUK=eval(A_LUK.value),
-      StPoint=0,
-      i=2;i<=n_A_STR;i++
-    )
-      StPoint+=StCalc2(i);
-    for(i=2;i<=n_A_AGI;i++)
-      StPoint+=StCalc2(i);
-    for(i=2;i<=n_A_VIT;i++)
-      StPoint+=StCalc2(i);
-    for(i=2;i<=n_A_INT;i++)
-      StPoint+=StCalc2(i);
-    for(i=2;i<=n_A_DEX;i++)
-      StPoint+=StCalc2(i);
-    for(i=2;i<=n_A_LUK;i++)
-      StPoint+=StCalc2(i);
-    if(n_A_BaseLV=eval(A_BaseLV.value),n_A_JobSet(),n_Tensei?wStPoint=100:wStPoint=48,1==nSC||0==BLVauto.checked)
-      for(i=1;i<n_A_BaseLV;i++) wStPoint+=Math.floor(i/5)+3;
-    else
-      for(i=1;StPoint>wStPoint&&99>i;i++) wStPoint+=Math.floor(i/5)+3;
+    n_A_STR=eval(A_STR.value),
+    n_A_AGI=eval(A_AGI.value),
+    n_A_VIT=eval(A_VIT.value),
+    n_A_DEX=eval(A_DEX.value),
+    n_A_INT=eval(A_INT.value),
+    n_A_LUK=eval(A_LUK.value),
+    StPoint=0;
+    for(i=2;i<=n_A_STR;i++) StPoint+=StCalc2(i);
+    for(i=2;i<=n_A_AGI;i++) StPoint+=StCalc2(i);
+    for(i=2;i<=n_A_VIT;i++) StPoint+=StCalc2(i);
+    for(i=2;i<=n_A_INT;i++) StPoint+=StCalc2(i);
+    for(i=2;i<=n_A_DEX;i++) StPoint+=StCalc2(i);
+    for(i=2;i<=n_A_LUK;i++) StPoint+=StCalc2(i);
+    n_A_BaseLV=eval(A_BaseLV.value);
+    n_A_JobSet();
+    n_Tensei?wStPoint=100:wStPoint=48;
+    if(1==nSC||0==BLVauto.checked) for(i=1;i<n_A_BaseLV;i++) wStPoint+=Math.floor(i/5)+3;
+    else for(i=1;StPoint>wStPoint&&99>i;i++) wStPoint+=Math.floor(i/5)+3;
     i>99&&(i=99),
     A_BaseLV.value=i,
     myInnerHtml("A_STPOINT",wStPoint-StPoint,0)
@@ -56,116 +49,99 @@ function SuperNoviceFullWeapon(nSNFW){
 }
 function StAllCalc(){
   with(document.calcForm){
-    if(
-      n_A_JobSet(),
-      20==n_A_JOB&&(
-        0==SuperNoviceFullWeaponCHECK&&1==eval(A_skill9.value)?
-          SuperNoviceFullWeapon(1):
-        1==SuperNoviceFullWeaponCHECK&&0==eval(A_skill9.value)&&
-          SuperNoviceFullWeapon(0)
-      ),
-      n_A_BaseLV=eval(A_BaseLV.value),
-      n_A_JobLV=eval(A_JobLV.value),
-      n_A_STR=eval(A_STR.value),
-      n_A_AGI=eval(A_AGI.value),
-      n_A_VIT=eval(A_VIT.value),
-      n_A_DEX=eval(A_DEX.value),
-      n_A_INT=eval(A_INT.value),
-      n_A_LUK=eval(A_LUK.value),
-      SU_STR=n_A_STR,
-      SU_AGI=n_A_AGI,
-      SU_VIT=n_A_VIT,
-      SU_DEX=n_A_DEX,
-      SU_INT=n_A_INT,
-      SU_LUK=n_A_LUK,
-      n_A_WeaponType=eval(A_WeaponType.value),
-      n_A_Arrow=eval(A_Arrow.value),
-      n_A_HEAD_DEF_PLUS=eval(A_HEAD_DEF_PLUS.value),
-      n_A_BODY_DEF_PLUS=eval(A_BODY_DEF_PLUS.value),
-      n_A_LEFT_DEF_PLUS=eval(A_LEFT_DEF_PLUS.value),
-      n_A_SHOULDER_DEF_PLUS=eval(A_SHOULDER_DEF_PLUS.value),
-      n_A_SHOES_DEF_PLUS=eval(A_SHOES_DEF_PLUS.value),
-      n_A_DEFplus=n_A_HEAD_DEF_PLUS+n_A_BODY_DEF_PLUS+n_A_LEFT_DEF_PLUS+n_A_SHOULDER_DEF_PLUS+n_A_SHOES_DEF_PLUS,
-      n_A_ActiveSkill=eval(A_ActiveSkill.value),
-      n_A_ActiveSkill>=3e3?
-        n_A_ActiveSkill=InsertSkill[n_A_ActiveSkill-3e3][2]:
-      n_A_ActiveSkill>=2e3&&
-        (n_A_ActiveSkill=AutoSpellSkill[n_A_ActiveSkill-2e3][2]),
-      n_A_ActiveSkillLV=eval(A_ActiveSkillLV.value),
-      n_A_Equip[0]=eval(A_weapon1.value),
-      n_A_Equip[1]=0,
-      n_Nitou&&(n_A_Equip[1]=eval(A_weapon2.value)),
-      n_A_Equip[2]=eval(A_head1.value),
-      n_A_Equip[3]=eval(A_head2.value),
-      n_A_Equip[4]=eval(A_head3.value),
-      n_A_Equip[5]=eval(A_left.value),
-      n_A_Equip[6]=eval(A_body.value),
-      n_A_Equip[7]=eval(A_shoulder.value),
-      n_A_Equip[8]=eval(A_shoes.value),
-      n_A_Equip[9]=eval(A_acces1.value),
-      n_A_Equip[10]=eval(A_acces2.value),
-      SetEquip(),
-      n_A_WeaponLV=ItemOBJ[n_A_Equip[0]][4],
-      n_A_Weapon_ATK=ItemOBJ[n_A_Equip[0]][3],
-      n_A_Weapon_ATKplus=eval(A_Weapon_ATKplus.value),
-      W_REF=0,
-      n_A_WeaponLV_seirenATK=0,
-      n_A_WeaponLV_Minplus=0,
-      n_A_WeaponLV_Maxplus=0,
-      1==n_A_WeaponLV?
-        (n_A_WeaponLV_seirenATK=2*n_A_Weapon_ATKplus,n_A_Weapon_ATKplus>=8&&(n_A_WeaponLV_Minplus=1,n_A_WeaponLV_Maxplus=3*(n_A_Weapon_ATKplus-7))):
-      2==n_A_WeaponLV?
-        (n_A_WeaponLV_seirenATK=3*n_A_Weapon_ATKplus,n_A_Weapon_ATKplus>=7&&(n_A_WeaponLV_Minplus=1,n_A_WeaponLV_Maxplus=5*(n_A_Weapon_ATKplus-6))):
-      3==n_A_WeaponLV?
-        (n_A_WeaponLV_seirenATK=5*n_A_Weapon_ATKplus,n_A_Weapon_ATKplus>=6&&(n_A_WeaponLV_Minplus=1,n_A_WeaponLV_Maxplus=8*(n_A_Weapon_ATKplus-5))):
-      4==n_A_WeaponLV&&
-        (n_A_WeaponLV_seirenATK=7*n_A_Weapon_ATKplus,n_A_Weapon_ATKplus>=5&&(n_A_WeaponLV_Minplus=1,n_A_WeaponLV_Maxplus=13*(n_A_Weapon_ATKplus-4))),
-      n_A_Weapon2LV=0,
-      n_A_Weapon2_ATK=0,
-      n_A_Weapon2_ATKplus=0,
-      n_A_Weapon2LV_seirenATK=0,
-      n_A_Weapon2LV_Minplus=0,
-      n_A_Weapon2LV_Maxplus=0,
-      n_Nitou&&(
-        W_REF2=0,
-        n_A_Weapon2LV=ItemOBJ[n_A_Equip[1]][4],
-        n_A_Weapon2_ATK=ItemOBJ[n_A_Equip[1]][3],
-        n_A_Weapon2_ATKplus=eval(document.calcForm.A_Weapon2_ATKplus.value),
-        1==n_A_Weapon2LV?
-          (n_A_Weapon2LV_seirenATK=2*n_A_Weapon2_ATKplus,n_A_Weapon2_ATKplus>=8&&(n_A_Weapon2LV_Minplus=1,n_A_Weapon2LV_Maxplus=3*(n_A_Weapon2_ATKplus-7))):
-        2==n_A_Weapon2LV?
-          (n_A_Weapon2LV_seirenATK=3*n_A_Weapon2_ATKplus,n_A_Weapon2_ATKplus>=7&&(n_A_Weapon2LV_Minplus=1,n_A_Weapon2LV_Maxplus=5*(n_A_Weapon2_ATKplus-6))):
-        3==n_A_Weapon2LV?
-          (n_A_Weapon2LV_seirenATK=5*n_A_Weapon2_ATKplus,n_A_Weapon2_ATKplus>=6&&(n_A_Weapon2LV_Minplus=1,n_A_Weapon2LV_Maxplus=8*(n_A_Weapon2_ATKplus-5))):
-        4==n_A_Weapon2LV&&
-          (n_A_Weapon2LV_seirenATK=7*n_A_Weapon2_ATKplus,n_A_Weapon2_ATKplus>=5&&(n_A_Weapon2LV_Minplus=1,n_A_Weapon2LV_Maxplus=13*(n_A_Weapon2_ATKplus-4)))
-      ),
-      n_A_card[0]=eval(A_weapon1_card1.value),
-      n_A_card[1]=eval(A_weapon1_card2.value),
-      n_A_card[2]=eval(A_weapon1_card3.value),
-      n_A_card[3]=eval(A_weapon1_card4.value),
-      n_Nitou
-    )
+    n_A_JobSet(),
+    20==n_A_JOB&&(
+      0==SuperNoviceFullWeaponCHECK&&1==eval(A_skill9.value)?SuperNoviceFullWeapon(1):
+      1==SuperNoviceFullWeaponCHECK&&0==eval(A_skill9.value)&&SuperNoviceFullWeapon(0)
+    ),
+    n_A_BaseLV=eval(A_BaseLV.value),
+    n_A_JobLV=eval(A_JobLV.value),
+    n_A_STR=eval(A_STR.value),
+    n_A_AGI=eval(A_AGI.value),
+    n_A_VIT=eval(A_VIT.value),
+    n_A_DEX=eval(A_DEX.value),
+    n_A_INT=eval(A_INT.value),
+    n_A_LUK=eval(A_LUK.value),
+    SU_STR=n_A_STR,
+    SU_AGI=n_A_AGI,
+    SU_VIT=n_A_VIT,
+    SU_DEX=n_A_DEX,
+    SU_INT=n_A_INT,
+    SU_LUK=n_A_LUK,
+    n_A_WeaponType=eval(A_WeaponType.value),
+    n_A_Arrow=eval(A_Arrow.value),
+    n_A_HEAD_DEF_PLUS=eval(A_HEAD_DEF_PLUS.value),
+    n_A_BODY_DEF_PLUS=eval(A_BODY_DEF_PLUS.value),
+    n_A_LEFT_DEF_PLUS=eval(A_LEFT_DEF_PLUS.value),
+    n_A_SHOULDER_DEF_PLUS=eval(A_SHOULDER_DEF_PLUS.value),
+    n_A_SHOES_DEF_PLUS=eval(A_SHOES_DEF_PLUS.value),
+    n_A_DEFplus=n_A_HEAD_DEF_PLUS+n_A_BODY_DEF_PLUS+n_A_LEFT_DEF_PLUS+n_A_SHOULDER_DEF_PLUS+n_A_SHOES_DEF_PLUS,
+    n_A_ActiveSkill=eval(A_ActiveSkill.value),
+    n_A_ActiveSkill>=3e3?n_A_ActiveSkill=InsertSkill[n_A_ActiveSkill-3e3][2]:n_A_ActiveSkill>=2e3&&(n_A_ActiveSkill=AutoSpellSkill[n_A_ActiveSkill-2e3][2]),
+    n_A_ActiveSkillLV=eval(A_ActiveSkillLV.value),
+    n_A_Equip[0]=eval(A_weapon1.value),
+    n_A_Equip[1]=0,n_Nitou&&(n_A_Equip[1]=eval(A_weapon2.value)),
+    n_A_Equip[2]=eval(A_head1.value),
+    n_A_Equip[3]=eval(A_head2.value),
+    n_A_Equip[4]=eval(A_head3.value),
+    n_A_Equip[5]=eval(A_left.value),
+    n_A_Equip[6]=eval(A_body.value),
+    n_A_Equip[7]=eval(A_shoulder.value),
+    n_A_Equip[8]=eval(A_shoes.value),
+    n_A_Equip[9]=eval(A_acces1.value),
+    n_A_Equip[10]=eval(A_acces2.value),
+    SetEquip(),
+    n_A_WeaponLV=ItemOBJ[n_A_Equip[0]][4],
+    n_A_Weapon_ATK=ItemOBJ[n_A_Equip[0]][3],
+    n_A_Weapon_ATKplus=eval(A_Weapon_ATKplus.value),
+    W_REF=0,
+    n_A_WeaponLV_seirenATK=0,
+    n_A_WeaponLV_Minplus=0,
+    n_A_WeaponLV_Maxplus=0,
+    1==n_A_WeaponLV?(n_A_WeaponLV_seirenATK=2*n_A_Weapon_ATKplus,n_A_Weapon_ATKplus>=8&&(n_A_WeaponLV_Minplus=1,n_A_WeaponLV_Maxplus=3*(n_A_Weapon_ATKplus-7))):
+    2==n_A_WeaponLV?(n_A_WeaponLV_seirenATK=3*n_A_Weapon_ATKplus,n_A_Weapon_ATKplus>=7&&(n_A_WeaponLV_Minplus=1,n_A_WeaponLV_Maxplus=5*(n_A_Weapon_ATKplus-6))):
+    3==n_A_WeaponLV?(n_A_WeaponLV_seirenATK=5*n_A_Weapon_ATKplus,n_A_Weapon_ATKplus>=6&&(n_A_WeaponLV_Minplus=1,n_A_WeaponLV_Maxplus=8*(n_A_Weapon_ATKplus-5))):
+    4==n_A_WeaponLV&&(n_A_WeaponLV_seirenATK=7*n_A_Weapon_ATKplus,n_A_Weapon_ATKplus>=5&&(n_A_WeaponLV_Minplus=1,n_A_WeaponLV_Maxplus=13*(n_A_Weapon_ATKplus-4))),
+    n_A_Weapon2LV=0,
+    n_A_Weapon2_ATK=0,
+    n_A_Weapon2_ATKplus=0,
+    n_A_Weapon2LV_seirenATK=0,
+    n_A_Weapon2LV_Minplus=0,
+    n_A_Weapon2LV_Maxplus=0,
+    n_Nitou&&(
+      W_REF2=0,
+      n_A_Weapon2LV=ItemOBJ[n_A_Equip[1]][4],
+      n_A_Weapon2_ATK=ItemOBJ[n_A_Equip[1]][3],
+      n_A_Weapon2_ATKplus=eval(document.calcForm.A_Weapon2_ATKplus.value),
+      1==n_A_Weapon2LV?(n_A_Weapon2LV_seirenATK=2*n_A_Weapon2_ATKplus,n_A_Weapon2_ATKplus>=8&&(n_A_Weapon2LV_Minplus=1,n_A_Weapon2LV_Maxplus=3*(n_A_Weapon2_ATKplus-7))):
+      2==n_A_Weapon2LV?(n_A_Weapon2LV_seirenATK=3*n_A_Weapon2_ATKplus,n_A_Weapon2_ATKplus>=7&&(n_A_Weapon2LV_Minplus=1,n_A_Weapon2LV_Maxplus=5*(n_A_Weapon2_ATKplus-6))):
+      3==n_A_Weapon2LV?(n_A_Weapon2LV_seirenATK=5*n_A_Weapon2_ATKplus,n_A_Weapon2_ATKplus>=6&&(n_A_Weapon2LV_Minplus=1,n_A_Weapon2LV_Maxplus=8*(n_A_Weapon2_ATKplus-5))):
+      4==n_A_Weapon2LV&&(n_A_Weapon2LV_seirenATK=7*n_A_Weapon2_ATKplus,n_A_Weapon2_ATKplus>=5&&(n_A_Weapon2LV_Minplus=1,n_A_Weapon2LV_Maxplus=13*(n_A_Weapon2_ATKplus-4)))
+    ),
+    n_A_card[0]=eval(A_weapon1_card1.value),
+    n_A_card[1]=eval(A_weapon1_card2.value),
+    n_A_card[2]=eval(A_weapon1_card3.value),
+    n_A_card[3]=eval(A_weapon1_card4.value);
+    if(n_Nitou){
       n_A_card[4]=eval(A_weapon2_card1.value),
       n_A_card[5]=eval(A_weapon2_card2.value),
       n_A_card[6]=eval(A_weapon2_card3.value),
       n_A_card[7]=eval(A_weapon2_card4.value);
-    else
+    }else{
       for(var i=4;7>=i;i++) n_A_card[i]=0;
-    if(
-      n_A_card[8]=eval(A_head1_card.value),
-      n_A_card[9]=eval(A_head2_card.value),
-      n_A_card[10]=eval(A_left_card.value),
-      n_A_card[11]=eval(A_body_card.value),
-      n_A_card[12]=eval(A_shoulder_card.value),
-      n_A_card[13]=eval(A_shoes_card.value),
-      n_A_card[14]=eval(A_acces1_card.value),
-      n_A_card[15]=eval(A_acces2_card.value),
-      SetCard(),
-      n_A_Weapon_zokusei=eval(A_Weapon_zokusei.value),
-      n_A_Weapon2_zokusei=n_A_Weapon_zokusei,
-      0 == n_A_Weapon_zokusei
-    ){
+    };
+    n_A_card[8]=eval(A_head1_card.value),
+    n_A_card[9]=eval(A_head2_card.value),
+    n_A_card[10]=eval(A_left_card.value),
+    n_A_card[11]=eval(A_body_card.value),
+    n_A_card[12]=eval(A_shoulder_card.value),
+    n_A_card[13]=eval(A_shoes_card.value),
+    n_A_card[14]=eval(A_acces1_card.value),
+    n_A_card[15]=eval(A_acces2_card.value),
+    SetCard(),
+    n_A_Weapon_zokusei=eval(A_Weapon_zokusei.value),
+    n_A_Weapon2_zokusei=n_A_Weapon_zokusei;
+    if(0==n_A_Weapon_zokusei){
       for(j=0;0!=ItemOBJ[n_A_Equip[0]][j+11];j+=2) 20==ItemOBJ[n_A_Equip[0]][j+11]&&(n_A_Weapon_zokusei=ItemOBJ[n_A_Equip[0]][j+12]);
       for(j=0;0!=ItemOBJ[n_A_Equip[1]][j+11];j+=2) 20==ItemOBJ[n_A_Equip[1]][j+11]&&(n_A_Weapon2_zokusei=ItemOBJ[n_A_Equip[1]][j+12]);
       201<=cardOBJ[n_A_card[0]][0]&&cardOBJ[n_A_card[0]][0]<=204&&(n_A_Weapon_zokusei=cardOBJ[n_A_card[0]][0]-200),
@@ -176,252 +152,250 @@ function StAllCalc(){
     for(var i=0;999!=JobSkillPassOBJ[n_A_JOB][i];i++){
       var wOBJ=document.getElementById("A_skill"+i); n_A_Buf[i]=eval(wOBJ.value)
     }
-    for(
-      n_SkillSW&&(
-        n_A_Buf2[0]=eval(A2_Skill0.value),
-        n_A_Buf2[1]=eval(A2_Skill1.value),
-        n_A_Buf2[2]=eval(A2_Skill2.value),
-        n_A_Buf2[3]=eval(A2_Skill3.checked),
-        n_A_Buf2[4]=eval(A2_Skill4.value),
-        n_A_Buf2[5]=eval(A2_Skill5.checked),
-        n_A_Buf2[6]=eval(A2_Skill6.value),
-        n_A_Buf2[7]=eval(A2_Skill7.checked),
-        n_A_Buf2[8]=eval(A2_Skill8.checked),
-        n_A_Buf2[9]=eval(A2_Skill9.value),
-        n_A_Buf2[10]=eval(A2_Skill10.value),
-        n_A_Buf2[11]=eval(A2_Skill11.value),
-        n_A_Buf2[12]=eval(A2_Skill12.value),
-        n_A_Buf2[13]=eval(A2_Skill13.value),
-        n_A_Buf2[14]=eval(A2_Skill14.value),
-        n_A_Buf2[15]=eval(A2_Skill15.value),
-        n_A_Buf2[16]=eval(A5_Skill0.checked),
-        n_A_Buf2[17]=eval(A5_Skill1.checked),
-        n_A_Buf2[18]=eval(A5_Skill2.checked),
-        n_A_Buf2[19]=eval(A5_Skill3.checked),
-        n_A_Buf2[20]=eval(A5_Skill4.checked),
-        n_A_Buf2[21]=eval(A5_Skill5.checked)
+    n_SkillSW&&(
+      n_A_Buf2[0]=eval(A2_Skill0.value),
+      n_A_Buf2[1]=eval(A2_Skill1.value),
+      n_A_Buf2[2]=eval(A2_Skill2.value),
+      n_A_Buf2[3]=eval(A2_Skill3.checked),
+      n_A_Buf2[4]=eval(A2_Skill4.value),
+      n_A_Buf2[5]=eval(A2_Skill5.checked),
+      n_A_Buf2[6]=eval(A2_Skill6.value),
+      n_A_Buf2[7]=eval(A2_Skill7.checked),
+      n_A_Buf2[8]=eval(A2_Skill8.checked),
+      n_A_Buf2[9]=eval(A2_Skill9.value),
+      n_A_Buf2[10]=eval(A2_Skill10.value),
+      n_A_Buf2[11]=eval(A2_Skill11.value),
+      n_A_Buf2[12]=eval(A2_Skill12.value),
+      n_A_Buf2[13]=eval(A2_Skill13.value),
+      n_A_Buf2[14]=eval(A2_Skill14.value),
+      n_A_Buf2[15]=eval(A2_Skill15.value),
+      n_A_Buf2[16]=eval(A5_Skill0.checked),
+      n_A_Buf2[17]=eval(A5_Skill1.checked),
+      n_A_Buf2[18]=eval(A5_Skill2.checked),
+      n_A_Buf2[19]=eval(A5_Skill3.checked),
+      n_A_Buf2[20]=eval(A5_Skill4.checked),
+      n_A_Buf2[21]=eval(A5_Skill5.checked)
+    ),
+    n_Skill3SW&&(
+      n_A_Buf3[0]=eval(A3_Skill0_1.value),
+      n_A_Buf3[1]=eval(A3_Skill1_1.value),
+      n_A_Buf3[2]=eval(A3_Skill2_1.value),
+      n_A_Buf3[3]=eval(A3_Skill3_1.value),
+      n_A_Buf3[4]=eval(A3_Skill4_1.value),
+      n_A_Buf3[5]=eval(A3_Skill5_1.value),
+      n_A_Buf3[6]=eval(A3_Skill6_1.value),
+      n_A_Buf3[7]=eval(A3_Skill7.value),
+      n_A_Buf3[8]=eval(A3_Skill8.value),
+      n_A_Buf3[9]=eval(A3_Skill9.value),
+      n_A_Buf3[10]=eval(A3_Skill10.value),
+      n_A_Buf3[11]=eval(A3_Skill11.checked),
+      n_A_Buf3[11]&&(
+        n_A_Buf3[12]=eval(A3_Skill11_STR.value),
+        n_A_Buf3[13]=eval(A3_Skill11_AGI.value),
+        n_A_Buf3[14]=eval(A3_Skill11_VIT.value),
+        n_A_Buf3[15]=eval(A3_Skill11_INT.value),
+        n_A_Buf3[16]=eval(A3_Skill11_DEX.value),
+        n_A_Buf3[17]=eval(A3_Skill11_LUK.value),
+        n_A_Buf3[18]=eval(A3_Skill11a.checked)
       ),
-      n_Skill3SW&&(
-        n_A_Buf3[0]=eval(A3_Skill0_1.value),
-        n_A_Buf3[1]=eval(A3_Skill1_1.value),
-        n_A_Buf3[2]=eval(A3_Skill2_1.value),
-        n_A_Buf3[3]=eval(A3_Skill3_1.value),
-        n_A_Buf3[4]=eval(A3_Skill4_1.value),
-        n_A_Buf3[5]=eval(A3_Skill5_1.value),
-        n_A_Buf3[6]=eval(A3_Skill6_1.value),
-        n_A_Buf3[7]=eval(A3_Skill7.value),
-        n_A_Buf3[8]=eval(A3_Skill8.value),
-        n_A_Buf3[9]=eval(A3_Skill9.value),
-        n_A_Buf3[10]=eval(A3_Skill10.value),
-        n_A_Buf3[11]=eval(A3_Skill11.checked),
-        n_A_Buf3[11]&&(
-          n_A_Buf3[12]=eval(A3_Skill11_STR.value),
-          n_A_Buf3[13]=eval(A3_Skill11_AGI.value),
-          n_A_Buf3[14]=eval(A3_Skill11_VIT.value),
-          n_A_Buf3[15]=eval(A3_Skill11_INT.value),
-          n_A_Buf3[16]=eval(A3_Skill11_DEX.value),
-          n_A_Buf3[17]=eval(A3_Skill11_LUK.value),
-          n_A_Buf3[18]=eval(A3_Skill11a.checked)
-        ),
-        n_A_Buf3[0]&&(n_A_Buf3[20]=eval(A3_Skill0_2.value),n_A_Buf3[30]=eval(A3_Skill0_3.value)),
-        n_A_Buf3[1]&&(n_A_Buf3[21]=eval(A3_Skill1_2.value),n_A_Buf3[31]=eval(A3_Skill1_3.value)),
-        n_A_Buf3[2]&&(
-          n_A_Buf3[22]=eval(A3_Skill2_2.value),
-          n_A_Buf3[29]=eval(A3_Skill2_3.value),
-          n_A_Buf3[32]=eval(A3_Skill2_4.value)
-        ),
-        n_A_Buf3[3]&&(n_A_Buf3[23]=eval(A3_Skill3_2.value),n_A_Buf3[33]=eval(A3_Skill3_3.value)),
-        n_A_Buf3[4]&&(n_A_Buf3[24]=eval(A3_Skill4_2.value),n_A_Buf3[34]=eval(A3_Skill4_3.value)),
-        n_A_Buf3[5]&&(n_A_Buf3[25]=eval(A3_Skill5_2.value),n_A_Buf3[35]=eval(A3_Skill5_3.value)),
-        n_A_Buf3[6]&&(n_A_Buf3[26]=eval(A3_Skill6_2.value),n_A_Buf3[36]=eval(A3_Skill6_3.value))
+      n_A_Buf3[0]&&(n_A_Buf3[20]=eval(A3_Skill0_2.value),n_A_Buf3[30]=eval(A3_Skill0_3.value)),
+      n_A_Buf3[1]&&(n_A_Buf3[21]=eval(A3_Skill1_2.value),n_A_Buf3[31]=eval(A3_Skill1_3.value)),
+      n_A_Buf3[2]&&(
+        n_A_Buf3[22]=eval(A3_Skill2_2.value),
+        n_A_Buf3[29]=eval(A3_Skill2_3.value),
+        n_A_Buf3[32]=eval(A3_Skill2_4.value)
       ),
-      n_Skill4SW&&(
-        n_A_Buf3[40]=eval(A3_Skill40.checked),
-        n_A_Buf3[41]=eval(A3_Skill41.value),
-        n_A_Buf3[42]=eval(A3_Skill42.value),
-        n_A_Buf3[43]=eval(A3_Skill43.value),
-        n_A_Buf3[44]=eval(A3_Skill44.value)
-      ),
-      n_Skill6SW&&(
-        n_A_Buf6[0]=eval(A6_Skill0.value),
-        n_A_Buf6[1]=eval(A6_Skill1.value),
-        n_A_Buf6[2]=eval(A6_Skill2.value),
-        n_A_Buf6[3]=eval(A6_Skill3.checked),
-        n_A_Buf6[4]=eval(A6_Skill4.value),
-        n_A_Buf6[5]=eval(A6_Skill5.value),
-        n_A_Buf6[6]=eval(A6_Skill6.checked),
-        n_A_Buf6[7]=eval(A6_Skill7.checked),
-        n_A_Buf6[8]=eval(A6_Skill8.checked),
-        n_A_Buf6[9]=eval(A6_Skill9.checked),
-        n_A_Buf6[10]=eval(A6_Skill10.checked),
-        n_A_Buf6[11]=eval(A6_Skill11.checked),
-        n_A_Buf6[12]=eval(A6_Skill12.checked),
-        n_A_Buf6[13]=eval(A6_Skill13.checked),
-        n_A_Buf6[14]=eval(A6_Skill14.checked),
-        n_A_Buf6[15]=eval(A6_Skill15.checked),
-        n_A_Buf6[16]=eval(A6_Skill16.checked),
-        n_A_Buf6[17]=eval(A6_Skill17.checked),
-        n_A_Buf6[18]=eval(A6_Skill18.value),
-        n_A_Buf6[19]=eval(A_IJYOU0.value),
-        n_A_Buf6[20]=eval(A_IJYOU1.value),
-        n_A_Buf6[21]=eval(A_IJYOU2.checked),
-        n_A_Buf6[22]=eval(A_IJYOU3.checked)
-      ),
-      n_Skill7SW&&(
-        n_A_Buf7[0]=eval(A7_Skill0.checked),
-        n_A_Buf7[1]=eval(A7_Skill1.checked),
-        n_A_Buf7[2]=eval(A7_Skill2.checked),
-        n_A_Buf7[3]=eval(A7_Skill3.value),
-        n_A_Buf7[4]=eval(A7_Skill4.value),
-        n_A_Buf7[5]=eval(A7_Skill5.value),
-        n_A_Buf7[6]=eval(A7_Skill6.value),
-        n_A_Buf7[7]=eval(A7_Skill7.value),
-        n_A_Buf7[8]=eval(A7_Skill8.value),
-        n_A_Buf7[9]=eval(A7_Skill9.checked),
-        n_A_Buf7[10]=eval(A7_Skill10.checked),
-        n_A_Buf7[11]=eval(A7_Skill11.checked),
-        n_A_Buf7[12]=eval(A7_Skill12.checked),
-        n_A_Buf7[13]=eval(A7_Skill13.checked),
-        n_A_Buf7[14]=eval(A7_Skill14.checked),
-        n_A_Buf7[16]=eval(A7_Skill16.checked),
-        n_A_Buf7[17]=eval(A7_Skill17.checked),
-        n_A_Buf7[18]=eval(A7_Skill18.checked),
-        n_A_Buf7[19]=eval(A7_Skill19.checked),
-        n_A_Buf7[20]=eval(A7_Skill20.checked),
-        n_A_Buf7[21]=eval(A7_Skill21.checked),
-        n_A_Buf7[22]=eval(A7_Skill22.checked),
-        n_A_Buf7[23]=eval(A7_Skill23.checked),
-        n_A_Buf7[24]=eval(A7_Skill24.checked),
-        n_A_Buf7[25]=eval(A7_Skill25.checked),
-        n_A_Buf7[26]=eval(A7_Skill26.checked),
-        n_A_Buf7[27]=eval(A7_Skill27.checked),
-        n_A_Buf7[28]=eval(A7_Skill28.checked),
-        n_A_Buf7[29]=eval(A7_Skill29.checked),
-        n_A_Buf7[30]=eval(A7_Skill30.checked),
-        n_A_Buf7[31]=eval(A7_Skill31.checked),
-        n_A_Buf7[32]=eval(A7_Skill32.checked),
-        n_A_Buf7[33]=eval(A7_Skill33.checked),
-        n_A_Buf7[34]=eval(A7_Skill34.checked),
-        n_A_Buf7[35]=eval(A_SpeedPOT.value),
-        n_A_Buf7[36]=eval(A7_Skill36.checked),
-        n_A_Buf7[37]=eval(A7_Skill37.checked),
-        n_A_Buf7[38]=eval(A7_Skill38.checked),
-        n_A_Buf7[39]=eval(A7_Skill39.value),
-        n_A_Buf7[40]=eval(A7_Skill40.value),
-        n_A_Buf7[41]=eval(A7_Skill41.checked),
-        n_A_Buf7[42]=eval(A7_Skill42.value),
-        n_A_Buf7[43]=eval(A7_Skill43.checked),
-        n_A_Buf7[44]=eval(A7_Skill44.checked),
-        n_A_Buf7[45]=eval(A7_Skill45.checked),
-        n_A_Buf7[46]=eval(A7_Skill46.checked),
-        n_A_Buf7[47]=eval(A7_Skill47.checked),
-        n_A_Buf7[48]=eval(A7_Skill48.checked),
-        n_A_Buf7[49]=eval(A7_Skill49.checked),
-        n_A_Buf7[50]=eval(A7_Skill50.checked),
-        n_A_Buf7[51]=eval(A7_Skill51.checked)
-      ),
-      n_Skill8SW&&(
-        n_A_Buf8[0]=eval(A8_Skill0.value),
-        n_A_Buf8[1]=eval(A8_Skill1.value),
-        n_A_Buf8[2]=eval(A8_Skill2.checked),
-        n_A_Buf8[3]=eval(A8_Skill3.value),
-        n_A_Buf8[5]=eval(A8_Skill5.value),
-        n_A_Buf8[6]=eval(A8_Skill6.value),
-        n_A_Buf8[7]=eval(A8_Skill7.value),
-        n_A_Buf8[8]=eval(A8_Skill8.value),
-        n_A_Buf8[9]=eval(A8_Skill9.value),
-        n_A_Buf8[10]=eval(A8_Skill10.value),
-        n_A_Buf8[11]=eval(A8_Skill11.value)
-      ),
-      n_Skill9SW&&(
-        n_A_Buf9[0]=eval(A9_Skill0.value),
-        n_A_Buf9[1]=eval(ARG_RC0.value),
-        n_A_Buf9[2]=eval(A9_Skill1.value),
-        n_A_Buf9[3]=eval(ARG_RC1.value),
-        n_A_Buf9[4]=eval(A9_Skill2.value),
-        n_A_Buf9[5]=eval(ARG_RC2.value),
-        n_A_Buf9[6]=eval(A9_Skill3.value),
-        n_A_Buf9[7]=eval(ARG_RC3.value),
-        n_A_Buf9[8]=eval(A9_Skill4.value),
-        n_A_Buf9[9]=eval(ARG_RC4.value),
-        n_A_Buf9[10]=eval(A9_Skill5.value),
-        n_A_Buf9[11]=eval(ARG_RC5.value),
-        n_A_Buf9[12]=eval(A9_Skill6.value),
-        n_A_Buf9[13]=eval(ARG_RC6.value),
-        n_A_Buf9[14]=eval(A9_Skill7.value),
-        n_A_Buf9[15]=eval(ARG_RC7.value),
-        n_A_Buf9[16]=eval(A9_Skill8.value),
-        n_A_Buf9[17]=eval(ARG_RC8.value),
-        n_A_Buf9[18]=eval(A9_Skill9.value),
-        n_A_Buf9[19]=eval(ARG_RC9.value),
-        n_A_Buf9[20]=eval(A9_Skill10.value),
-        n_A_Buf9[21]=eval(ARG_RC10.value),
-        n_A_Buf9[22]=eval(A9_Skill11.value),
-        n_A_Buf9[23]=eval(ARG_RC11.value),
-        n_A_Buf9[24]=eval(A9_Skill12.value),
-        n_A_Buf9[25]=eval(ARG_RC12.value),
-        n_A_Buf9[26]=eval(A9_Skill13.value),
-        n_A_Buf9[27]=eval(ARG_RC13.value),
-        n_A_Buf9[28]=eval(A9_Skill14.value),
-        n_A_Buf9[29]=eval(ARG_RC14.value),
-        n_A_Buf9[30]=eval(ARG_RC15.value),
-        n_A_Buf9[31]=eval(ARG_RC16.value),
-        n_A_Buf9[32]=eval(ARG_RC17.value),
-        n_A_Buf9[33]=eval(ARG_RC18.value),
-        n_A_Buf9[34]=eval(ARG_RC19.value),
-        n_A_Buf9[35]=eval(ARG_RC20.value),
-        n_A_Buf9[36]=eval(ARG_RC21.value),
-        n_A_Buf9[37]=eval(ARG_RC22.value),
-        n_A_Buf9[38]=eval(ARG_RC23.value),
-        n_A_Buf9[39]=eval(ARG_RC24.value),
-        n_A_Buf9[40]=eval(ARG_RC25.value),
-        n_A_Buf9[41]=eval(ARG_RC26.value),
-        n_A_Buf9[42]=eval(ARG_RC27.value),
-        n_A_Buf9[43]=eval(ARG_RC28.value),
-        n_A_Buf9[44]=eval(ARG_RC29.value),
-        n_A_Buf9[45]=eval(ARG_RC30.value),
-        n_A_Buf9[46]=eval(ARG_RC31.value),
-        n_A_Buf9[47]=eval(ARG_RC32.value),
-        n_A_Buf9[48]=eval(ARG_RC33.value),
-        n_A_Buf9[49]=eval(ARG_RC34.value),
-        n_A_Buf9[50]=eval(ARG_RC35.value),
-        n_A_Buf9[51]=eval(ARG_RC36.value),
-        n_A_Buf9[52]=eval(ARG_RC37.value),
-        n_A_Buf9[53]=eval(ARG_RC38.value),
-        n_A_Buf9[54]=eval(ARG_RC39.value)
-      ),
-      n_Skill10SW&&(
-        n_B_manual[1]=eval(BRG_RC0.value),
-        n_B_manual[2]=eval(Bman1.value),
-        n_B_manual[3]=eval(BRG_RC1.value),
-        n_B_manual[4]=eval(Bman2.value),
-        n_B_manual[5]=eval(BRG_RC2.value),
-        n_B_manual[7]=eval(BRG_RC3.value),
-        n_B_manual[9]=eval(BRG_RC4.value),
-        n_B_manual[21]=eval(BRG_RC10.value),
-        n_B_manual[30]=eval(BRG_RC15.value),
-        n_B_manual[31]=eval(BRG_RC16.value),
-        n_B_manual[34]=eval(BRG_RC19.value),
-        n_B_manual[35]=eval(BRG_RC20.value),
-        n_B_manual[36]=eval(BRG_RC21.value),
-        n_B_manual[37]=eval(BRG_RC22.value),
-        n_B_manual[38]=eval(BRG_RC23.value),
-        n_B_manual[39]=eval(BRG_RC24.value),
-        n_B_manual[40]=eval(BRG_RC25.value),
-        n_B_manual[41]=eval(BRG_RC26.value),
-        n_B_manual[42]=eval(BRG_RC27.value),
-        n_B_manual[43]=eval(BRG_RC28.value),
-        n_B_manual[44]=eval(BRG_RC29.value),
-        n_B_manual[48]=eval(BRG_RC33.value),
-        n_B_manual[49]=eval(BRG_RC34.value),
-        n_B_manual[50]=eval(BRG_RC35.value),
-        n_B_manual[51]=eval(BRG_RC36.value),
-        n_B_manual[52]=eval(BRG_RC37.value),
-        n_B_manual[53]=eval(BRG_RC38.value),
-        n_B_manual[54]=eval(BRG_RC39.value)
-      ),
-      i=0;22>=i;i++
-    ) n_B[i]=MonsterOBJ[B_Enemy.value][i];
+      n_A_Buf3[3]&&(n_A_Buf3[23]=eval(A3_Skill3_2.value),n_A_Buf3[33]=eval(A3_Skill3_3.value)),
+      n_A_Buf3[4]&&(n_A_Buf3[24]=eval(A3_Skill4_2.value),n_A_Buf3[34]=eval(A3_Skill4_3.value)),
+      n_A_Buf3[5]&&(n_A_Buf3[25]=eval(A3_Skill5_2.value),n_A_Buf3[35]=eval(A3_Skill5_3.value)),
+      n_A_Buf3[6]&&(n_A_Buf3[26]=eval(A3_Skill6_2.value),n_A_Buf3[36]=eval(A3_Skill6_3.value))
+    ),
+    n_Skill4SW&&(
+      n_A_Buf3[40]=eval(A3_Skill40.checked),
+      n_A_Buf3[41]=eval(A3_Skill41.value),
+      n_A_Buf3[42]=eval(A3_Skill42.value),
+      n_A_Buf3[43]=eval(A3_Skill43.value),
+      n_A_Buf3[44]=eval(A3_Skill44.value)
+    ),
+    n_Skill6SW&&(
+      n_A_Buf6[0]=eval(A6_Skill0.value),
+      n_A_Buf6[1]=eval(A6_Skill1.value),
+      n_A_Buf6[2]=eval(A6_Skill2.value),
+      n_A_Buf6[3]=eval(A6_Skill3.checked),
+      n_A_Buf6[4]=eval(A6_Skill4.value),
+      n_A_Buf6[5]=eval(A6_Skill5.value),
+      n_A_Buf6[6]=eval(A6_Skill6.checked),
+      n_A_Buf6[7]=eval(A6_Skill7.checked),
+      n_A_Buf6[8]=eval(A6_Skill8.checked),
+      n_A_Buf6[9]=eval(A6_Skill9.checked),
+      n_A_Buf6[10]=eval(A6_Skill10.checked),
+      n_A_Buf6[11]=eval(A6_Skill11.checked),
+      n_A_Buf6[12]=eval(A6_Skill12.checked),
+      n_A_Buf6[13]=eval(A6_Skill13.checked),
+      n_A_Buf6[14]=eval(A6_Skill14.checked),
+      n_A_Buf6[15]=eval(A6_Skill15.checked),
+      n_A_Buf6[16]=eval(A6_Skill16.checked),
+      n_A_Buf6[17]=eval(A6_Skill17.checked),
+      n_A_Buf6[18]=eval(A6_Skill18.value),
+      n_A_Buf6[19]=eval(A_IJYOU0.value),
+      n_A_Buf6[20]=eval(A_IJYOU1.value),
+      n_A_Buf6[21]=eval(A_IJYOU2.checked),
+      n_A_Buf6[22]=eval(A_IJYOU3.checked)
+    ),
+    n_Skill7SW&&(
+      n_A_Buf7[0]=eval(A7_Skill0.checked),
+      n_A_Buf7[1]=eval(A7_Skill1.checked),
+      n_A_Buf7[2]=eval(A7_Skill2.checked),
+      n_A_Buf7[3]=eval(A7_Skill3.value),
+      n_A_Buf7[4]=eval(A7_Skill4.value),
+      n_A_Buf7[5]=eval(A7_Skill5.value),
+      n_A_Buf7[6]=eval(A7_Skill6.value),
+      n_A_Buf7[7]=eval(A7_Skill7.value),
+      n_A_Buf7[8]=eval(A7_Skill8.value),
+      n_A_Buf7[9]=eval(A7_Skill9.checked),
+      n_A_Buf7[10]=eval(A7_Skill10.checked),
+      n_A_Buf7[11]=eval(A7_Skill11.checked),
+      n_A_Buf7[12]=eval(A7_Skill12.checked),
+      n_A_Buf7[13]=eval(A7_Skill13.checked),
+      n_A_Buf7[14]=eval(A7_Skill14.checked),
+      n_A_Buf7[16]=eval(A7_Skill16.checked),
+      n_A_Buf7[17]=eval(A7_Skill17.checked),
+      n_A_Buf7[18]=eval(A7_Skill18.checked),
+      n_A_Buf7[19]=eval(A7_Skill19.checked),
+      n_A_Buf7[20]=eval(A7_Skill20.checked),
+      n_A_Buf7[21]=eval(A7_Skill21.checked),
+      n_A_Buf7[22]=eval(A7_Skill22.checked),
+      n_A_Buf7[23]=eval(A7_Skill23.checked),
+      n_A_Buf7[24]=eval(A7_Skill24.checked),
+      n_A_Buf7[25]=eval(A7_Skill25.checked),
+      n_A_Buf7[26]=eval(A7_Skill26.checked),
+      n_A_Buf7[27]=eval(A7_Skill27.checked),
+      n_A_Buf7[28]=eval(A7_Skill28.checked),
+      n_A_Buf7[29]=eval(A7_Skill29.checked),
+      n_A_Buf7[30]=eval(A7_Skill30.checked),
+      n_A_Buf7[31]=eval(A7_Skill31.checked),
+      n_A_Buf7[32]=eval(A7_Skill32.checked),
+      n_A_Buf7[33]=eval(A7_Skill33.checked),
+      n_A_Buf7[34]=eval(A7_Skill34.checked),
+      n_A_Buf7[35]=eval(A_SpeedPOT.value),
+      n_A_Buf7[36]=eval(A7_Skill36.checked),
+      n_A_Buf7[37]=eval(A7_Skill37.checked),
+      n_A_Buf7[38]=eval(A7_Skill38.checked),
+      n_A_Buf7[39]=eval(A7_Skill39.value),
+      n_A_Buf7[40]=eval(A7_Skill40.value),
+      n_A_Buf7[41]=eval(A7_Skill41.checked),
+      n_A_Buf7[42]=eval(A7_Skill42.value),
+      n_A_Buf7[43]=eval(A7_Skill43.checked),
+      n_A_Buf7[44]=eval(A7_Skill44.checked),
+      n_A_Buf7[45]=eval(A7_Skill45.checked),
+      n_A_Buf7[46]=eval(A7_Skill46.checked),
+      n_A_Buf7[47]=eval(A7_Skill47.checked),
+      n_A_Buf7[48]=eval(A7_Skill48.checked),
+      n_A_Buf7[49]=eval(A7_Skill49.checked),
+      n_A_Buf7[50]=eval(A7_Skill50.checked),
+      n_A_Buf7[51]=eval(A7_Skill51.checked)
+    ),
+    n_Skill8SW&&(
+      n_A_Buf8[0]=eval(A8_Skill0.value),
+      n_A_Buf8[1]=eval(A8_Skill1.value),
+      n_A_Buf8[2]=eval(A8_Skill2.checked),
+      n_A_Buf8[3]=eval(A8_Skill3.value),
+      n_A_Buf8[5]=eval(A8_Skill5.value),
+      n_A_Buf8[6]=eval(A8_Skill6.value),
+      n_A_Buf8[7]=eval(A8_Skill7.value),
+      n_A_Buf8[8]=eval(A8_Skill8.value),
+      n_A_Buf8[9]=eval(A8_Skill9.value),
+      n_A_Buf8[10]=eval(A8_Skill10.value),
+      n_A_Buf8[11]=eval(A8_Skill11.value)
+    ),
+    n_Skill9SW&&(
+      n_A_Buf9[0]=eval(A9_Skill0.value),
+      n_A_Buf9[1]=eval(ARG_RC0.value),
+      n_A_Buf9[2]=eval(A9_Skill1.value),
+      n_A_Buf9[3]=eval(ARG_RC1.value),
+      n_A_Buf9[4]=eval(A9_Skill2.value),
+      n_A_Buf9[5]=eval(ARG_RC2.value),
+      n_A_Buf9[6]=eval(A9_Skill3.value),
+      n_A_Buf9[7]=eval(ARG_RC3.value),
+      n_A_Buf9[8]=eval(A9_Skill4.value),
+      n_A_Buf9[9]=eval(ARG_RC4.value),
+      n_A_Buf9[10]=eval(A9_Skill5.value),
+      n_A_Buf9[11]=eval(ARG_RC5.value),
+      n_A_Buf9[12]=eval(A9_Skill6.value),
+      n_A_Buf9[13]=eval(ARG_RC6.value),
+      n_A_Buf9[14]=eval(A9_Skill7.value),
+      n_A_Buf9[15]=eval(ARG_RC7.value),
+      n_A_Buf9[16]=eval(A9_Skill8.value),
+      n_A_Buf9[17]=eval(ARG_RC8.value),
+      n_A_Buf9[18]=eval(A9_Skill9.value),
+      n_A_Buf9[19]=eval(ARG_RC9.value),
+      n_A_Buf9[20]=eval(A9_Skill10.value),
+      n_A_Buf9[21]=eval(ARG_RC10.value),
+      n_A_Buf9[22]=eval(A9_Skill11.value),
+      n_A_Buf9[23]=eval(ARG_RC11.value),
+      n_A_Buf9[24]=eval(A9_Skill12.value),
+      n_A_Buf9[25]=eval(ARG_RC12.value),
+      n_A_Buf9[26]=eval(A9_Skill13.value),
+      n_A_Buf9[27]=eval(ARG_RC13.value),
+      n_A_Buf9[28]=eval(A9_Skill14.value),
+      n_A_Buf9[29]=eval(ARG_RC14.value),
+      n_A_Buf9[30]=eval(ARG_RC15.value),
+      n_A_Buf9[31]=eval(ARG_RC16.value),
+      n_A_Buf9[32]=eval(ARG_RC17.value),
+      n_A_Buf9[33]=eval(ARG_RC18.value),
+      n_A_Buf9[34]=eval(ARG_RC19.value),
+      n_A_Buf9[35]=eval(ARG_RC20.value),
+      n_A_Buf9[36]=eval(ARG_RC21.value),
+      n_A_Buf9[37]=eval(ARG_RC22.value),
+      n_A_Buf9[38]=eval(ARG_RC23.value),
+      n_A_Buf9[39]=eval(ARG_RC24.value),
+      n_A_Buf9[40]=eval(ARG_RC25.value),
+      n_A_Buf9[41]=eval(ARG_RC26.value),
+      n_A_Buf9[42]=eval(ARG_RC27.value),
+      n_A_Buf9[43]=eval(ARG_RC28.value),
+      n_A_Buf9[44]=eval(ARG_RC29.value),
+      n_A_Buf9[45]=eval(ARG_RC30.value),
+      n_A_Buf9[46]=eval(ARG_RC31.value),
+      n_A_Buf9[47]=eval(ARG_RC32.value),
+      n_A_Buf9[48]=eval(ARG_RC33.value),
+      n_A_Buf9[49]=eval(ARG_RC34.value),
+      n_A_Buf9[50]=eval(ARG_RC35.value),
+      n_A_Buf9[51]=eval(ARG_RC36.value),
+      n_A_Buf9[52]=eval(ARG_RC37.value),
+      n_A_Buf9[53]=eval(ARG_RC38.value),
+      n_A_Buf9[54]=eval(ARG_RC39.value)
+    ),
+    n_Skill10SW&&(
+      n_B_manual[1]=eval(BRG_RC0.value),
+      n_B_manual[2]=eval(Bman1.value),
+      n_B_manual[3]=eval(BRG_RC1.value),
+      n_B_manual[4]=eval(Bman2.value),
+      n_B_manual[5]=eval(BRG_RC2.value),
+      n_B_manual[7]=eval(BRG_RC3.value),
+      n_B_manual[9]=eval(BRG_RC4.value),
+      n_B_manual[21]=eval(BRG_RC10.value),
+      n_B_manual[30]=eval(BRG_RC15.value),
+      n_B_manual[31]=eval(BRG_RC16.value),
+      n_B_manual[34]=eval(BRG_RC19.value),
+      n_B_manual[35]=eval(BRG_RC20.value),
+      n_B_manual[36]=eval(BRG_RC21.value),
+      n_B_manual[37]=eval(BRG_RC22.value),
+      n_B_manual[38]=eval(BRG_RC23.value),
+      n_B_manual[39]=eval(BRG_RC24.value),
+      n_B_manual[40]=eval(BRG_RC25.value),
+      n_B_manual[41]=eval(BRG_RC26.value),
+      n_B_manual[42]=eval(BRG_RC27.value),
+      n_B_manual[43]=eval(BRG_RC28.value),
+      n_B_manual[44]=eval(BRG_RC29.value),
+      n_B_manual[48]=eval(BRG_RC33.value),
+      n_B_manual[49]=eval(BRG_RC34.value),
+      n_B_manual[50]=eval(BRG_RC35.value),
+      n_B_manual[51]=eval(BRG_RC36.value),
+      n_B_manual[52]=eval(BRG_RC37.value),
+      n_B_manual[53]=eval(BRG_RC38.value),
+      n_B_manual[54]=eval(BRG_RC39.value)
+    );
+    for(i=0;22>=i;i++) n_B[i]=MonsterOBJ[B_Enemy.value][i];
     n_A_BodyZokusei=StPlusCard(198),
     0==n_A_BodyZokusei&&(n_A_BodyZokusei=StPlusCalc2(198)),
     13!=n_A_JOB&&27!=n_A_JOB||!CardNumSearch(456)||(n_A_BodyZokusei=6),
@@ -432,132 +406,136 @@ function StAllCalc(){
     myInnerHtml("A_BodyELEMENT",ZokuseiOBJ[n_A_BodyZokusei]+"1",0);
     for(var i=0;6>=i;i++) n_Delay[i]=0;
     for(i=1;200>=i;i++) n_tok[i]=0,n_tok[i]+=StPlusCalc2(i),n_tok[i]+=StPlusCard(i);
-    {
-      // Movement Speed
-      var t=777;
-      for(var a=0,e=0;20>=e;e++) {
-        for(var n=0;0!=ItemOBJ[n_A_Equip[e]][n+11];n+=2) {
-          209==ItemOBJ[n_A_Equip[e]][n+11]&&(a=ItemOBJ[n_A_Equip[e]][n+12],(t==777)?(t=a):(t<a)&&(t=a));
-        }
-      }
-      (t==777)&&(t=0);
-      n_tok[209]=t,n_tok[209]+=StPlusCard(209);
-      n_tok[210]=0,n_tok[210]+=StPlusCalc2(210),n_tok[210]+=StPlusCard(210);
-    }
+    //-> MOVESPEED calculation
+    var t=777;
+    for(var a=0,e=0;20>=e;e++) {for(var n=0;0!=ItemOBJ[n_A_Equip[e]][n+11];n+=2) {209==ItemOBJ[n_A_Equip[e]][n+11]&&(a=ItemOBJ[n_A_Equip[e]][n+12],(t==777)?(t=a):(t<a)&&(t=a));}}
+    (t==777)&&(t=0);
+    n_tok[209]=t,t=StPlusCard(209),t>n_tok[209]&&(n_tok[209]=t);
+    n_tok[210]=0,n_tok[210]+=StPlusCalc2(210),n_tok[210]+=StPlusCard(210);
+    var speed=150,speed_rate=100;
+    var ib_speed=n_tok[209]+n_tok[210]; // Permanent item-based speedup
+    var val,t;
+    SkillSearch(364)||SkillSearch(78)?val=25:val=0; // Peco Peco Ride or Union
+    speed_rate-=val;
+    val=0;
+    n_A_Buf6[20]&&(val=25);//Decrease AGI
+    n_A_Buf6[19]&&(val=50);//Quagmire
+    SkillSearch(433)&&(val=100);//Gatling Fever
+    n_A_Buf6[22]&&(val=300);//Curse
+    (ib_speed<0)&&(t=-ib_speed,val<t)&&(val=t);
+    speed_rate+=val;
+    val=0;
+    n_A_Buf2[1]&&(val=25);//Increase AGI
+    t=2*SkillSearch(273);(t>val)&&(val=t);//Wind Walk
+    t=2*n_A_Buf2[9];(t>val)&&(val=t);//Wind Walk Party
+    8==n_A_JobClass2()&&(t=SkillSearch(14),(t>val)&&(val=t));//Assassin Improve Dodge
+    SkillSearch(258)&&(val<25)&&(val=25);//Lork Knight Berserk
+    (ib_speed>0)&&(val<ib_speed)&&(val=ib_speed);
+    speed_rate-=val;
+    (speed_rate<40)&&(speed_rate=40);
+    speed=speed*speed_rate/100;
+    SkillSearch(196)&&(speed=200);//Steel Body
+    (speed<10)&&(speed=10);
+    myInnerHtml("A_MovSPEED",Math.floor((150/speed)*100)+" % ("+speed+" units)",0);
+    //<- MOVESPEED
     for(i=290;339>=i;i++) n_tok[i]=0,n_tok[i]+=StPlusCalc2(i),n_tok[i]+=StPlusCard(i);
     for(i=650;659>=i;i++) n_tok[i]=0,n_tok[i]+=StPlusCalc2(i),n_tok[i]+=StPlusCard(i);
-    for(
-      StPlusCalc(),
-      restrictEquipslot(),
-      equip_restrict?(
-        n_tok[195]?(A_LEFT_DEF_PLUS.disabled=!0,A_LEFT_DEF_PLUS.value=0,A_left.disabled=!0,A_left.value=305,A_left_card.disabled=!0,A_left_card.value=0):
-        9==n_A_WeaponType&&(A_LEFT_DEF_PLUS.disabled=!1,A_left.disabled=!1,card_restrict&&0!=ItemOBJ[A_left.value][5]&&(A_left_card.disabled=!1)),
-        1==n_tok[200]?
-          (A_head2.disabled=!0,A_head2.value=243,A_head2_card.disabled=!0,A_head2_card.value=0,A_head3.disabled=!1):
-        2==n_tok[200]?
-          (A_head2.disabled=!1,A_head2_card.disabled=!1,A_head3.disabled=!0,A_head3.value=268):
-        3==n_tok[200]?
-          (A_head3.disabled=!0,A_head3.value=268):
-        n_tok[200]>=4?
-          (A_head2.disabled=!0,A_head2.value=243,A_head2_card.disabled=!0,A_head2_card.value=0,A_head3.disabled=!0,A_head3.value=268):
-          (A_head2.disabled=!1,A_head3.disabled=!1)
-      ):(
-        A_LEFT_DEF_PLUS.disabled=!1,A_left.disabled=!1,
-        card_restrict=eval(document.getElementById("restrict_cardslot").checked),
-        card_restrict||(A_left_card.disabled=!1,A_head2_card.disabled=!1),
-        A_head2.disabled=!1,
-        A_head3.disabled=!1
-      ),
-      10!=n_A_WeaponType&&14!=n_A_WeaponType&&15!=n_A_WeaponType&&17!=n_A_WeaponType&&18!=n_A_WeaponType&&19!=n_A_WeaponType&&20!=n_A_WeaponType&&21!=n_A_WeaponType?(
-        n_A_ATK_w=Math.round(Math.floor(n_A_STR/10)*Math.floor(n_A_STR/10)),n_A_ATK=n_A_STR+n_A_ATK_w+Math.floor(n_A_DEX/5)+Math.floor(n_A_LUK/5)
-      ):(
-        n_A_ATK_w=Math.round(Math.floor(n_A_DEX/10)*Math.floor(n_A_DEX/10)),n_A_ATK=n_A_DEX+n_A_ATK_w+Math.floor(n_A_STR/5)+Math.floor(n_A_LUK/5)
-      ),
-      w=n_tok[17],
-      w+=n_A_Buf9[40],
-      n_A_Buf7[38]?
-        w+=30:
-      n_A_Buf7[9]||n_A_Buf7[46]?
-        w+=20:
-      n_A_Buf7[29]?
-        w+=15:
-      n_A_Buf7[2]&&
-        (w+=10),
-      SkillSearch(146)&&(w+=3),
-      SkillSearch(420)&&(w+=100),
-      w+=Math.floor(n_A_JobLV/10)*CardNumSearch(492),
-      4==n_A_JobClass()&&(w+=10*EquipNumSearch(1120)),
-      676==n_A_Equip[2]&&(w+=2*n_A_HEAD_DEF_PLUS),
-      1165==n_A_Equip[0]&&(w+=10*SkillSearch(311)),
-      1714==n_A_Equip[7]&&(w+=2*n_A_SHOULDER_DEF_PLUS),
-      1723==n_A_Equip[6]&&(w+=3*n_A_BODY_DEF_PLUS),
-      SU_AGI>=90&&(w+=10*EquipNumSearch(442)),
-      1814==n_A_Equip[2]&&(w+=Math.floor(SU_STR/4),w+=Math.floor(n_A_HEAD_DEF_PLUS/3)),
-      SU_STR>=80&&267==n_A_card[12]&&(w+=20),
-      SU_STR>=95&&621==n_A_Equip[0]&&(w+=340),
-      SU_STR>=44&&625==n_A_Equip[0]&&(w+=44),
-      SU_STR>=95&&1160==n_A_Equip[0]&&(w+=20),
-      SU_LUK>=90&&1164==n_A_Equip[0]&&(w+=20),
-      (953==n_A_Equip[2]||1261==n_A_Equip[2])&&(w+=Math.floor(2*n_A_JobLV/7)),
-      n_A_HEAD_DEF_PLUS>=5&&1218==n_A_Equip[2]&&(w+=n_A_HEAD_DEF_PLUS-4),
-      n_A_HEAD_DEF_PLUS>=5&&1495==n_A_Equip[2]&&(w+=n_A_HEAD_DEF_PLUS-4),
-      n_A_HEAD_DEF_PLUS>=7&&1274==n_A_Equip[2]&&(w+=15),
-      n_A_HEAD_DEF_PLUS>=7&&1474==n_A_Equip[2]&&(w+=15),
-      n_A_HEAD_DEF_PLUS>=7&&1275==n_A_Equip[2]&&(w+=15),
-      n_A_HEAD_DEF_PLUS>=7&&1475==n_A_Equip[2]&&(w+=15),
-      n_A_HEAD_DEF_PLUS>=7&&1276==n_A_Equip[2]&&(w+=15),
-      n_A_HEAD_DEF_PLUS>=7&&1477==n_A_Equip[2]&&(w+=15),
-      n_A_HEAD_DEF_PLUS>=7&&1479==n_A_Equip[2]&&(w+=15),
-      n_A_HEAD_DEF_PLUS>=7&&1480==n_A_Equip[2]&&(w+=15),
-      n_A_HEAD_DEF_PLUS>=7&&1291==n_A_Equip[2]&&(w+=5),
-      10==n_A_HEAD_DEF_PLUS&&1290==n_A_Equip[2]&&(w+=5),
-      n_A_SHOULDER_DEF_PLUS>=7&&SU_STR>=90&&1472==n_A_Equip[7]&&(w+=20),
-      n_A_SHOULDER_DEF_PLUS>=9&&SU_STR>=90&&1472==n_A_Equip[7]&&(w+=10),
-      !SkillSearch(433)||20!=n_A_WeaponType&&0!=n_A_WeaponType||(w+=20+10*SkillSearch(433)),
-      0==n_A_Buf6[0]&&n_A_Buf6[1]>=1&&3==n_A_BodyZokusei&&(w+=10*n_A_Buf6[1]),
-      n_A_ATK+=w,
-      V_ATK=Math.floor(n_A_Weapon_ATK+n_A_Weapon2_ATK+n_A_ATK)-Math.floor(n_A_LUK/5),
-      SkillSearch(256)&&(V_ATK+=.05*V_ATK*SkillSearch(256)),
-      SkillSearch(12)&&(V_ATK+=.32*V_ATK),
-      n_A_Buf7[17]&&(V_ATK+=.05*V_ATK),
-      n_A_Buf6[5]&&(V_ATK+=Math.floor((.02+.03*n_A_Buf6[5])*V_ATK)),
-      n_A_Buf6[5]&&n_A_Buf7[31]?V_ATK+=0:n_A_Buf7[31]&&(V_ATK+=Math.floor(.05*V_ATK)),
-      V_ATK<0&&(V_ATK=0),
-      1813==n_A_Equip[4]&&(1===n_A_JobClass()||2==n_A_JobClass()||4==n_A_JobClass()||6==n_A_JobClass()||41==n_A_JobClass()||15==n_A_JobClass2()||44==n_A_JOB||45==n_A_JOB)&&(n_tok[87]+=3),
-      w=n_tok[87],
-      w+=n_A_Buf9[53],
-      SkillSearch(342)&&(w+=SkillSearch(380)<=1?0:2*SkillSearch(342)*SkillSearch(380)),
-      n_A_ATK<0&&(n_A_ATK=0),
-      n_A_ATK=Math.floor(n_A_ATK*(100+w)/100),
-      wImp=5*n_A_Buf2[2],
-      n_A_Buf3[9]&&(wImp+=25+25*n_A_Buf3[9]),
-      !n_A_Buf3[10]||4!=n_A_WeaponLV&&4!=n_A_Weapon2LV||(V_ATK+=50+25*n_A_Buf3[10]),
-      0==n_A_Buf6[0]&&n_A_Buf6[1]>=1&&3==n_A_BodyZokusei&&(V_ATK+=10*n_A_Buf6[1]),
-      1==n_A_Buf2[19]&&(V_ATK=2*V_ATK),
-      myInnerHtml("A_ATK2",Math.floor(wImp+V_ATK)+"+"+(n_A_WeaponLV_seirenATK+n_A_Weapon2LV_seirenATK),0),
-      myInnerHtml("A_RealATK",wImp+Math.floor(V_ATK*(100+w)/100)+n_A_WeaponLV_seirenATK+n_A_Weapon2LV_seirenATK+n_A_WeaponLV_Minplus+"~"+(wImp+Math.floor(V_ATK*(100+w)/100)+n_A_WeaponLV_seirenATK+n_A_Weapon2LV_seirenATK+n_A_WeaponLV_Maxplus),0),
-
-      JobHP_A=new Array(0,70,50,40,50,30,40,150,110,75,85,55,90,110,85,90 ,75,75,75,90,0,150,110,75,85,55,90,110,85,90 ,75,75,75,90,0,0,0,0,0,0,0,70,90 ,75,75,84),
-      JobHP_B=new Array(5,5 ,5 ,5 ,5 ,5 ,5 ,5  ,5  ,5 ,5 ,5 ,5 ,7  ,5 ,6.5,3 ,3 ,5 ,5 ,5,5  ,5  ,5 ,5 ,5 ,5 ,7  , 5,6.5, 3, 3, 5, 5,0,0,0,0,0,0,0, 5,6.5, 5, 3,3.5),
-      wHPSL=0,
-      43==n_A_JOB&&n_A_BaseLV>=70&&(
-        n_A_BaseLV<=79?
-          wHPSL=40*(n_A_BaseLV-70):
-        n_A_BaseLV<=84?
-          wHPSL=50*(n_A_BaseLV-80):
-        n_A_BaseLV<=89?
-          wHPSL=50*(n_A_BaseLV-80)-10:
-        n_A_BaseLV<=92?
-          wHPSL=50*(n_A_BaseLV-90):
-        n_A_BaseLV<=97?
-          wHPSL=50*(n_A_BaseLV-90)-10 :
-        n_A_BaseLV==98?
-          wHPSL=375:
-          wHPSL=4
-      ),
-      w=0,
-      i=2;i<=n_A_BaseLV;i++
-    ) w+=Math.round(JobHP_A[n_A_JOB]*i/100);
+    StPlusCalc(),
+    restrictEquipslot(),
+    equip_restrict?(
+      n_tok[195]?(A_LEFT_DEF_PLUS.disabled=!0,A_LEFT_DEF_PLUS.value=0,A_left.disabled=!0,A_left.value=305,A_left_card.disabled=!0,A_left_card.value=0):
+      9==n_A_WeaponType&&(A_LEFT_DEF_PLUS.disabled=!1,A_left.disabled=!1,card_restrict&&0!=ItemOBJ[A_left.value][5]&&(A_left_card.disabled=!1)),
+      1==n_tok[200]?(A_head2.disabled=!0,A_head2.value=243,A_head2_card.disabled=!0,A_head2_card.value=0,A_head3.disabled=!1):
+      2==n_tok[200]?(A_head2.disabled=!1,A_head2_card.disabled=!1,A_head3.disabled=!0,A_head3.value=268):
+      3==n_tok[200]?(A_head3.disabled=!0,A_head3.value=268):
+      n_tok[200]>=4?(A_head2.disabled=!0,A_head2.value=243,A_head2_card.disabled=!0,A_head2_card.value=0,A_head3.disabled=!0,A_head3.value=268):
+                    (A_head2.disabled=!1,A_head3.disabled=!1)
+    ):(
+      A_LEFT_DEF_PLUS.disabled=!1,A_left.disabled=!1,
+      card_restrict=eval(document.getElementById("restrict_cardslot").checked),
+      card_restrict||(A_left_card.disabled=!1,A_head2_card.disabled=!1),
+      A_head2.disabled=!1,
+      A_head3.disabled=!1
+    ),
+    //ATK calculation
+    10!=n_A_WeaponType&&14!=n_A_WeaponType&&15!=n_A_WeaponType&&17!=n_A_WeaponType&&18!=n_A_WeaponType&&19!=n_A_WeaponType&&20!=n_A_WeaponType&&21!=n_A_WeaponType?(
+      n_A_ATK_w=Math.round(Math.floor(n_A_STR/10)*Math.floor(n_A_STR/10)),n_A_ATK=n_A_STR+n_A_ATK_w+Math.floor(n_A_DEX/5)+Math.floor(n_A_LUK/5)
+    ):(
+      n_A_ATK_w=Math.round(Math.floor(n_A_DEX/10)*Math.floor(n_A_DEX/10)),n_A_ATK=n_A_DEX+n_A_ATK_w+Math.floor(n_A_STR/5)+Math.floor(n_A_LUK/5)
+    ),
+    w=n_tok[17],
+    w+=n_A_Buf9[40],
+    n_A_Buf7[38]?w+=30:
+    n_A_Buf7[9]||n_A_Buf7[46]?w+=20:
+    n_A_Buf7[29]?w+=15:
+    n_A_Buf7[2]&&(w+=10),
+    SkillSearch(146)&&(w+=3),
+    SkillSearch(420)&&(w+=100),
+    w+=Math.floor(n_A_JobLV/10)*CardNumSearch(492),
+    4==n_A_JobClass()&&(w+=10*EquipNumSearch(1120)),
+    676==n_A_Equip[2]&&(w+=2*n_A_HEAD_DEF_PLUS),
+    1165==n_A_Equip[0]&&(w+=10*SkillSearch(311)),
+    1714==n_A_Equip[7]&&(w+=2*n_A_SHOULDER_DEF_PLUS),
+    1723==n_A_Equip[6]&&(w+=3*n_A_BODY_DEF_PLUS),
+    SU_AGI>=90&&(w+=10*EquipNumSearch(442)),
+    1814==n_A_Equip[2]&&(w+=Math.floor(SU_STR/4),w+=Math.floor(n_A_HEAD_DEF_PLUS/3)),
+    SU_STR>=80&&267==n_A_card[12]&&(w+=20),
+    SU_STR>=95&&621==n_A_Equip[0]&&(w+=340),
+    SU_STR>=44&&625==n_A_Equip[0]&&(w+=44),
+    SU_STR>=95&&1160==n_A_Equip[0]&&(w+=20),
+    SU_LUK>=90&&1164==n_A_Equip[0]&&(w+=20),
+    (953==n_A_Equip[2]||1261==n_A_Equip[2])&&(w+=Math.floor(2*n_A_JobLV/7)),
+    n_A_HEAD_DEF_PLUS>=5&&1218==n_A_Equip[2]&&(w+=n_A_HEAD_DEF_PLUS-4),
+    n_A_HEAD_DEF_PLUS>=5&&1495==n_A_Equip[2]&&(w+=n_A_HEAD_DEF_PLUS-4),
+    n_A_HEAD_DEF_PLUS>=7&&1274==n_A_Equip[2]&&(w+=15),
+    n_A_HEAD_DEF_PLUS>=7&&1474==n_A_Equip[2]&&(w+=15),
+    n_A_HEAD_DEF_PLUS>=7&&1275==n_A_Equip[2]&&(w+=15),
+    n_A_HEAD_DEF_PLUS>=7&&1475==n_A_Equip[2]&&(w+=15),
+    n_A_HEAD_DEF_PLUS>=7&&1276==n_A_Equip[2]&&(w+=15),
+    n_A_HEAD_DEF_PLUS>=7&&1477==n_A_Equip[2]&&(w+=15),
+    n_A_HEAD_DEF_PLUS>=7&&1479==n_A_Equip[2]&&(w+=15),
+    n_A_HEAD_DEF_PLUS>=7&&1480==n_A_Equip[2]&&(w+=15),
+    n_A_HEAD_DEF_PLUS>=7&&1291==n_A_Equip[2]&&(w+=5),
+    10==n_A_HEAD_DEF_PLUS&&1290==n_A_Equip[2]&&(w+=5),
+    n_A_SHOULDER_DEF_PLUS>=7&&SU_STR>=90&&1472==n_A_Equip[7]&&(w+=20),
+    n_A_SHOULDER_DEF_PLUS>=9&&SU_STR>=90&&1472==n_A_Equip[7]&&(w+=10),
+    !SkillSearch(433)||20!=n_A_WeaponType&&0!=n_A_WeaponType||(w+=20+10*SkillSearch(433)),
+    0==n_A_Buf6[0]&&n_A_Buf6[1]>=1&&3==n_A_BodyZokusei&&(w+=10*n_A_Buf6[1]),
+    n_A_ATK+=w,
+    V_ATK=Math.floor(n_A_Weapon_ATK+n_A_Weapon2_ATK+n_A_ATK)-Math.floor(n_A_LUK/5),
+    //ATKADD percent damage calculation
+    SkillSearch(256)&&(V_ATK+=.05*V_ATK*SkillSearch(256)),
+    SkillSearch(12)&&(V_ATK+=.32*V_ATK),
+    n_A_Buf7[17]&&(V_ATK+=.05*V_ATK),
+    n_A_Buf6[5]&&(V_ATK+=Math.floor((.02+.03*n_A_Buf6[5])*V_ATK)),
+    n_A_Buf6[5]&&n_A_Buf7[31]?V_ATK+=0:n_A_Buf7[31]&&(V_ATK+=Math.floor(.05*V_ATK)),
+    V_ATK<0&&(V_ATK=0),
+    1813==n_A_Equip[4]&&(1===n_A_JobClass()||2==n_A_JobClass()||4==n_A_JobClass()||6==n_A_JobClass()||41==n_A_JobClass()||15==n_A_JobClass2()||44==n_A_JOB||45==n_A_JOB)&&(n_tok[87]+=3),
+    w=n_tok[87],
+    w+=n_A_Buf9[53],
+    SkillSearch(342)&&(w+=SkillSearch(380)<=1?0:2*SkillSearch(342)*SkillSearch(380)),
+    n_A_ATK<0&&(n_A_ATK=0),
+    n_A_ATK=Math.floor(n_A_ATK*(100+w)/100),
+    wImp=5*n_A_Buf2[2],
+    n_A_Buf3[9]&&(wImp+=25+25*n_A_Buf3[9]),
+    !n_A_Buf3[10]||4!=n_A_WeaponLV&&4!=n_A_Weapon2LV||(V_ATK+=50+25*n_A_Buf3[10]),
+    0==n_A_Buf6[0]&&n_A_Buf6[1]>=1&&3==n_A_BodyZokusei&&(V_ATK+=10*n_A_Buf6[1]),
+    1==n_A_Buf2[19]&&(V_ATK=2*V_ATK),
+    myInnerHtml("A_ATK2",Math.floor(wImp+V_ATK)+"+"+(n_A_WeaponLV_seirenATK+n_A_Weapon2LV_seirenATK),0),
+    myInnerHtml("A_RealATK",wImp+Math.floor(V_ATK*(100+w)/100)+n_A_WeaponLV_seirenATK+n_A_Weapon2LV_seirenATK+n_A_WeaponLV_Minplus+"~"+(wImp+Math.floor(V_ATK*(100+w)/100)+n_A_WeaponLV_seirenATK+n_A_Weapon2LV_seirenATK+n_A_WeaponLV_Maxplus),0),
+    //HP calculation
+    JobHP_A=new Array(0,70,50,40,50,30,40,150,110,75,85,55,90,110,85,90 ,75,75,75,90,0,150,110,75,85,55,90,110,85,90 ,75,75,75,90,0,0,0,0,0,0,0,70,90 ,75,75,84),
+    JobHP_B=new Array(5,5 ,5 ,5 ,5 ,5 ,5 ,5  ,5  ,5 ,5 ,5 ,5 ,7  ,5 ,6.5,3 ,3 ,5 ,5 ,5,5  ,5  ,5 ,5 ,5 ,5 ,7  , 5,6.5, 3, 3, 5, 5,0,0,0,0,0,0,0, 5,6.5, 5, 3,3.5),
+    wHPSL=0,
+    43==n_A_JOB&&n_A_BaseLV>=70&&(
+      n_A_BaseLV<=79?wHPSL=40*(n_A_BaseLV-70):
+      n_A_BaseLV<=84?wHPSL=50*(n_A_BaseLV-80):
+      n_A_BaseLV<=89?wHPSL=50*(n_A_BaseLV-80)-10:
+      n_A_BaseLV<=92?wHPSL=50*(n_A_BaseLV-90):
+      n_A_BaseLV<=97?wHPSL=50*(n_A_BaseLV-90)-10:
+      n_A_BaseLV==98?wHPSL=375:wHPSL=4
+    ),
+    w=0; for(i=2;i<=n_A_BaseLV;i++) w+=Math.round(JobHP_A[n_A_JOB]*i/100);
     n_A_MaxHP=Math.floor(JobHP_B[n_A_JOB]*n_A_BaseLV+35+w),
     44==n_A_JOB&&(
       NinHP=new Array(131,137,144,151,159,167,175,184,193,202,212,222,232,243,254,265,277,289,301,316,331,346,364,382,400,420,440,460,482,504,526,548,572,596,620,646,672,698,
@@ -573,255 +551,203 @@ function StAllCalc(){
     ),
     20==n_A_JOB&&99==n_A_BaseLV&&(n_A_MaxHP+=2e3),
     n_Tensei&&(n_A_MaxHP=Math.floor(125*n_A_MaxHP/100));
-    var q=document.calcForm.A_youshi.checked;
-    if(
-      eval(A_youshi.checked)?(n_A_MaxHP=Math.floor(70*n_A_MaxHP/100),myInnerHtml("A_BodySIZE","Demi-Human & Small",0)):myInnerHtml("A_BodySIZE","Demi-Human & Medium",0),
-      n_A_MaxHP=Math.floor((n_A_MaxHP-wHPSL)*(100+n_A_VIT)/100),
-      41==n_A_JOB&&n_A_BaseLV>=70&&(
-        n_A_BaseLV<=79?
-          n_A_MaxHP=Math.floor((2127+10*(n_A_BaseLV-70))*(100+n_A_VIT)/100):
-        n_A_BaseLV<=89?
-          n_A_MaxHP=Math.floor((2200+50*(n_A_BaseLV-80))*(100+n_A_VIT)/100):
-        n_A_BaseLV<=99&&(
-          n_A_MaxHP=(2700+50*(n_A_BaseLV-90))*(100+n_A_VIT)/100,
-          SkillSearch(345)&&(n_A_MaxHP=3*n_A_MaxHP),
-          n_A_MaxHP=Math.floor(n_A_MaxHP)
-        )
-      ),
-      42==n_A_JOB&&n_A_BaseLV>=70&&(
-        wKenseiHP=[3455,3524,3593,3663,3834,3806,3878,3951,4025,4500],
-        n_A_BaseLV<=79?
-          n_A_MaxHP=Math.floor((2670+10*(n_A_BaseLV-70))*(100+n_A_VIT)/100):
-        n_A_BaseLV<=89?
-          n_A_MaxHP=Math.floor((3e3+20*(n_A_BaseLV-80))*(100+n_A_VIT)/100):
-        n_A_BaseLV<=99&&
-          (n_A_MaxHP=Math.floor(wKenseiHP[n_A_BaseLV-90]*(100+n_A_VIT)/100))
-      ),
-      1==n_A_Buf7[39]?
-        n_A_MaxHP+=Math.floor(500+10*n_A_BaseLV/3):
-      2==n_A_Buf7[39]?
-        n_A_MaxHP+=Math.floor(1500+10*n_A_BaseLV/3):
-      3==n_A_Buf7[39]&&(
-        n_A_MaxHP+=Math.floor(2500+10*n_A_BaseLV/3)
-      ),
-      n_A_MaxHP+=200*SkillSearch(156),
-      w=0,
-      w+=n_tok[13],
-      n_A_BaseLV<=79&&(w+=400*EquipNumSearch(883)),
-      5==n_A_JobClass()&&(w-=100*CardNumSearch(474)),
-      0==n_A_JobClass()&&(w+=30*EquipNumSearch(1116)),
-      1==n_A_JobClass()&&(w+=500*CardNumSearch(477)),
-      186==n_A_card[11]&&(w-=40*n_A_BODY_DEF_PLUS),
-      836==n_A_Equip[8]&&(w+=10*n_A_BaseLV),
-      859==n_A_Equip[6]&&(w+=20*n_A_BaseLV),
-      762==n_A_Equip[6]&&(w+=20*n_A_BaseLV),
-      EquipNumSearch(770)&&(w+=3*n_A_BaseLV),
-      986==n_A_Equip[6]&&(w+=7*n_A_BaseLV),
-      1172==n_A_Equip[0]&&(w+=25*n_A_Weapon_ATKplus),
-      1671==n_A_Equip[0]&&(w+=50*Math.floor(n_A_Weapon_ATKplus/2)),
-      EquipNumSearch(1058)&&(w+=10*n_A_BaseLV),
-      n_A_BODY_DEF_PLUS>=9&&225==n_A_card[11]&&(w+=800),
-      n_A_Weapon_ATKplus>=6&&1168==n_A_Equip[0]&&(w-=200*(n_A_Weapon_ATKplus-5)),
-      0!=n_A_JOB&&20!=n_A_JOB||1670!=n_A_Equip[3]||(w+=80),
-      536==n_A_Equip[8]&&(wHPVS=n_A_JobClass(),(3==wHPVS||4==wHPVS||5==wHPVS)&&(w+=5*n_A_BaseLV)),
-      n_A_MaxHP+=w,
-      n_A_MaxHP<1&&(n_A_MaxHP=1),
-      w=0,
-      w+=n_tok[15],
-      n_A_Buf3[3]&&(w+=5+2*n_A_Buf3[3]+n_A_Buf3[33]+Math.floor(n_A_Buf3[23]/10)),
-      n_A_Buf2[17]&&(w+=100),
-      n_A_Buf7[16]&&(w+=3),
-      715==n_A_Equip[8]&&(w-=n_A_SHOES_DEF_PLUS),
-      1730==n_A_Equip[6]&&(w+=n_A_BODY_DEF_PLUS),
-      SU_VIT>=80&&267==n_A_card[12]&&(w+=3),
-      n_A_SHOES_DEF_PLUS>=9&&304==n_A_card[13]&&(w+=10),
-      n_A_SHOES_DEF_PLUS<=4&&407==n_A_card[13]&&(w+=4),
-      n_A_SHOES_DEF_PLUS>=8&&1732==n_A_Equip[8]&&(w+=n_A_SHOES_DEF_PLUS-7),
-      405!=n_A_card[12]||1!=n_A_JobClass()&&2!=n_A_JobClass()&&6!=n_A_JobClass()||(w+=5),
-      n_A_MaxHP=n_A_MaxHP*(100+w)/100,
-      1==n_A_Buf6[0]&&n_A_Buf6[1]>=1&&1==n_A_BodyZokusei
-    ){
+    var n_Baby=eval(A_youshi.checked);
+    n_Baby?(n_A_MaxHP=Math.floor(70*n_A_MaxHP/100),myInnerHtml("A_BodySIZE","Demi-Human & Small",0)):myInnerHtml("A_BodySIZE","Demi-Human & Medium",0);
+    n_A_MaxHP=Math.floor((n_A_MaxHP-wHPSL)*(100+n_A_VIT)/100),
+    41==n_A_JOB&&n_A_BaseLV>=70&&(
+      n_A_BaseLV<=79?n_A_MaxHP=Math.floor((2127+10*(n_A_BaseLV-70))*(100+n_A_VIT)/100):
+      n_A_BaseLV<=89?n_A_MaxHP=Math.floor((2200+50*(n_A_BaseLV-80))*(100+n_A_VIT)/100):
+      n_A_BaseLV<=99&&(n_A_MaxHP=(2700+50*(n_A_BaseLV-90))*(100+n_A_VIT)/100, SkillSearch(345)&&(n_A_MaxHP=3*n_A_MaxHP), n_A_MaxHP=Math.floor(n_A_MaxHP))
+    ),
+    42==n_A_JOB&&n_A_BaseLV>=70&&(
+      wKenseiHP=[3455,3524,3593,3663,3834,3806,3878,3951,4025,4500],
+      n_A_BaseLV<=79?n_A_MaxHP=Math.floor((2670+10*(n_A_BaseLV-70))*(100+n_A_VIT)/100):
+      n_A_BaseLV<=89?n_A_MaxHP=Math.floor((3e3+20*(n_A_BaseLV-80))*(100+n_A_VIT)/100):
+      n_A_BaseLV<=99&&(n_A_MaxHP=Math.floor(wKenseiHP[n_A_BaseLV-90]*(100+n_A_VIT)/100))
+    ),
+    1==n_A_Buf7[39]?n_A_MaxHP+=Math.floor(500+10*n_A_BaseLV/3):
+    2==n_A_Buf7[39]?n_A_MaxHP+=Math.floor(1500+10*n_A_BaseLV/3):
+    3==n_A_Buf7[39]&&(n_A_MaxHP+=Math.floor(2500+10*n_A_BaseLV/3)),
+    n_A_MaxHP+=200*SkillSearch(156),
+    w=0,
+    w+=n_tok[13],
+    n_A_BaseLV<=79&&(w+=400*EquipNumSearch(883)),
+    5==n_A_JobClass()&&(w-=100*CardNumSearch(474)),
+    0==n_A_JobClass()&&(w+=30*EquipNumSearch(1116)),
+    1==n_A_JobClass()&&(w+=500*CardNumSearch(477)),
+    186==n_A_card[11]&&(w-=40*n_A_BODY_DEF_PLUS),
+    836==n_A_Equip[8]&&(w+=10*n_A_BaseLV),
+    859==n_A_Equip[6]&&(w+=20*n_A_BaseLV),
+    762==n_A_Equip[6]&&(w+=20*n_A_BaseLV),
+    EquipNumSearch(770)&&(w+=3*n_A_BaseLV),
+    986==n_A_Equip[6]&&(w+=7*n_A_BaseLV),
+    1172==n_A_Equip[0]&&(w+=25*n_A_Weapon_ATKplus),
+    1671==n_A_Equip[0]&&(w+=50*Math.floor(n_A_Weapon_ATKplus/2)),
+    EquipNumSearch(1058)&&(w+=10*n_A_BaseLV),
+    n_A_BODY_DEF_PLUS>=9&&225==n_A_card[11]&&(w+=800),
+    n_A_Weapon_ATKplus>=6&&1168==n_A_Equip[0]&&(w-=200*(n_A_Weapon_ATKplus-5)),
+    0!=n_A_JOB&&20!=n_A_JOB||1670!=n_A_Equip[3]||(w+=80),
+    536==n_A_Equip[8]&&(wHPVS=n_A_JobClass(),(3==wHPVS||4==wHPVS||5==wHPVS)&&(w+=5*n_A_BaseLV)),
+    n_A_MaxHP+=w,
+    n_A_MaxHP<1&&(n_A_MaxHP=1),
+    w=0,
+    w+=n_tok[15],
+    n_A_Buf3[3]&&(w+=5+2*n_A_Buf3[3]+n_A_Buf3[33]+Math.floor(n_A_Buf3[23]/10)),
+    n_A_Buf2[17]&&(w+=100),
+    n_A_Buf7[16]&&(w+=3),
+    715==n_A_Equip[8]&&(w-=n_A_SHOES_DEF_PLUS),
+    1730==n_A_Equip[6]&&(w+=n_A_BODY_DEF_PLUS),
+    SU_VIT>=80&&267==n_A_card[12]&&(w+=3),
+    n_A_SHOES_DEF_PLUS>=9&&304==n_A_card[13]&&(w+=10),
+    n_A_SHOES_DEF_PLUS<=4&&407==n_A_card[13]&&(w+=4),
+    n_A_SHOES_DEF_PLUS>=8&&1732==n_A_Equip[8]&&(w+=n_A_SHOES_DEF_PLUS-7),
+    405!=n_A_card[12]||1!=n_A_JobClass()&&2!=n_A_JobClass()&&6!=n_A_JobClass()||(w+=5),
+    n_A_MaxHP=n_A_MaxHP*(100+w)/100;
+    if(1==n_A_Buf6[0]&&n_A_Buf6[1]>=1&&1==n_A_BodyZokusei){
       var dHP=[5,9,12,14,15];
       n_A_MaxHP=n_A_MaxHP*(100+dHP[n_A_Buf6[1]-1])/100
     }
-    for(
-      SkillSearch(258)&&(n_A_MaxHP*=3),
-      n_A_MaxHP=Math.floor(n_A_MaxHP),
-      n_A_MaxHP>=100?n_A_MaxHP>=1e4?myInnerHtml("A_MaxHP"," "+n_A_MaxHP,0):myInnerHtml("A_MaxHP",n_A_MaxHP,0):myInnerHtml("A_MaxHP"," "+n_A_MaxHP,0),
-      JobSP_A=new Array(1,2,2,5,2,6,3,3,4,8,4,9,4,4.7,5,4.7,6,6,7,4,1,3,4,8,4,9,4,4.7,5,4.7,6,6,7,4,0,0,0,0,0,0,0,2,4.7,9,3.75,3.75),
-      wSPSL=0,
-      43==n_A_JOB&&n_A_BaseLV>=70&&(
-        n_A_BaseLV<80?
-          wSPSL=4*(n_A_BaseLV-70)+5:
-        n_A_BaseLV<90?
-          wSPSL=4*(n_A_BaseLV-80):
-        n_A_BaseLV<93?
-          wSPSL=4*(n_A_BaseLV-90):
-        n_A_BaseLV<99?
-          wSPSL=4*(n_A_BaseLV-90)-10:
-          wSPSL=1
-      ),
-      n_A_MaxSP=10+n_A_BaseLV*JobSP_A[n_A_JOB]-wSPSL,
-      44==n_A_JOB&&(
-        n_A_BaseLV<=20?
-          n_A_MaxSP=11+3*n_A_BaseLV:
-        n_A_BaseLV<=40?
-          n_A_MaxSP=71+4*(n_A_BaseLV-20):
-        n_A_BaseLV<=60?
-          n_A_MaxSP=151+5*(n_A_BaseLV-40):
-        n_A_BaseLV<=80?
-          n_A_MaxSP=251+6*(n_A_BaseLV-60):
-          n_A_MaxSP=370+8*(n_A_BaseLV-80)
-      ),
-      45==n_A_JOB&&(
-        n_A_BaseLV<=25?
-          n_A_MaxSP=10+3*n_A_BaseLV:
-        n_A_BaseLV<=35?
-          n_A_MaxSP=85+4*(n_A_BaseLV-25):
-        n_A_BaseLV<=40?
-          n_A_MaxSP=126+3*(n_A_BaseLV-35):
-        n_A_BaseLV<=50?
-          n_A_MaxSP=141+4*(n_A_BaseLV-40):
-        n_A_BaseLV<=75?
-          n_A_MaxSP=181+5*(n_A_BaseLV-50):
-        n_A_BaseLV<=78?
-          n_A_MaxSP=306+6*(n_A_BaseLV-75):
-          n_A_MaxSP=330+6*(n_A_BaseLV-78)
-      ),
-      n_Tensei&&(n_A_MaxSP=Math.floor(125*n_A_MaxSP/100)),
-      eval(A_youshi.checked)&&(n_A_MaxSP=Math.floor(70*n_A_MaxSP/100)),
-      n_A_MaxSP=Math.floor(n_A_MaxSP*(100+n_A_INT)/100),
-      1==n_A_Buf7[40]?
-        n_A_MaxSP=Math.floor(n_A_MaxSP*(95+n_A_BaseLV/10)/100):
-      2==n_A_Buf7[40]?
-        n_A_MaxSP=Math.floor(n_A_MaxSP*(100+n_A_BaseLV/10)/100):
-      3==n_A_Buf7[40]&&
-        (n_A_MaxSP=Math.floor(n_A_MaxSP*(105+n_A_BaseLV/10)/100)),
-      41==n_A_JOB&&n_A_BaseLV>=70&&(
-        n_A_BaseLV<=79?
-          n_A_MaxSP=Math.floor((150+1*(n_A_BaseLV-70))*(100+n_A_INT)/100):
-        n_A_BaseLV<=89?
-          n_A_MaxSP=Math.floor((160+1*(n_A_BaseLV-70))*(100+n_A_INT)/100):
-        n_A_BaseLV<=99&&(
-          n_A_MaxSP=190*(100+n_A_INT)/100,
-          SkillSearch(345)&&(n_A_MaxSP=3*n_A_MaxSP),
-          n_A_MaxSP=Math.floor(n_A_MaxSP)
-        )
-      ),
-      42==n_A_JOB&&n_A_BaseLV>=70&&(
-        n_A_BaseLV<=79?
-          n_A_MaxSP=Math.floor((339+2*(n_A_BaseLV-70))*(100+n_A_INT)/100):
-        n_A_BaseLV<=89?
-          n_A_MaxSP=Math.floor((386+2*(n_A_BaseLV-80))*(100+n_A_INT)/100):
-        n_A_BaseLV<=99&&(
-          n_A_MaxSP=Math.floor((430+3*(n_A_BaseLV-90))*(100+n_A_INT)/100))
-      ),
-      w=0,
-      w+=n_tok[14],
-      w+=StPlusCalc2(4),
-      w+=StPlusCalc2(7),
-      w+=30*SkillSearch(372),
-      n_A_BaseLV<=79&&(w+=200*EquipNumSearch(883)),
-      179==n_A_card[9]&&(w+=40),
-      3==n_A_JobClass()&&(w+=50*EquipNumSearch(1118)),
-      5==n_A_JobClass()&&(w+=100*CardNumSearch(474)+100*CardNumSearch(476)),
-      859==n_A_Equip[6]&&(w+=5*n_A_BaseLV),
-      762==n_A_Equip[6]&&(w+=5*n_A_BaseLV),
-      EquipNumSearch(770)&&(w+=n_A_JobLV),
-      986==n_A_Equip[6]&&(w+=Math.floor(.5*n_A_BaseLV)),
-      1193==n_A_Equip[7]&&(w+=Math.floor(n_A_BaseLV/3)+10*n_A_SHOULDER_DEF_PLUS),
-      EquipNumSearch(1058)&&(w+=2*n_A_BaseLV),
-      n_A_HEAD_DEF_PLUS>=9&&1818==n_A_Equip[2]&&(w+=5),
-      n_A_HEAD_DEF_PLUS<=4&&179==n_A_card[8]&&(w+=40),
-      n_A_HEAD_DEF_PLUS>=9&&298==n_A_card[8]&&(w+=150),
-      n_A_Weapon_ATKplus>=9&&642==n_A_Equip[0]&&(w+=300),
-      n_A_Weapon_ATKplus>=6&&1168==n_A_Equip[0]&&(w-=100*(n_A_Weapon_ATKplus-5)),
-      n_A_HEAD_DEF_PLUS>=6&&1593==n_A_Equip[2]&&(w+=10*(n_A_HEAD_DEF_PLUS-5)),
-      n_A_HEAD_DEF_PLUS>=6&&EquipNumSearch(1581)&&(w+=n_A_HEAD_DEF_PLUS),
-      0!=n_A_JOB&&20!=n_A_JOB||1670!=n_A_Equip[3]||(w+=30),
-      536==n_A_Equip[8]&&(wSPVS=n_A_JobClass(),(1==wSPVS||2==wSPVS||6==wSPVS)&&(w+=2*n_A_JobLV)),
-      n_A_MaxSP+=w,
-      n_A_MaxSP<0&&(n_A_MaxSP=0),
-      w=0,
-      w+=n_tok[16],
-      w+=SkillSearch(269),
-      w+=2*SkillSearch(274),
-      n_A_Buf2[18]&&(w+=100+n_tok[16]),
-      n_A_Buf7[16]&&(w+=3),
-      715==n_A_Equip[8]&&(w-=n_A_SHOES_DEF_PLUS),
-      n_A_HEAD_DEF_PLUS>=6&&EquipNumSearch(1581)&&(w+=n_A_HEAD_DEF_PLUS),
-      n_A_SHOES_DEF_PLUS>=9&&304==n_A_card[13]&&(w+=10),
-      n_A_SHOES_DEF_PLUS<=4&&407==n_A_card[13]&&(w+=4),
-      405!=n_A_card[12]||3!=n_A_JobClass()&&4!=n_A_JobClass()&&5!=n_A_JobClass()||(w+=5),
-      n_A_Buf3[6]&&(
-        w+=SRV?
-          15+n_A_Buf3[6]+n_A_Buf3[26]/10+n_A_Buf3[36]:
-          15+n_A_Buf3[6]+Math.floor(n_A_Buf3[36]/2)+Math.floor(n_A_Buf3[26]/10)
-      ),
-      n_A_MaxSP=Math.floor(n_A_MaxSP*(1+w/100)),
-      n_A_MaxSP>=100?myInnerHtml("A_MaxSP",n_A_MaxSP,0):myInnerHtml("A_MaxSP"," "+n_A_MaxSP,0),
-      n_A_DEF=n_tok[18],
-      i=2;10>=i;i++
-    ) n_A_DEF+=ItemOBJ[n_A_Equip[i]][3];
-    for(
-      521==n_A_Equip[0]&&(n_A_Weapon_ATKplus<=5?n_A_DEF+=2:n_A_Weapon_ATKplus>=9?n_A_DEF+=7:n_A_DEF+=5),
-      n_A_LEFT_DEF_PLUS<=5&&222==n_A_card[10]&&(n_A_DEF+=2),
-      n_A_BODY_DEF_PLUS<=5&&283==n_A_card[11]&&(n_A_DEF+=2),
-      n_A_HEAD_DEF_PLUS>=7&&1272==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1273==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1274==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1474==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1275==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1475==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1276==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1280==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1282==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1286==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1287==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1486==n_A_Equip[2]&&(n_A_DEF+=2),
-      n_A_HEAD_DEF_PLUS>=7&&1487==n_A_Equip[2]&&(n_A_DEF+=2),
-      n_A_HEAD_DEF_PLUS>=7&&1485==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1550==n_A_Equip[2]&&(n_A_DEF+=1),
-      n_A_Buf3[9]&&(n_A_DEF+=2+2*n_A_Buf3[9]),
-      n_A_Buf7[32]&&(n_A_DEF+=3),
-      1==n_A_JobClass()&&(n_A_DEF+=2*EquipNumSearch(1117)),
-      658==n_A_Equip[0]&&(n_A_DEF+=n_A_Weapon_ATKplus),
-      715==n_A_Equip[8]&&(n_A_DEF+=Math.floor(n_A_SHOES_DEF_PLUS/2)),
-      942==n_A_Equip[0]&&(n_A_DEF+=Math.floor(n_A_Weapon_ATKplus/2)),
-      1350==n_A_Equip[2]&&(n_A_DEF-=n_A_HEAD_DEF_PLUS),
-      EquipNumSearch(1026)&&(n_A_DEF-=5),
-      EquipNumSearch(764)&&(SRV?n_A_DEF-=n_A_HEAD_DEF_PLUS+n_A_LEFT_DEF_PLUS:n_A_DEFplus-=n_A_HEAD_DEF_PLUS+n_A_LEFT_DEF_PLUS),
-      EquipNumSearch(742)&&1==n_A_JobClass()&&(n_A_DEF+=6),
-      986!=n_A_Equip[6]||1!=n_A_JobClass()&&2!=n_A_JobClass()&&6!=n_A_JobClass()||(n_A_DEF+=3),
-      809==n_A_Equip[2]&&(n_A_DEFplus-=n_A_HEAD_DEF_PLUS),
-      (TimeItemNumSearch(9)||TimeItemNumSearch(50))&&(n_A_DEF+=20),
-      (TimeItemNumSearch(33)||TimeItemNumSearch(51))&&(n_A_DEF-=20),
-      n_A_totalDEF=n_A_DEF+Math.round(7*n_A_DEFplus/10),
-      n_tok[24]&&(n_A_totalDEF=Math.floor(n_A_totalDEF/n_tok[24])),
-      n_tok[85]&&(n_A_totalDEF-=Math.floor(n_A_totalDEF*n_tok[85]/100)),
-      n_A_Buf6[21]&&(n_A_totalDEF-=Math.floor(25*n_A_totalDEF/100)),
-      SkillSearch(256)&&(n_A_totalDEF=Math.floor(n_A_totalDEF*(1-.05*SkillSearch(256)))),
-      (n_A_Buf6[13]||n_A_Buf6[15])&&(n_A_totalDEF-=Math.floor(.5*n_A_totalDEF)),
-      n_A_Buf2[21]&&(n_A_totalDEF+=Math.floor(.25*n_A_totalDEF)),
-      SkillSearch(196)&&(n_A_totalDEF=90),
-      document.calcForm.B_num.value>=2&&(n_A_totalDEF-=Math.floor(n_A_totalDEF*(document.calcForm.B_num.value-1)*5/100)),
-      n_A_totalDEF>=100&&(n_A_totalDEF=99),
-      i=0;11>i;i++
-    ) n_A_Buf2[4]==i&&(P_VIT1=.05*n_A_VIT*i);
-    if(
-      n_A_DEFVIT=parseInt(n_A_VIT+P_VIT1),
-      n_A_Buf7[31]&&(n_A_DEFVIT-=Math.floor(.1*n_A_DEFVIT)),
-      n_A_Buf6[5]&&(n_A_DEFVIT-=Math.floor((.05+.05*n_A_Buf6[5])*n_A_DEFVIT)),
-      SkillSearch(258)&&(n_A_totalDEF=0,n_A_DEFVIT=0),
-      myInnerHtml("A_totalDEF",n_A_totalDEF+"+"+n_A_DEFVIT,0),
-      n_A_VITDEF=new Array,
-      n_A_VITDEF[0]=Math.floor(.5*n_A_VIT)+Math.floor(.3*n_A_VIT),
-      n_A_VITDEF[2]=Math.floor(.5*n_A_VIT)+Math.floor(n_A_VIT*n_A_VIT/150)-1,
-      n_A_VITDEF[2]>n_A_VITDEF[0]?
-        n_A_VITDEF[1]=(n_A_VITDEF[0]+n_A_VITDEF[2])/2:
-        (n_A_VITDEF[1]=n_A_VITDEF[0],n_A_VITDEF[2]=n_A_VITDEF[0]),
-      SkillSearch(12)
-    ) for(i=0;2>=i;i++) n_A_VITDEF[i]=Math.floor(.45*n_A_VITDEF[i]);
+    SkillSearch(258)&&(n_A_MaxHP*=3),
+    n_A_MaxHP=Math.floor(n_A_MaxHP),
+    n_A_MaxHP>=100?n_A_MaxHP>=1e4?myInnerHtml("A_MaxHP"," "+n_A_MaxHP,0):myInnerHtml("A_MaxHP",n_A_MaxHP,0):myInnerHtml("A_MaxHP"," "+n_A_MaxHP,0);
+    //SP calculation
+    JobSP_A=new Array(1,2,2,5,2,6,3,3,4,8,4,9,4,4.7,5,4.7,6,6,7,4,1,3,4,8,4,9,4,4.7,5,4.7,6,6,7,4,0,0,0,0,0,0,0,2,4.7,9,3.75,3.75),
+    wSPSL=0,
+    43==n_A_JOB&&n_A_BaseLV>=70&&(
+      n_A_BaseLV<80?wSPSL=4*(n_A_BaseLV-70)+5:
+      n_A_BaseLV<90?wSPSL=4*(n_A_BaseLV-80):
+      n_A_BaseLV<93?wSPSL=4*(n_A_BaseLV-90):
+      n_A_BaseLV<99?wSPSL=4*(n_A_BaseLV-90)-10:wSPSL=1
+    ),
+    n_A_MaxSP=10+n_A_BaseLV*JobSP_A[n_A_JOB]-wSPSL,
+    44==n_A_JOB&&(
+      n_A_BaseLV<=20?n_A_MaxSP=11+3*n_A_BaseLV:
+      n_A_BaseLV<=40?n_A_MaxSP=71+4*(n_A_BaseLV-20):
+      n_A_BaseLV<=60?n_A_MaxSP=151+5*(n_A_BaseLV-40):
+      n_A_BaseLV<=80?n_A_MaxSP=251+6*(n_A_BaseLV-60):n_A_MaxSP=370+8*(n_A_BaseLV-80)
+    ),
+    45==n_A_JOB&&(
+      n_A_BaseLV<=25?n_A_MaxSP=10+3*n_A_BaseLV:
+      n_A_BaseLV<=35?n_A_MaxSP=85+4*(n_A_BaseLV-25):
+      n_A_BaseLV<=40?n_A_MaxSP=126+3*(n_A_BaseLV-35):
+      n_A_BaseLV<=50?n_A_MaxSP=141+4*(n_A_BaseLV-40):
+      n_A_BaseLV<=75?n_A_MaxSP=181+5*(n_A_BaseLV-50):
+      n_A_BaseLV<=78?n_A_MaxSP=306+6*(n_A_BaseLV-75):n_A_MaxSP=330+6*(n_A_BaseLV-78)
+    ),
+    n_Tensei&&(n_A_MaxSP=Math.floor(125*n_A_MaxSP/100)),
+    n_Baby&&(n_A_MaxSP=Math.floor(70*n_A_MaxSP/100)),
+    n_A_MaxSP=Math.floor(n_A_MaxSP*(100+n_A_INT)/100),
+    1==n_A_Buf7[40]?n_A_MaxSP=Math.floor(n_A_MaxSP*(95+n_A_BaseLV/10)/100):
+    2==n_A_Buf7[40]?n_A_MaxSP=Math.floor(n_A_MaxSP*(100+n_A_BaseLV/10)/100):
+    3==n_A_Buf7[40]&&(n_A_MaxSP=Math.floor(n_A_MaxSP*(105+n_A_BaseLV/10)/100)),
+    41==n_A_JOB&&n_A_BaseLV>=70&&(
+      n_A_BaseLV<=79?n_A_MaxSP=Math.floor((150+1*(n_A_BaseLV-70))*(100+n_A_INT)/100):
+      n_A_BaseLV<=89?n_A_MaxSP=Math.floor((160+1*(n_A_BaseLV-70))*(100+n_A_INT)/100):
+      n_A_BaseLV<=99&&(n_A_MaxSP=190*(100+n_A_INT)/100, SkillSearch(345)&&(n_A_MaxSP=3*n_A_MaxSP), n_A_MaxSP=Math.floor(n_A_MaxSP))
+    ),
+    42==n_A_JOB&&n_A_BaseLV>=70&&(
+      n_A_BaseLV<=79?n_A_MaxSP=Math.floor((339+2*(n_A_BaseLV-70))*(100+n_A_INT)/100):
+      n_A_BaseLV<=89?n_A_MaxSP=Math.floor((386+2*(n_A_BaseLV-80))*(100+n_A_INT)/100):
+      n_A_BaseLV<=99&&(n_A_MaxSP=Math.floor((430+3*(n_A_BaseLV-90))*(100+n_A_INT)/100))
+    ),
+    w=0,
+    w+=n_tok[14],
+    w+=StPlusCalc2(4),
+    w+=StPlusCalc2(7),
+    w+=30*SkillSearch(372),
+    n_A_BaseLV<=79&&(w+=200*EquipNumSearch(883)),
+    179==n_A_card[9]&&(w+=40),
+    3==n_A_JobClass()&&(w+=50*EquipNumSearch(1118)),
+    5==n_A_JobClass()&&(w+=100*CardNumSearch(474)+100*CardNumSearch(476)),
+    859==n_A_Equip[6]&&(w+=5*n_A_BaseLV),
+    762==n_A_Equip[6]&&(w+=5*n_A_BaseLV),
+    EquipNumSearch(770)&&(w+=n_A_JobLV),
+    986==n_A_Equip[6]&&(w+=Math.floor(.5*n_A_BaseLV)),
+    1193==n_A_Equip[7]&&(w+=Math.floor(n_A_BaseLV/3)+10*n_A_SHOULDER_DEF_PLUS),
+    EquipNumSearch(1058)&&(w+=2*n_A_BaseLV),
+    n_A_HEAD_DEF_PLUS>=9&&1818==n_A_Equip[2]&&(w+=5),
+    n_A_HEAD_DEF_PLUS<=4&&179==n_A_card[8]&&(w+=40),
+    n_A_HEAD_DEF_PLUS>=9&&298==n_A_card[8]&&(w+=150),
+    n_A_Weapon_ATKplus>=9&&642==n_A_Equip[0]&&(w+=300),
+    n_A_Weapon_ATKplus>=6&&1168==n_A_Equip[0]&&(w-=100*(n_A_Weapon_ATKplus-5)),
+    n_A_HEAD_DEF_PLUS>=6&&1593==n_A_Equip[2]&&(w+=10*(n_A_HEAD_DEF_PLUS-5)),
+    n_A_HEAD_DEF_PLUS>=6&&EquipNumSearch(1581)&&(w+=n_A_HEAD_DEF_PLUS),
+    0!=n_A_JOB&&20!=n_A_JOB||1670!=n_A_Equip[3]||(w+=30),
+    536==n_A_Equip[8]&&(wSPVS=n_A_JobClass(),(1==wSPVS||2==wSPVS||6==wSPVS)&&(w+=2*n_A_JobLV)),
+    n_A_MaxSP+=w,
+    n_A_MaxSP<0&&(n_A_MaxSP=0),
+    w=0,
+    w+=n_tok[16],
+    w+=SkillSearch(269),
+    w+=2*SkillSearch(274),
+    n_A_Buf2[18]&&(w+=100+n_tok[16]),
+    n_A_Buf7[16]&&(w+=3),
+    715==n_A_Equip[8]&&(w-=n_A_SHOES_DEF_PLUS),
+    n_A_HEAD_DEF_PLUS>=6&&EquipNumSearch(1581)&&(w+=n_A_HEAD_DEF_PLUS),
+    n_A_SHOES_DEF_PLUS>=9&&304==n_A_card[13]&&(w+=10),
+    n_A_SHOES_DEF_PLUS<=4&&407==n_A_card[13]&&(w+=4),
+    405!=n_A_card[12]||3!=n_A_JobClass()&&4!=n_A_JobClass()&&5!=n_A_JobClass()||(w+=5),
+    n_A_Buf3[6]&&(w+=SRV?15+n_A_Buf3[6]+n_A_Buf3[26]/10+n_A_Buf3[36]:15+n_A_Buf3[6]+Math.floor(n_A_Buf3[36]/2)+Math.floor(n_A_Buf3[26]/10)),
+    n_A_MaxSP=Math.floor(n_A_MaxSP*(1+w/100)),
+    n_A_MaxSP>=100?myInnerHtml("A_MaxSP",n_A_MaxSP,0):myInnerHtml("A_MaxSP"," "+n_A_MaxSP,0);
+    //DEF calculation
+    n_A_DEF=n_tok[18];
+    for(i=2;10>=i;i++) n_A_DEF+=ItemOBJ[n_A_Equip[i]][3];
+    521==n_A_Equip[0]&&(n_A_Weapon_ATKplus<=5?n_A_DEF+=2:n_A_Weapon_ATKplus>=9?n_A_DEF+=7:n_A_DEF+=5),
+    n_A_LEFT_DEF_PLUS<=5&&222==n_A_card[10]&&(n_A_DEF+=2),
+    n_A_BODY_DEF_PLUS<=5&&283==n_A_card[11]&&(n_A_DEF+=2),
+    n_A_HEAD_DEF_PLUS>=7&&1272==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1273==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1274==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1474==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1275==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1475==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1276==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1280==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1282==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1286==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1287==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1486==n_A_Equip[2]&&(n_A_DEF+=2),
+    n_A_HEAD_DEF_PLUS>=7&&1487==n_A_Equip[2]&&(n_A_DEF+=2),
+    n_A_HEAD_DEF_PLUS>=7&&1485==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1550==n_A_Equip[2]&&(n_A_DEF+=1),
+    n_A_Buf3[9]&&(n_A_DEF+=2+2*n_A_Buf3[9]),
+    n_A_Buf7[32]&&(n_A_DEF+=3),
+    1==n_A_JobClass()&&(n_A_DEF+=2*EquipNumSearch(1117)),
+    658==n_A_Equip[0]&&(n_A_DEF+=n_A_Weapon_ATKplus),
+    715==n_A_Equip[8]&&(n_A_DEF+=Math.floor(n_A_SHOES_DEF_PLUS/2)),
+    942==n_A_Equip[0]&&(n_A_DEF+=Math.floor(n_A_Weapon_ATKplus/2)),
+    1350==n_A_Equip[2]&&(n_A_DEF-=n_A_HEAD_DEF_PLUS),
+    EquipNumSearch(1026)&&(n_A_DEF-=5),
+    EquipNumSearch(764)&&(SRV?n_A_DEF-=n_A_HEAD_DEF_PLUS+n_A_LEFT_DEF_PLUS:n_A_DEFplus-=n_A_HEAD_DEF_PLUS+n_A_LEFT_DEF_PLUS),
+    EquipNumSearch(742)&&1==n_A_JobClass()&&(n_A_DEF+=6),
+    986!=n_A_Equip[6]||1!=n_A_JobClass()&&2!=n_A_JobClass()&&6!=n_A_JobClass()||(n_A_DEF+=3),
+    809==n_A_Equip[2]&&(n_A_DEFplus-=n_A_HEAD_DEF_PLUS),
+    (TimeItemNumSearch(9)||TimeItemNumSearch(50))&&(n_A_DEF+=20),
+    (TimeItemNumSearch(33)||TimeItemNumSearch(51))&&(n_A_DEF-=20),
+    n_A_totalDEF=n_A_DEF+Math.round(7*n_A_DEFplus/10),
+    n_tok[24]&&(n_A_totalDEF=Math.floor(n_A_totalDEF/n_tok[24])),
+    n_tok[85]&&(n_A_totalDEF-=Math.floor(n_A_totalDEF*n_tok[85]/100)),
+    n_A_Buf6[21]&&(n_A_totalDEF-=Math.floor(25*n_A_totalDEF/100)),
+    SkillSearch(256)&&(n_A_totalDEF=Math.floor(n_A_totalDEF*(1-.05*SkillSearch(256)))),
+    (n_A_Buf6[13]||n_A_Buf6[15])&&(n_A_totalDEF-=Math.floor(.5*n_A_totalDEF)),
+    n_A_Buf2[21]&&(n_A_totalDEF+=Math.floor(.25*n_A_totalDEF)),
+    SkillSearch(196)&&(n_A_totalDEF=90),
+    document.calcForm.B_num.value>=2&&(n_A_totalDEF-=Math.floor(n_A_totalDEF*(document.calcForm.B_num.value-1)*5/100)),
+    n_A_totalDEF>=100&&(n_A_totalDEF=99);
+    for(i=0;11>i;i++) n_A_Buf2[4]==i&&(P_VIT1=.05*n_A_VIT*i);
+    n_A_DEFVIT=parseInt(n_A_VIT+P_VIT1),
+    n_A_Buf7[31]&&(n_A_DEFVIT-=Math.floor(.1*n_A_DEFVIT)),
+    n_A_Buf6[5]&&(n_A_DEFVIT-=Math.floor((.05+.05*n_A_Buf6[5])*n_A_DEFVIT)),
+    SkillSearch(258)&&(n_A_totalDEF=0,n_A_DEFVIT=0),
+    myInnerHtml("A_totalDEF",n_A_totalDEF+"+"+n_A_DEFVIT,0);
+    //VITDEF calculation
+    n_A_VITDEF=new Array,
+    n_A_VITDEF[0]=Math.floor(.5*n_A_VIT)+Math.floor(.3*n_A_VIT),
+    n_A_VITDEF[2]=Math.floor(.5*n_A_VIT)+Math.floor(n_A_VIT*n_A_VIT/150)-1,
+    n_A_VITDEF[2]>n_A_VITDEF[0]?n_A_VITDEF[1]=(n_A_VITDEF[0]+n_A_VITDEF[2])/2:(n_A_VITDEF[1]=n_A_VITDEF[0],n_A_VITDEF[2]=n_A_VITDEF[0]);
+    if(SkillSearch(12))
+      for(i=0;2>=i;i++) n_A_VITDEF[i]=Math.floor(.45*n_A_VITDEF[i]);
     else if(n_A_Buf6[5])
       for(i=0;2>=i;i++) n_A_VITDEF[i]=Math.floor(n_A_VITDEF[i]*(.95-.05*n_A_Buf6[5]));
     else if(n_A_Buf7[31])
@@ -838,140 +764,134 @@ function StAllCalc(){
       for(i=0;2>=i;i++) n_A_VITDEF[i]=0;
     if(document.calcForm.B_num.value>=2)
       for(i=0;2>=i;i++) n_A_VITDEF[i]-=Math.floor(n_A_VITDEF[i]*(document.calcForm.B_num.value-1)*5/100);
-    if(
-      n_A_MDEF=n_tok[19],
-      3==n_A_JobClass()&&(n_A_MDEF+=CardNumSearch(383)),
-      n_A_Buf7[33]&&(n_A_MDEF+=3),
-      213==n_A_card[9]&&(n_A_MDEF+=5),
-      213==n_A_card[16]&&(n_A_MDEF+=5),
-      213==n_A_card[17]&&(n_A_MDEF+=5),
-      213==n_A_card[18]&&(n_A_MDEF+=5),
-      EquipNumSearch(764)&&(n_A_MDEF+=n_A_HEAD_DEF_PLUS+n_A_LEFT_DEF_PLUS),
-      1169==n_A_Equip[0]&&(n_A_MDEF+=n_A_Weapon_ATKplus),
-      199==n_A_card[11]&&5==n_A_JobClass()&&(n_A_MDEF+=3),
-      (EquipNumSearch(809)||1350==n_A_Equip[2])&&(n_A_MDEF+=n_A_HEAD_DEF_PLUS),
-      n_A_HEAD_DEF_PLUS<=5&&213==n_A_card[8]&&(n_A_MDEF+=5),
-      n_A_LEFT_DEF_PLUS<=5&&222==n_A_card[10]&&(n_A_MDEF+=3),
-      n_A_BODY_DEF_PLUS<=5&&283== n_A_card[11]&&(n_A_MDEF+=5),
-      n_A_LEFT_DEF_PLUS>=9&&310==n_A_card[10]&&(n_A_MDEF+=5),
-      n_A_SHOES_DEF_PLUS<=5&&381==n_A_card[13]&&(n_A_MDEF+=7),
-      n_A_HEAD_DEF_PLUS>=6&&1593==n_A_Equip[2]&&(n_A_MDEF+=n_A_HEAD_DEF_PLUS-5),
-      n_A_HEAD_DEF_PLUS>=7&&1277==n_A_Equip[2]&&(n_A_MDEF+=1),
-      n_A_HEAD_DEF_PLUS>=7&&1281==n_A_Equip[2]&&(n_A_MDEF+=7),
-      n_A_HEAD_DEF_PLUS>=7&&1478==n_A_Equip[2]&&(n_A_MDEF+=7),
-      n_A_HEAD_DEF_PLUS>=7&&1483==n_A_Equip[2]&&(n_A_MDEF+=5),
-      n_A_SHOULDER_DEF_PLUS<=5&&258==n_A_card[12]&&(n_A_MDEF+=8),
-      986!=n_A_Equip[6]||3!=n_A_JobClass()&&4!=n_A_JobClass()&&5!=n_A_JobClass()||(n_A_MDEF+=5),
-      SkillSearch(9)?n_A_MDEF+=SkillSearch(9):SkillSearch(256)&&(n_A_MDEF+=1),
-      (TimeItemNumSearch(9)||TimeItemNumSearch(50))&&(n_A_MDEF-=20),
-      (TimeItemNumSearch(33)||TimeItemNumSearch(51))&&(n_A_MDEF+=20),
-      (n_A_Buf6[13]||n_A_Buf6[15])&&(n_A_MDEF+=Math.floor(.25*n_A_MDEF)),
-      SkillSearch(196)&&(n_A_MDEF=90),
-      1!=n_A_JOB&&7!=n_A_JOB&&13!=n_A_JOB&&21!=n_A_JOB&&27!=n_A_JOB&&35!=n_A_JOB&&n_A_MDEF>=99&&(n_A_MDEF=99),
-      n_A_INTMDEF=n_A_INT,
-      n_A_softMDEF=n_A_INT+Math.floor(n_A_VIT/2),
-      n_A_Buf6[4]&&(n_A_softMDEF-=Math.floor(n_A_softMDEF*n_A_Buf6[4]*.12)),
-      SkillSearch(258)&&(n_A_MDEF=0,n_A_INTMDEF=0,n_A_softMDEF=0),
-      myInnerHtml("A_MDEF",n_A_MDEF+"+"+n_A_INTMDEF,0),
-      myInnerHtml("A_RealMDEF",n_A_MDEF+"+"+n_A_softMDEF,0),
-      n_A_HIT=n_A_BaseLV+n_A_DEX,
-      n_A_HIT+=n_tok[8],
-      n_A_HIT+=Math.floor(n_A_JobLV/10)*CardNumSearch(492),
-      SRV&&324==n_A_ActiveSkill&&(n_A_HIT+=20),
-      n_A_Buf2[20]&&(n_A_HIT+=50),
-      n_A_Buf3[4]&&(n_A_HIT+=10+2*n_A_Buf3[4]+n_A_Buf3[34]+Math.floor(n_A_Buf3[24]/10)),
-      n_A_Buf7[0]&&(n_A_HIT+=30),
-      n_A_Buf7[26]&&(n_A_HIT+=5),
-      n_A_Buf7[27]?n_A_HIT+=33:n_A_Buf7[46]?n_A_HIT+=30:n_A_Buf7[18]&&(n_A_HIT+=10),
-      10==n_A_WeaponType&&(n_A_HIT+=5*CardNumSearch(465)),
-      654==n_A_Equip[0]&&(n_A_HIT+=Math.floor(SU_AGI/10)),
-      656==n_A_Equip[0]&&(n_A_HIT-=Math.floor(SU_DEX/3)),
-      SU_STR>=90&&(n_A_HIT+=10*EquipNumSearch(442)),
-      SU_STR>=95&&1167==n_A_Equip[0]&&(n_A_HIT+=10),
-      (3==n_A_WeaponType||2==n_A_WeaponType)&&(n_A_HIT+=5*CardNumSearch(464)),
-      EquipNumSearch(1005)&EquipNumSearch(442)&&(n_A_HIT+=Math.floor(n_A_Weapon_ATKplus/2)),
-      1176==n_A_Equip[0]&&10==SkillSearch(81)&&(n_A_HIT+=10),
-      n_A_HEAD_DEF_PLUS>=7&&1480==n_A_Equip[2]&&(n_A_HIT+=5),
-      n_A_HEAD_DEF_PLUS>=7&&1549==n_A_Equip[2]&&(n_A_HIT+=5),
-      n_A_HIT+=1*SkillSearch(39),
-      n_A_HIT+=2*SkillSearch(148),
-      n_A_HIT+=3*SkillSearch(270),
-      n_A_HIT+=10*SkillSearch(256),
-      n_A_HIT+=1*SkillSearch(426),
-      n_A_HIT+=2*SkillSearch(425),
-      SkillSearch(421)&&(n_A_HIT-=30),
-      SkillSearch(422)&&(n_A_HIT+=20),
-      n_A_Buf7[16]&&(n_A_HIT+=Math.floor(.03*n_A_HIT)),
-      n_A_Buf6[11]&&(n_A_HIT=Math.round(.75*n_A_HIT)),
-      myInnerHtml("A_HIT",n_A_HIT,0),
-      myInnerHtml("A_PefHIT",n_tok[86],0),
-      n_A_FLEE=n_A_BaseLV+n_A_AGI,
-      n_A_FLEE+=n_tok[9],
-      24==n_A_JOB&&(n_A_FLEE+=Math.round(SkillSearch(273)/2)),
-      SkillSearch(383)&&(n_A_FLEE+=10),
-      SkillSearch(356)&&(n_A_FLEE+=Math.floor((n_A_BaseLV+n_A_LUK+n_A_DEX)/10)),
-      SkillSearch(421)&&(n_A_FLEE+=30),
-      483==n_A_Equip[0]&&(n_A_FLEE-=n_A_BaseLV+SU_AGI),
-      1714==n_A_Equip[7]&&(n_A_FLEE+=2*n_A_SHOULDER_DEF_PLUS),
-      1718==n_A_Equip[6]&&(n_A_FLEE+=n_A_BODY_DEF_PLUS),
-      n_A_Buf2[20]&&(n_A_FLEE+=50),
-      n_A_Buf3[0]&&(n_A_FLEE+=n_A_Buf3[0]+Math.floor(n_A_Buf3[30]/2)+Math.floor(n_A_Buf3[20]/10)),
-      n_A_Buf7[1]&&(n_A_FLEE+=30),
-      n_A_Buf7[28]?n_A_FLEE+=33:n_A_Buf7[46]&&(n_A_FLEE+=30),
-      TimeItemNumSearch(1)&&(n_A_FLEE+=30*TimeItemNumSearch(1)),
-      SU_STR>=90&&(n_A_FLEE+=10*EquipNumSearch(442)),
-      n_A_Buf2[9]&&0==SkillSearch(273)&&(n_A_FLEE+=Math.round(n_A_Buf2[9]/2)),
-      2==n_A_JobClass()&&295==n_A_card[12]&&(n_A_FLEE+=20),
-      n_A_HEAD_DEF_PLUS>=6&&1555==n_A_Equip[2]&&(n_A_FLEE+=2),
-      n_A_HEAD_DEF_PLUS>=5&&1576==n_A_Equip[2]&&(n_A_FLEE+=5),
-      n_A_HEAD_DEF_PLUS>=7&&1576==n_A_Equip[2]&&(n_A_FLEE+=2),
-      n_A_HEAD_DEF_PLUS>=7&&1541==n_A_Equip[2]&&(n_A_FLEE+=2),
-      n_A_HEAD_DEF_PLUS>=7&&1276==n_A_Equip[2]&&(n_A_FLEE+=10),
-      n_A_HEAD_DEF_PLUS>=7&&1280==n_A_Equip[2]&&(n_A_FLEE+=10),
-      n_A_HEAD_DEF_PLUS>=7&&1282==n_A_Equip[2]&&(n_A_FLEE+=10),
-      n_A_HEAD_DEF_PLUS>=7&&1283==n_A_Equip[2]&&(n_A_FLEE+=10),
-      n_A_HEAD_DEF_PLUS>=7&&1481==n_A_Equip[2]&&(n_A_FLEE+=10),
-      n_A_HEAD_DEF_PLUS>=7&&1550==n_A_Equip[2]&&(n_A_FLEE+=10),
-      n_A_HEAD_DEF_PLUS>=9&&1285==n_A_Equip[2]&&(n_A_FLEE+=5),
-      n_A_SHOULDER_DEF_PLUS>=9&&271==n_A_card[12]&&(n_A_FLEE+=20),
-      n_A_SHOULDER_DEF_PLUS<=4&&401==n_A_card[12]&&(n_A_FLEE+=10),
-      n_A_SHOULDER_DEF_PLUS>=9&&403==n_A_card[12]&&(n_A_FLEE+=5),
-      2==n_A_Buf6[0]&&n_A_Buf6[1]>=1&&4==n_A_BodyZokusei&&(n_A_FLEE+=3*n_A_Buf6[1]),
-      8==n_A_JOB||14==n_A_JOB||22==n_A_JOB||28==n_A_JOB?n_A_FLEE+=4*SkillSearch(14):n_A_FLEE+=3*SkillSearch(14),
-      SkillSearch(433)&&(20==n_A_WeaponType||0==n_A_WeaponType)&&(n_A_FLEE-=5*SkillSearch(433)),
-      Mikiri=new Array(0,1,3,4,6,7,9,10,12,13,15),
-      n_A_FLEE+=Mikiri[SkillSearch(191)],
-      document.calcForm.B_num.value>=2
-    ){
-      var w=document.calcForm.B_num.value-1;
-      w>10&&(w=10),
-      n_A_FLEE-=Math.floor(n_A_FLEE*w*10/100)
-    }
-    if(
-      SkillSearch(258)&&(n_A_FLEE=Math.round(n_A_FLEE/2)),
-      n_A_Buf6[11]&&(n_A_FLEE=Math.round(.75*n_A_FLEE)),
-      n_A_Buf6[12]&&(n_A_FLEE=0),
-      n_A_Buf6[14]&&(n_A_FLEE=0),
-      n_A_Buf6[15]&&(n_A_FLEE=0),
-      n_A_FLEE<0&&(n_A_FLEE=0),
-      n_A_Buf7[18]&&(n_A_FLEE+=20),
-      myInnerHtml("A_FLEE",n_A_FLEE,0),
-      myInnerHtml("A_WoeFLEE",Math.floor(.8*n_A_FLEE),0),
-      n_A_LUCKY=1+.1*n_A_LUK,
-      n_A_LUCKY+=n_tok[11]+n_A_Buf9[38],
-      1==n_A_JobClass()&&(n_A_LUCKY+=3*CardNumSearch(354)),
-      2==n_A_JobClass()&&391==n_A_card[13]&&(n_A_LUCKY+=5),
-      n_A_SHOULDER_DEF_PLUS>6&&1724==n_A_Equip[7]&&(n_A_LUCKY+=n_A_SHOULDER_DEF_PLUS-6),
-      n_A_SHOULDER_DEF_PLUS<=4&&401==n_A_card[12]&&(n_A_LUCKY+=1),
-      535==n_A_Equip[7]
-    ){
-      var wHPVS=n_A_JobClass();
-      (3==wHPVS||4==wHPVS||5==wHPVS)&&(n_A_LUCKY+=5,n_A_LUCKY+=2*n_A_SHOULDER_DEF_PLUS)
-    }
+    //MDEF calculation
+    n_A_MDEF=n_tok[19],
+    3==n_A_JobClass()&&(n_A_MDEF+=CardNumSearch(383)),
+    n_A_Buf7[33]&&(n_A_MDEF+=3),
+    213==n_A_card[9]&&(n_A_MDEF+=5),
+    213==n_A_card[16]&&(n_A_MDEF+=5),
+    213==n_A_card[17]&&(n_A_MDEF+=5),
+    213==n_A_card[18]&&(n_A_MDEF+=5),
+    EquipNumSearch(764)&&(n_A_MDEF+=n_A_HEAD_DEF_PLUS+n_A_LEFT_DEF_PLUS),
+    1169==n_A_Equip[0]&&(n_A_MDEF+=n_A_Weapon_ATKplus),
+    199==n_A_card[11]&&5==n_A_JobClass()&&(n_A_MDEF+=3),
+    (EquipNumSearch(809)||1350==n_A_Equip[2])&&(n_A_MDEF+=n_A_HEAD_DEF_PLUS),
+    n_A_HEAD_DEF_PLUS<=5&&213==n_A_card[8]&&(n_A_MDEF+=5),
+    n_A_LEFT_DEF_PLUS<=5&&222==n_A_card[10]&&(n_A_MDEF+=3),
+    n_A_BODY_DEF_PLUS<=5&&283== n_A_card[11]&&(n_A_MDEF+=5),
+    n_A_LEFT_DEF_PLUS>=9&&310==n_A_card[10]&&(n_A_MDEF+=5),
+    n_A_SHOES_DEF_PLUS<=5&&381==n_A_card[13]&&(n_A_MDEF+=7),
+    n_A_HEAD_DEF_PLUS>=6&&1593==n_A_Equip[2]&&(n_A_MDEF+=n_A_HEAD_DEF_PLUS-5),
+    n_A_HEAD_DEF_PLUS>=7&&1277==n_A_Equip[2]&&(n_A_MDEF+=1),
+    n_A_HEAD_DEF_PLUS>=7&&1281==n_A_Equip[2]&&(n_A_MDEF+=7),
+    n_A_HEAD_DEF_PLUS>=7&&1478==n_A_Equip[2]&&(n_A_MDEF+=7),
+    n_A_HEAD_DEF_PLUS>=7&&1483==n_A_Equip[2]&&(n_A_MDEF+=5),
+    n_A_SHOULDER_DEF_PLUS<=5&&258==n_A_card[12]&&(n_A_MDEF+=8),
+    986!=n_A_Equip[6]||3!=n_A_JobClass()&&4!=n_A_JobClass()&&5!=n_A_JobClass()||(n_A_MDEF+=5),
+    SkillSearch(9)?n_A_MDEF+=SkillSearch(9):SkillSearch(256)&&(n_A_MDEF+=1),
+    (TimeItemNumSearch(9)||TimeItemNumSearch(50))&&(n_A_MDEF-=20),
+    (TimeItemNumSearch(33)||TimeItemNumSearch(51))&&(n_A_MDEF+=20),
+    (n_A_Buf6[13]||n_A_Buf6[15])&&(n_A_MDEF+=Math.floor(.25*n_A_MDEF)),
+    SkillSearch(196)&&(n_A_MDEF=90),
+    1!=n_A_JOB&&7!=n_A_JOB&&13!=n_A_JOB&&21!=n_A_JOB&&27!=n_A_JOB&&35!=n_A_JOB&&n_A_MDEF>=99&&(n_A_MDEF=99),
+    n_A_INTMDEF=n_A_INT,
+    n_A_softMDEF=n_A_INT+Math.floor(n_A_VIT/2),
+    n_A_Buf6[4]&&(n_A_softMDEF-=Math.floor(n_A_softMDEF*n_A_Buf6[4]*.12)),
+    SkillSearch(258)&&(n_A_MDEF=0,n_A_INTMDEF=0,n_A_softMDEF=0),
+    myInnerHtml("A_MDEF",n_A_MDEF+"+"+n_A_INTMDEF,0),
+    myInnerHtml("A_RealMDEF",n_A_MDEF+"+"+n_A_softMDEF,0);
+    //HIT calculation
+    n_A_HIT=n_A_BaseLV+n_A_DEX,
+    n_A_HIT+=n_tok[8],
+    n_A_HIT+=Math.floor(n_A_JobLV/10)*CardNumSearch(492),
+    SRV&&324==n_A_ActiveSkill&&(n_A_HIT+=20),
+    n_A_Buf2[20]&&(n_A_HIT+=50),
+    n_A_Buf3[4]&&(n_A_HIT+=10+2*n_A_Buf3[4]+n_A_Buf3[34]+Math.floor(n_A_Buf3[24]/10)),
+    n_A_Buf7[0]&&(n_A_HIT+=30),
+    n_A_Buf7[26]&&(n_A_HIT+=5),
+    n_A_Buf7[27]?n_A_HIT+=33:n_A_Buf7[46]?n_A_HIT+=30:n_A_Buf7[18]&&(n_A_HIT+=10),
+    10==n_A_WeaponType&&(n_A_HIT+=5*CardNumSearch(465)),
+    654==n_A_Equip[0]&&(n_A_HIT+=Math.floor(SU_AGI/10)),
+    656==n_A_Equip[0]&&(n_A_HIT-=Math.floor(SU_DEX/3)),
+    SU_STR>=90&&(n_A_HIT+=10*EquipNumSearch(442)),
+    SU_STR>=95&&1167==n_A_Equip[0]&&(n_A_HIT+=10),
+    (3==n_A_WeaponType||2==n_A_WeaponType)&&(n_A_HIT+=5*CardNumSearch(464)),
+    EquipNumSearch(1005)&EquipNumSearch(442)&&(n_A_HIT+=Math.floor(n_A_Weapon_ATKplus/2)),
+    1176==n_A_Equip[0]&&10==SkillSearch(81)&&(n_A_HIT+=10),
+    n_A_HEAD_DEF_PLUS>=7&&1480==n_A_Equip[2]&&(n_A_HIT+=5),
+    n_A_HEAD_DEF_PLUS>=7&&1549==n_A_Equip[2]&&(n_A_HIT+=5),
+    n_A_HIT+=1*SkillSearch(39),
+    n_A_HIT+=2*SkillSearch(148),
+    n_A_HIT+=3*SkillSearch(270),
+    n_A_HIT+=10*SkillSearch(256),
+    n_A_HIT+=1*SkillSearch(426),
+    n_A_HIT+=2*SkillSearch(425),
+    SkillSearch(421)&&(n_A_HIT-=30),
+    SkillSearch(422)&&(n_A_HIT+=20),
+    n_A_Buf7[16]&&(n_A_HIT+=Math.floor(.03*n_A_HIT)),
+    n_A_Buf6[11]&&(n_A_HIT=Math.round(.75*n_A_HIT)),
+    myInnerHtml("A_HIT",n_A_HIT,0),
+    myInnerHtml("A_PefHIT",n_tok[86],0);
+    //FLEE calculation
+    n_A_FLEE=n_A_BaseLV+n_A_AGI,
+    n_A_FLEE+=n_tok[9],
+    24==n_A_JOB&&(n_A_FLEE+=Math.round(SkillSearch(273)/2)),
+    SkillSearch(383)&&(n_A_FLEE+=10),
+    SkillSearch(356)&&(n_A_FLEE+=Math.floor((n_A_BaseLV+n_A_LUK+n_A_DEX)/10)),
+    SkillSearch(421)&&(n_A_FLEE+=30),
+    483==n_A_Equip[0]&&(n_A_FLEE-=n_A_BaseLV+SU_AGI),
+    1714==n_A_Equip[7]&&(n_A_FLEE+=2*n_A_SHOULDER_DEF_PLUS),
+    1718==n_A_Equip[6]&&(n_A_FLEE+=n_A_BODY_DEF_PLUS),
+    n_A_Buf2[20]&&(n_A_FLEE+=50),
+    n_A_Buf3[0]&&(n_A_FLEE+=n_A_Buf3[0]+Math.floor(n_A_Buf3[30]/2)+Math.floor(n_A_Buf3[20]/10)),
+    n_A_Buf7[1]&&(n_A_FLEE+=30),
+    n_A_Buf7[28]?n_A_FLEE+=33:n_A_Buf7[46]&&(n_A_FLEE+=30),
+    TimeItemNumSearch(1)&&(n_A_FLEE+=30*TimeItemNumSearch(1)),
+    SU_STR>=90&&(n_A_FLEE+=10*EquipNumSearch(442)),
+    n_A_Buf2[9]&&0==SkillSearch(273)&&(n_A_FLEE+=Math.round(n_A_Buf2[9]/2)),
+    2==n_A_JobClass()&&295==n_A_card[12]&&(n_A_FLEE+=20),
+    n_A_HEAD_DEF_PLUS>=6&&1555==n_A_Equip[2]&&(n_A_FLEE+=2),
+    n_A_HEAD_DEF_PLUS>=5&&1576==n_A_Equip[2]&&(n_A_FLEE+=5),
+    n_A_HEAD_DEF_PLUS>=7&&1576==n_A_Equip[2]&&(n_A_FLEE+=2),
+    n_A_HEAD_DEF_PLUS>=7&&1541==n_A_Equip[2]&&(n_A_FLEE+=2),
+    n_A_HEAD_DEF_PLUS>=7&&1276==n_A_Equip[2]&&(n_A_FLEE+=10),
+    n_A_HEAD_DEF_PLUS>=7&&1280==n_A_Equip[2]&&(n_A_FLEE+=10),
+    n_A_HEAD_DEF_PLUS>=7&&1282==n_A_Equip[2]&&(n_A_FLEE+=10),
+    n_A_HEAD_DEF_PLUS>=7&&1283==n_A_Equip[2]&&(n_A_FLEE+=10),
+    n_A_HEAD_DEF_PLUS>=7&&1481==n_A_Equip[2]&&(n_A_FLEE+=10),
+    n_A_HEAD_DEF_PLUS>=7&&1550==n_A_Equip[2]&&(n_A_FLEE+=10),
+    n_A_HEAD_DEF_PLUS>=9&&1285==n_A_Equip[2]&&(n_A_FLEE+=5),
+    n_A_SHOULDER_DEF_PLUS>=9&&271==n_A_card[12]&&(n_A_FLEE+=20),
+    n_A_SHOULDER_DEF_PLUS<=4&&401==n_A_card[12]&&(n_A_FLEE+=10),
+    n_A_SHOULDER_DEF_PLUS>=9&&403==n_A_card[12]&&(n_A_FLEE+=5),
+    2==n_A_Buf6[0]&&n_A_Buf6[1]>=1&&4==n_A_BodyZokusei&&(n_A_FLEE+=3*n_A_Buf6[1]),
+    8==n_A_JOB||14==n_A_JOB||22==n_A_JOB||28==n_A_JOB?n_A_FLEE+=4*SkillSearch(14):n_A_FLEE+=3*SkillSearch(14),
+    SkillSearch(433)&&(20==n_A_WeaponType||0==n_A_WeaponType)&&(n_A_FLEE-=5*SkillSearch(433)),
+    Mikiri=new Array(0,1,3,4,6,7,9,10,12,13,15),
+    n_A_FLEE+=Mikiri[SkillSearch(191)];
+    if(document.calcForm.B_num.value>=2){var w=document.calcForm.B_num.value-1;w>10&&(w=10),n_A_FLEE-=Math.floor(n_A_FLEE*w*10/100)}
+    SkillSearch(258)&&(n_A_FLEE=Math.round(n_A_FLEE/2)),
+    n_A_Buf6[11]&&(n_A_FLEE=Math.round(.75*n_A_FLEE)),
+    n_A_Buf6[12]&&(n_A_FLEE=0),
+    n_A_Buf6[14]&&(n_A_FLEE=0),
+    n_A_Buf6[15]&&(n_A_FLEE=0),
+    n_A_FLEE<0&&(n_A_FLEE=0),
+    n_A_Buf7[18]&&(n_A_FLEE+=20),
+    myInnerHtml("A_FLEE",n_A_FLEE,0),
+    myInnerHtml("A_WoeFLEE",Math.floor(.8*n_A_FLEE),0);
+    //PERFECTFLEE calculation
+    n_A_LUCKY=1+.1*n_A_LUK,
+    n_A_LUCKY+=n_tok[11]+n_A_Buf9[38],
+    1==n_A_JobClass()&&(n_A_LUCKY+=3*CardNumSearch(354)),
+    2==n_A_JobClass()&&391==n_A_card[13]&&(n_A_LUCKY+=5),
+    n_A_SHOULDER_DEF_PLUS>6&&1724==n_A_Equip[7]&&(n_A_LUCKY+=n_A_SHOULDER_DEF_PLUS-6),
+    n_A_SHOULDER_DEF_PLUS<=4&&401==n_A_card[12]&&(n_A_LUCKY+=1);
+    if(535==n_A_Equip[7]){var wHPVS=n_A_JobClass();(3==wHPVS||4==wHPVS||5==wHPVS)&&(n_A_LUCKY+=5,n_A_LUCKY+=2*n_A_SHOULDER_DEF_PLUS)}
     41==n_A_JobClass()&&678==n_A_Equip[3]&&(n_A_LUCKY+=2),
     n_A_LUCKY=Math.round(10*n_A_LUCKY)/10,
     n_A_LUCKY<0&&(n_A_LUCKY=0),
     myInnerHtml("A_LUCKY",n_A_LUCKY,0),
+    //CRIT calculation
     n_A_CRI=1+.3*n_A_LUK,
     w=0,
     w+=n_tok[10],
@@ -1009,6 +929,7 @@ function StAllCalc(){
     n_A_CRI=Math.round(10*n_A_CRI)/10,
     n_A_Buf6[9]&&(n_A_CRI=0),
     myInnerHtml("A_CRI",n_A_CRI,0),
+    //MATK calculation
     n_A_MATK=[0,0,0];
     var w=Math.floor(n_A_INT/7);
     n_A_MATK[0]=n_A_INT+w*w,
@@ -1069,61 +990,18 @@ function StAllCalc(){
     (14==n_A_JobClass2()||44==n_A_JOB)&&(w+=15*EquipNumSearch(898)),
     n_A_MATK[0]=Math.floor(n_A_MATK[0]*w/100),
     n_A_MATK[2]=Math.floor(n_A_MATK[2]*w/100),
-    849==n_A_Equip[2]&&(
-      n_A_MATK[0]+=Math.floor(n_A_MATK[0]*Math.floor(n_A_HEAD_DEF_PLUS/2)/100),
-      n_A_MATK[2]+=Math.floor(n_A_MATK[2]*Math.floor(n_A_HEAD_DEF_PLUS/2)/100)
-    ),
+    849==n_A_Equip[2]&&(n_A_MATK[0]+=Math.floor(n_A_MATK[0]*Math.floor(n_A_HEAD_DEF_PLUS/2)/100),n_A_MATK[2]+=Math.floor(n_A_MATK[2]*Math.floor(n_A_HEAD_DEF_PLUS/2)/100)),
     BK_n_A_MATK=[0,0,0],
     BK_n_A_MATK[0]=n_A_MATK[0],
     BK_n_A_MATK[2]=n_A_MATK[2],
     BK_n_A_MATK[0]!=BK_n_A_MATK[2]&&(BK_n_A_MATK[2]-=1),
     BK_n_A_MATK[1]=(BK_n_A_MATK[2]+BK_n_A_MATK[0])/2,
-    n_A_Buf6[4]&&(
-      w=100+20*n_A_Buf6[4],
-      n_A_MATK[0]=Math.floor(n_A_MATK[0]*w/100),
-      n_A_MATK[2]=Math.floor(n_A_MATK[2]*w/100)
-    ),
-    SkillSearch(276)&&(
-      n_A_MATK[0]=Math.floor(n_A_MATK[0]*(1+.05*SkillSearch(276))),
-      n_A_MATK[2]=Math.floor(n_A_MATK[2]*(1+.05*SkillSearch(276)))
-    ),
+    n_A_Buf6[4]&&(w=100+20*n_A_Buf6[4],n_A_MATK[0]=Math.floor(n_A_MATK[0]*w/100),n_A_MATK[2]=Math.floor(n_A_MATK[2]*w/100)),
+    SkillSearch(276)&&(n_A_MATK[0]=Math.floor(n_A_MATK[0]*(1+.05*SkillSearch(276))),n_A_MATK[2]=Math.floor(n_A_MATK[2]*(1+.05*SkillSearch(276)))),
     myInnerHtml("A_MATK",n_A_MATK[0]+"~"+n_A_MATK[2],0),
     n_A_MATK[0]!=n_A_MATK[2]&&(n_A_MATK[2]-=1),
     n_A_MATK[1]=(n_A_MATK[2]+n_A_MATK[0])/2;
-    {
-      // Movement Speed
-      var speed=150;
-      var speed_rate=100;
-      var ib_speed=n_tok[209]+n_tok[210]; // Permanent item-based speedup
-      var val,t;
-
-      SkillSearch(364)?val=25:SkillSearch(78)?val=25:val=0; // Peco Peco Ride or Union
-      speed_rate-=val;
-
-      val=0;
-      n_A_Buf6[20]&&(val=25);//Decrease AGI
-      n_A_Buf6[19]&&(val=50);//Quagmire
-      SkillSearch(433)&&(val=100);//Gatling Fever
-      n_A_Buf6[22]&&(val=300);//Curse
-      (ib_speed<0)&&(t=-ib_speed,val<t)&&(val=t);
-      speed_rate+=val;
-
-      val=0;
-      n_A_Buf2[1]&&(val=25);//Increase AGI
-      t=2*SkillSearch(273);(t>val)&&(val=t);//Wind Walk
-      t=2*n_A_Buf2[9];(t>val)&&(val=t);//Wind Walk Party
-      8==n_A_JobClass2()&&(t=SkillSearch(14),(t>val)&&(val=t));//Assassin Improve Dodge
-      SkillSearch(258)&&(val<25)&&(val=25);//Lork Knight Berserk
-      (ib_speed>0)&&(val<ib_speed)&&(val=ib_speed);
-      speed_rate-=val;
-
-      (speed_rate<40)&&(speed_rate=40);
-
-      speed=speed*speed_rate/100;
-      SkillSearch(196)&&(speed=200);//Steel Body
-      (speed<10)&&(speed=10);
-      myInnerHtml("A_MovSPEED",Math.floor((150/speed)*100)+" % ("+speed+" units)",0);
-    }
+    //ASPD calculation
     w=0,
     ASPDch=0,
     0==n_A_Buf6[19]&&0==n_A_Buf6[20]&&(
@@ -1177,23 +1055,19 @@ function StAllCalc(){
     ),
     n_A_Buf3[1]&&0==ASPDch&&(
       10==n_A_WeaponType||17<=n_A_WeaponType&&n_A_WeaponType<=21||(
-        w+=SRV?
-          10+n_A_Buf3[1]+Math.round(n_A_Buf3[31]/2)+Math.round(n_A_Buf3[21]/10):
-          5+n_A_Buf3[1]+Math.floor(n_A_Buf3[31]/2)+Math.floor(n_A_Buf3[21]/20)
+        w+=SRV?10+n_A_Buf3[1]+Math.round(n_A_Buf3[31]/2)+Math.round(n_A_Buf3[21]/10):5+n_A_Buf3[1]+Math.floor(n_A_Buf3[31]/2)+Math.floor(n_A_Buf3[21]/20)
       )
     ),
     w+=n_tok[12],
     3==n_A_Buf7[35]?w+=20:n_A_Buf7[44]||2==n_A_Buf7[35]?w+=15:(n_A_Buf7[26]||1==n_A_Buf7[35])&&(w+=10),
-    EquipNumSearch(1003)&EquipNumSearch(442)&&(w+=n_A_Weapon_ATKplus/2),
+    EquipNumSearch(1004)&&(w+=n_A_Weapon_ATKplus/2),
     1==n_Nitou?
       0==n_A_WeaponType&&0!=n_A_Weapon2Type?
         WD=50*JobASPD[n_A_JOB][n_A_Weapon2Type]:
         WD=35*(JobASPD[n_A_JOB][n_A_WeaponType]+JobASPD[n_A_JOB][n_A_Weapon2Type]):
       WD=50*JobASPD[n_A_JOB][n_A_WeaponType],
-    n_A_ASPD_irowiki=200-(WD-(Math.round(WD*n_A_AGI/25)+Math.round(WD*n_A_DEX/100))/10)*(1-w/100),
-    w>0?
-      n_A_ASPD=200-WD*(1-(4*n_A_AGI+n_A_DEX+1)/1e3)*(1-w/100):
-      n_A_ASPD=200-WD*(1-(4*n_A_AGI+n_A_DEX)/1e3)*(1-w/100),
+    //n_A_ASPD_irowiki=200-(WD-(Math.round(WD*n_A_AGI/25)+Math.round(WD*n_A_DEX/100))/10)*(1-w/100)
+    w>0?n_A_ASPD=200-WD*(1-(4*n_A_AGI+n_A_DEX+1)/1e3)*(1-w/100):n_A_ASPD=200-WD*(1-(4*n_A_AGI+n_A_DEX)/1e3)*(1-w/100),
     n_A_ASPD+=EquipNumSearch(1696),
     n_A_Buf2[15]&&(n_A_ASPD-=25-5*n_A_Buf2[15]),
     47==n_A_Equip[0]&&(n_A_ASPD+=2),
@@ -1210,6 +1084,7 @@ function StAllCalc(){
     n_A_ASPD>190&&(n_A_ASPD=190),
     n_A_ASPD=Math.floor(10*n_A_ASPD)/10,
     myInnerHtml("A_ASPD",n_A_ASPD,0),
+    //----
     n_A_ASPD=(200-n_A_ASPD)/50,
     n_Delay[1]=Math.floor(1e3*n_A_ASPD)/1e3,
     17==n_A_ActiveSkill&&(n_Delay[1]=Math.floor(75*n_A_ASPD)/100),
@@ -1409,45 +1284,38 @@ function StAllCalc(){
       for(i=61;69>=i;i++) n_tok[i]+=55+5*n_A_Buf3[7];
       for(i=150;159>=i;i++) n_tok[i]+=10*n_A_Buf3[7]
     }
-    for(
-      n_A_Buf7[11]&&(n_tok[61]+=20,n_tok[64]-=15),
-      n_A_Buf7[12]&&(n_tok[62]+=20,n_tok[63]-=15),
-      n_A_Buf7[13]&&(n_tok[63]+=20,n_tok[61]-=15),
-      n_A_Buf7[14]&&(n_tok[64]+=20,n_tok[62]-=15),
-      1085==n_A_Equip[0]&&(
-        n_A_Weapon_ATKplus>=6&&(n_tok[91]+=5+2*(n_A_Weapon_ATKplus-5),n_tok[94]+=5+2*(n_A_Weapon_ATKplus-5)),
-        n_A_Weapon_ATKplus>=10&&(n_tok[91]+=10,n_tok[94]+=10)
-      ),
-      0==SRV&&EquipNumSearch(1030)&&(n_tok[77]-=5,n_tok[79]-=5),
-      534==n_A_Equip[6]&&(wSPVS=n_A_JobClass(),(1==wSPVS||2==wSPVS||6==wSPVS)&&(n_tok[151]+=50),(3==wSPVS||4==wSPVS||5==wSPVS)&&(n_tok[156]+=50)),
-      1806==n_A_Equip[2]&&(wSPVS=n_A_JobClass(),(3==wSPVS||4==wSPVS||5==wSPVS)&&(n_tok[151]+=5)),
-      828==n_A_Equip[2]&&(n_tok[151]+=2*n_A_HEAD_DEF_PLUS,n_tok[152]+=2*n_A_HEAD_DEF_PLUS,n_tok[159]+=2*n_A_HEAD_DEF_PLUS),
-      SU_AGI>=90&&(n_tok[151]+=30*CardNumSearch(176),n_tok[156]+=30*CardNumSearch(176)),
-      SU_VIT>=80&&(n_tok[155]+=50*CardNumSearch(176),n_tok[159]+=50*CardNumSearch(176)),
-      42==n_A_Buf8[0]&&1218==n_A_Equip[2]&&(n_tok[151]+=10),
-      n_A_zokusei=new Array,
-      i=0;9>=i;i++
-    ) n_A_zokusei[i]=100*zokusei[10*n_A_BodyZokusei+1][i],n_A_zokusei[i]=n_A_zokusei[i]-Math.floor(n_A_zokusei[i]*n_tok[60+i])/100;
-    if(
-      (1076==n_A_Equip[1]||1077==n_A_Equip[1])&&n_A_Weapon2_ATKplus>=6&&(n_tok[307]+=5),
-      (1076==n_A_Equip[0]||1077==n_A_Equip[0]||1080==n_A_Equip[0]||1081==n_A_Equip[0]||1086==n_A_Equip[0]||1088<=n_A_Equip[0]&&n_A_Equip[0]<=1090||
-       1092==n_A_Equip[0]||1093==n_A_Equip[0]||1097<=n_A_Equip[0]&&n_A_Equip[0]<=1103)&&n_A_Weapon_ATKplus>=6&&(n_tok[307]+=5),
-      (1082==n_A_Equip[0]||1087==n_A_Equip[0]||1094==n_A_Equip[0]||1096==n_A_Equip[0])&&n_A_Weapon_ATKplus>=6&&(n_tok[307]+=5),
-      645==n_A_Equip[0]&&(n_tok[295]+=10+n_A_Weapon_ATKplus),
-      9==n_A_WeaponType&&(n_tok[295]+=2*CardNumSearch(466)),
-      1==n_B[19]&&(n_tok[297]+=30*CardNumSearch(425)),
-      936==n_A_Equip[0]&&(n_tok[295]+=1*n_A_Weapon_ATKplus),
-      1==n_B[19]&&1228==n_A_Equip[2]&&n_A_HEAD_DEF_PLUS>=6&&(n_tok[297]+=n_A_HEAD_DEF_PLUS-5),
-      1==n_B[19]&&(n_tok[295]+=n_tok[297]),
-      (1084==n_A_Equip[0]||1095==n_A_Equip[0])&&n_A_Weapon_ATKplus>=6&&(n_tok[317]+=5),
-      1085==n_A_Equip[0]&&n_A_Weapon_ATKplus>=6&&(n_tok[317]+=5),
-      1083==n_A_Equip[0]&&n_A_Weapon_ATKplus>=6&&(n_tok[317]+=5+2*(n_A_Weapon_ATKplus-5)),
-      n_tok[70]+=n_tok[320+n_B[2]],
-      535==n_A_Equip[7]
-    ){
-      var wVM=n_A_JobClass();
-      (1==wVM||2==wVM||6==wVM)&&(n_tok[71]+=5,n_tok[71]+=2*n_A_SHOULDER_DEF_PLUS)
-    }
+    n_A_Buf7[11]&&(n_tok[61]+=20,n_tok[64]-=15),
+    n_A_Buf7[12]&&(n_tok[62]+=20,n_tok[63]-=15),
+    n_A_Buf7[13]&&(n_tok[63]+=20,n_tok[61]-=15),
+    n_A_Buf7[14]&&(n_tok[64]+=20,n_tok[62]-=15),
+    1085==n_A_Equip[0]&&(
+      n_A_Weapon_ATKplus>=6&&(n_tok[91]+=5+2*(n_A_Weapon_ATKplus-5),n_tok[94]+=5+2*(n_A_Weapon_ATKplus-5)),
+      n_A_Weapon_ATKplus>=10&&(n_tok[91]+=10,n_tok[94]+=10)
+    ),
+    0==SRV&&EquipNumSearch(1030)&&(n_tok[77]-=5,n_tok[79]-=5),
+    534==n_A_Equip[6]&&(wSPVS=n_A_JobClass(),(1==wSPVS||2==wSPVS||6==wSPVS)&&(n_tok[151]+=50),(3==wSPVS||4==wSPVS||5==wSPVS)&&(n_tok[156]+=50)),
+    1806==n_A_Equip[2]&&(wSPVS=n_A_JobClass(),(3==wSPVS||4==wSPVS||5==wSPVS)&&(n_tok[151]+=5)),
+    828==n_A_Equip[2]&&(n_tok[151]+=2*n_A_HEAD_DEF_PLUS,n_tok[152]+=2*n_A_HEAD_DEF_PLUS,n_tok[159]+=2*n_A_HEAD_DEF_PLUS),
+    SU_AGI>=90&&(n_tok[151]+=30*CardNumSearch(176),n_tok[156]+=30*CardNumSearch(176)),
+    SU_VIT>=80&&(n_tok[155]+=50*CardNumSearch(176),n_tok[159]+=50*CardNumSearch(176)),
+    42==n_A_Buf8[0]&&1218==n_A_Equip[2]&&(n_tok[151]+=10),
+    n_A_zokusei=new Array;
+    for(i=0;9>=i;i++) n_A_zokusei[i]=100*zokusei[10*n_A_BodyZokusei+1][i],n_A_zokusei[i]=n_A_zokusei[i]-Math.floor(n_A_zokusei[i]*n_tok[60+i])/100;
+    (1076==n_A_Equip[1]||1077==n_A_Equip[1])&&n_A_Weapon2_ATKplus>=6&&(n_tok[307]+=5),
+    (1076==n_A_Equip[0]||1077==n_A_Equip[0]||1080==n_A_Equip[0]||1081==n_A_Equip[0]||1086==n_A_Equip[0]||
+      1088<=n_A_Equip[0]&&n_A_Equip[0]<=1090||1092==n_A_Equip[0]||1093==n_A_Equip[0]||1097<=n_A_Equip[0]&&n_A_Equip[0]<=1103)&&n_A_Weapon_ATKplus>=6&&(n_tok[307]+=5),
+    (1082==n_A_Equip[0]||1087==n_A_Equip[0]||1094==n_A_Equip[0]||1096==n_A_Equip[0])&&n_A_Weapon_ATKplus>=6&&(n_tok[307]+=5),
+    645==n_A_Equip[0]&&(n_tok[295]+=10+n_A_Weapon_ATKplus),
+    9==n_A_WeaponType&&(n_tok[295]+=2*CardNumSearch(466)),
+    1==n_B[19]&&(n_tok[297]+=30*CardNumSearch(425)),
+    936==n_A_Equip[0]&&(n_tok[295]+=1*n_A_Weapon_ATKplus),
+    1==n_B[19]&&1228==n_A_Equip[2]&&n_A_HEAD_DEF_PLUS>=6&&(n_tok[297]+=n_A_HEAD_DEF_PLUS-5),
+    1==n_B[19]&&(n_tok[295]+=n_tok[297]),
+    (1084==n_A_Equip[0]||1095==n_A_Equip[0])&&n_A_Weapon_ATKplus>=6&&(n_tok[317]+=5),
+    1085==n_A_Equip[0]&&n_A_Weapon_ATKplus>=6&&(n_tok[317]+=5),
+    1083==n_A_Equip[0]&&n_A_Weapon_ATKplus>=6&&(n_tok[317]+=5+2*(n_A_Weapon_ATKplus-5)),
+    n_tok[70]+=n_tok[320+n_B[2]];
+    if(535==n_A_Equip[7]){var wVM=n_A_JobClass();(1==wVM||2==wVM||6==wVM)&&(n_tok[71]+=5,n_tok[71]+=2*n_A_SHOULDER_DEF_PLUS)}
     TimeItemNumSearch(52)&&(n_tok[71]+=3*n_A_LEFT_DEF_PLUS),
     ClickB_Enemy(),
     KakutyouKansuu()

@@ -332,17 +332,18 @@ function BattleCalc999(){
         var DEATH=[1,1.2,1.6,2,2.4,3,3.6,4,5,6,7,8,9,10];
         wHITsuu=DEATH[eval(document.calcForm.SkillSubNum.value)]
       }
-      ATKbai02(wbairitu, 0);
+      ATKbai02(wbairitu,0);
       for(var i=0;2>=i;i++)
-        w_DMG[i]=BattleCalc(n_A_DMG[i],i),
+        w_DMG[i]=Math.floor((BattleCalc((n_A_DMG[i]*wHITsuu),i))/wHITsuu),
         391==n_A_ActiveSkill&&2!=n_B[2]&&4!=n_B[2]&&(w_DMG[i]=0),
-        w_DMG[i]+=EDP_DMG(i),Last_DMG_B[i]=w_DMG[i],
-        76==n_A_ActiveSkill&&(Last_DMG_B[i]=2*w_DMG[i]),
+        w_DMG[i]+=EDP_DMG(i),
         Last_DMG_A[i]=w_DMG[i]*wHITsuu,
+        Last_DMG_B[i]=w_DMG[i],
         0==n_B_IJYOU[6]||0==wLAch?
-          InnStr[i]+=Math.floor(w_DMG[i]*wHITsuu)+" ("+w_DMG[i]+SubName[8]+wHITsuu+"hit)":
+          InnStr[i]+=Last_DMG_A[i]+" ("+Last_DMG_B[i]+SubName[8]+wHITsuu+"hit)":
           (InnStr[i]+=3*w_DMG[i]+"("+2*w_DMG[i]+"+"+w_DMG[i]+")",Last_DMG_B[i]=3*w_DMG[i]),
-        w_DMG[i]-=EDP_DMG(i),w_DMG[i]*=wHITsuu;
+        w_DMG[i]-=EDP_DMG(i),
+        w_DMG[i]*=wHITsuu;
       var wX=BattleCalc2(0);
       w_DMG[1]=(w_DMG[1]*w_HIT+wX*wHITsuu*(100-w_HIT))/100,
       0==wHITsuu&&192==n_A_ActiveSkill&&(InnStr[0]="<B style='color:red'># of Spirit Spheres must be higher than 0<BR>Please change it at [Supportive/Party Skills]</B>"),
@@ -377,38 +378,35 @@ function BattleCalc999(){
       EDPplus(1),
       CastAndDelay(),BattleCalc998()
     }else if(159==n_A_ActiveSkill||384==n_A_ActiveSkill){
-      if(
-        n_PerHIT_DMG=0,n_Enekyori=1,n_A_Weapon_zokusei=0,n_Delay[2]=.7,wbairitu2=1+.3*n_A_ActiveSkillLV,
-        384==n_A_ActiveSkill&&(n_Delay[2]=.35,wbairitu2*=2),SRV
-      ){
+      n_PerHIT_DMG=0,
+      n_Enekyori=1,
+      n_A_Weapon_zokusei=0,
+      n_Delay[2]=.7,
+      wbairitu2=1+.3*n_A_ActiveSkillLV,
+      384==n_A_ActiveSkill&&(n_Delay[2]=.35);
+      if(SRV){
         wSBr=10*n_A_LEFT_DEF_PLUS,
-        (EquipNumSearch(620)||EquipNumSearch(409)||CardNumSearch(255))?
-          (M_DEF1=n_B[14], M_DEF2=n_B_DEF2[0]):
-        (EquipNumSearch(393)||EquipNumSearch(904)||EquipNumSearch(43))&&7==n_B[2]?
-          (M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):
-        (EquipNumSearch(392)||EquipNumSearch(401))&&3==n_B[2]?
-          (M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):
-        (EquipNumSearch(467)||EquipNumSearch(405)||EquipNumSearch(471))&&9==n_B[2]?
-          (M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):
-        (EquipNumSearch(394))&&6==n_B[2]?
-          (M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):
-          (M_DEF1=0,M_DEF2=0);
+        EquipNumSearch(620)||EquipNumSearch(409)||CardNumSearch(255)||EquipNumSearch(43)?(M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):
+        (EquipNumSearch(393)||EquipNumSearch(904))&&7==n_B[2]?(M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):
+        (EquipNumSearch(392)||EquipNumSearch(401))&&3==n_B[2]?(M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):
+        (EquipNumSearch(467)||EquipNumSearch(405)||EquipNumSearch(471))&&9==n_B[2]?(M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):
+        EquipNumSearch(394)&&6==n_B[2]?(M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):(M_DEF1=0,M_DEF2=0);
         var SB_ATK=n_A_ATK+.05*n_A_ATK*n_A_Buf2[8];
         SkillSearch(12)&&(SB_ATK+=.32*SB_ATK),
         n_A_Buf6[5]&&(SB_ATK+=Math.floor((.02+.03*n_A_Buf6[5])*SB_ATK)),
-        n_A_Buf6[5]&&n_A_Buf7[31]?SB_ATK+=0:
-        n_A_Buf7[31]&&(SB_ATK+=Math.floor(.05*SB_ATK));
-        for(var i=0;2>=i;i++)
-          n_tok[23]>0?
-            (n_A_ATK_IP=Math.round((SB_ATK+ItemOBJ[n_A_Equip[5]][6])*(n_B_DEF2[2-i]+n_B[14])/100),w_DMG[i]=n_A_ATK_IP*wbairitu):
-            (w_DMG[i]=(SB_ATK+ItemOBJ[n_A_Equip[5]][6])*wbairitu,w_DMG[i]=Math.floor(w_DMG[i]*(100-(n_B[14]-M_DEF1))/100-(n_B_DEF2[i]-M_DEF2))),
+        n_A_Buf6[5]&&n_A_Buf7[31]?SB_ATK+=0:n_A_Buf7[31]&&(SB_ATK+=Math.floor(.05*SB_ATK));
+        for(var i=0;i<=2;i++)
+          0<n_tok[23]?(n_A_ATK_IP=Math.round((SB_ATK+ItemOBJ[n_A_Equip[5]][6])*(n_B_DEF2[2-i]+n_B[14])/100),w_DMG[i]=n_A_ATK_IP*wbairitu):w_DMG[i]=(SB_ATK+ItemOBJ[n_A_Equip[5]][6])*wbairitu,
           w_DMG[i]=Math.floor(w_DMG[i]*wbairitu2),
-          w_DMG[i]=BaiCI(w_DMG[i])+wSBr,
-          0!=M_DEF1&&(w_DMG[2]=w_DMG[1]=w_DMG[0]),
+          384==n_A_ActiveSkill&&(w_DMG[i]=Math.floor(2*w_DMG[i])),
+          w_DMG[i]=w_DMG[i]*(100+StPlusCalc2(5384)+StPlusCard(5384))/100,
+          w_DMG[i]=Math.floor(w_DMG[i]*(100-(n_B[14]-M_DEF1))/100-(n_B_DEF2[i]-M_DEF2)),
+          w_DMG[i]=BaiCI(w_DMG[i])+wSBr,0!=M_DEF1&&(w_DMG[2]=w_DMG[1]=w_DMG[0]),
           w_DMG[i]<1&&(w_DMG[i]=1),
           305==ItemOBJ[n_A_Equip[5]][0]&&(w_DMG[i]=0),
           w_DMG[i]=Math.floor(w_DMG[i]*zokusei[n_B[3]][0]),
-          Last_DMG_A[i]=Last_DMG_B[i]=w_DMG[i],InnStr[i]+=Last_DMG_A[i]
+          Last_DMG_A[i]=Last_DMG_B[i]=w_DMG[i],
+          InnStr[i]+=Last_DMG_A[i]
       }else{
         wSBr=4*n_A_LEFT_DEF_PLUS,
         n_A_ATK_w=Math.round(Math.floor(n_A_STR/10)*Math.floor(n_A_STR/10)),
@@ -999,12 +997,10 @@ function BattleCalc998(){
   ) for(i=0;2>=i;i++) w_DMG[i]=0,myInnerHtml("ATK_0"+i,0,0);
   tPlusAG();
   var _;
-  if(
-    _=Math.floor(n_B[6]/w_DMG[2]),
-    n_B[6]%Math.floor(w_DMG[2])!=0&&(_+=1),
-    1e4>_?myInnerHtml("MinATKnum",_,0):myInnerHtml("MinATKnum",SubName[5],0),
-    0!=SG_Special_HITnum
-  ){
+  _=Math.floor(n_B[6]/w_DMG[2]),
+  n_B[6]%Math.floor(w_DMG[2])!=0&&(_+=1),
+  1e4>_?myInnerHtml("MinATKnum",_,0):myInnerHtml("MinATKnum",SubName[5],0);
+  if(0!=SG_Special_HITnum){
     if(1==_){
       var n,e;
       if(
@@ -1038,26 +1034,21 @@ function BattleCalc998(){
     n_B[6]%Math.floor(t)!=0&&(_+=1),
     1e4>_?myInnerHtml("MaxATKnum",_,0):myInnerHtml("MaxATKnum",SubName[5],0)
   }
-  if(
-    _=Math.floor(n_B[6]/w_DMG[1]),
-    n_B[6]%w_DMG[1]!=0&&(_+=1),
-    0==Taijin?(
-      myInnerHtml("nm063","Base Exp Per Hit",0),
-      myInnerHtml("nm064","Job Exp Per Hit",0),
-      1e4>_?(
-        myInnerHtml("AtkBaseExp",Math.round(n_B[16]/_)+"Exp",0),
-        myInnerHtml("AtkJobExp",Math.round(n_B[17]/_)+"Exp",0)
-      ):(
-        myInnerHtml("AtkBaseExp",SubName[7],0),
-        myInnerHtml("AtkJobExp",SubName[7],0))
-    ):(
-      myInnerHtml("nm063","",0),
-      myInnerHtml("AtkBaseExp","",0),
-      myInnerHtml("nm064","",0),
-      myInnerHtml("AtkJobExp","",0)
-    ),
-    1e4>_
-  ){
+  _=Math.floor(n_B[6]/w_DMG[1]),
+  n_B[6]%w_DMG[1]!=0&&(_+=1),
+  0==Taijin?(
+    myInnerHtml("nm063","Base Exp Per Hit",0),
+    myInnerHtml("nm064","Job Exp Per Hit",0),
+    1e4>_?
+      (myInnerHtml("AtkBaseExp",Math.round(n_B[16]/_)+"Exp",0),myInnerHtml("AtkJobExp",Math.round(n_B[17]/_)+"Exp",0)):
+      (myInnerHtml("AtkBaseExp",SubName[7],0),myInnerHtml("AtkJobExp",SubName[7],0))
+  ):(
+    myInnerHtml("nm063","",0),
+    myInnerHtml("AtkBaseExp","",0),
+    myInnerHtml("nm064","",0),
+    myInnerHtml("AtkJobExp","",0)
+  );
+  if(1e4>_){
     myInnerHtml("AveATKnum",_,0),
     n_AveATKnum=_;
     var a=(wCast+wDelay)*n_AveATKnum; a=Math.floor(100*a)/100,
@@ -3451,9 +3442,7 @@ function calc(){
     n_A_workDEX>=n_A_Weapon_ATK||SkillSearch(155)?
       n_A_DMG[2]=n_A_ATK+n_A_WeaponLV_Maxplus+Math.floor((n_A_Weapon_ATK+wImp)*wCSize):
       n_A_DMG[2]=n_A_ATK+n_A_WeaponLV_Maxplus+Math.floor((n_A_Weapon_ATK-1+wImp)*wCSize),
-    (10==n_A_WeaponType||17==n_A_WeaponType||18==n_A_WeaponType||19==n_A_WeaponType||20==n_A_WeaponType||21==n_A_WeaponType)&&(
-      n_A_DMG[2]+=Math.floor((ArrowOBJ[n_A_Arrow][0]-1)*wCSize)
-    ),
+    (10==n_A_WeaponType||17==n_A_WeaponType||18==n_A_WeaponType||19==n_A_WeaponType||20==n_A_WeaponType||21==n_A_WeaponType)&&(n_A_DMG[2]+=Math.floor((ArrowOBJ[n_A_Arrow][0]-1)*wCSize)),
     (10==n_A_WeaponType||17==n_A_WeaponType||18==n_A_WeaponType||19==n_A_WeaponType||20==n_A_WeaponType||21==n_A_WeaponType)&&(
       w1=n_A_ATK+n_A_WeaponLV_Maxplus+Math.floor(n_A_Weapon_ATK*n_A_Weapon_ATK/100*wCSize)+Math.floor(wImp*wCSize),
       t=n_A_ATK+n_A_WeaponLV_Maxplus+Math.floor(n_A_Weapon_ATK*n_A_workDEX/100*wCSize)+Math.floor(wImp*wCSize),
@@ -3606,21 +3595,12 @@ function BaiCI(_){
     11==n_A_WeaponType&&SkillSearch(262)&&(_=Math.floor(_*(110+2*SkillSearch(262))/100)),
     n=0,
     0==Taijin?
-      SkillSearch(354)&&SkillSearch(365)?
-        n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
-      SkillSearch(354)&&2==n_B[4]&&n_B[6]>=17392?
-        n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
-      SkillSearch(352)&&0==n_B[4]?
-        n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(352)):
-      SkillSearch(353)&&1==n_B[4]&&n_B[6]>=5218&&(
-        n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(353))):
-      SkillSearch(354)?
-        n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
-      SkillSearch(352)?
-        n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(352)):
-      SkillSearch(353)&&(
-        n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(353))),
-    _=Math.floor(_*(100+n)/100)
+      SkillSearch(354)&&SkillSearch(365)?n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
+      SkillSearch(354)&&2==n_B[4]&&17392<=n_B[6]?n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
+      SkillSearch(352)&&0==n_B[4]?n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(352)):SkillSearch(353)&&1==n_B[4]&&5218<=n_B[6]&&(n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(353))):
+    SkillSearch(354)?n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
+    SkillSearch(352)?n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(352)):SkillSearch(353)&&(n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(353))),
+    _=Math.floor(_*(100+n)/100);
   }
   return _=Math.floor(tPlusDamCut(_)),
     n=0,
@@ -3638,7 +3618,7 @@ function BaiCI(_){
     264==n_A_ActiveSkill&&EquipNumSearch(1176)&&10==SkillSearch(81)&&(n+=20),
     -1==TyouEnkakuSousa3dan&&EquipNumSearch(639)&&(n+=15),
     83!=n_A_ActiveSkill&&388!=n_A_ActiveSkill||!SkillSearch(381)||0!=wBCEDPch||(n+=10),
-    _=_*(100+StPlusCalc2(5e3+n_A_ActiveSkill)+StPlusCard(5e3+n_A_ActiveSkill)+n)/100,
+    384!=n_A_ActiveSkill&&159!=n_A_ActiveSkill&&(_=_*(100+StPlusCalc2(5e3+n_A_ActiveSkill)+StPlusCard(5e3+n_A_ActiveSkill)+n)/100),
     n_A_Buf7[20]&&MANUKU_MONSTER()&&(_=110*_/100),
     n_A_Buf7[23]&&SUPURE_MONSTER()&&(_=110*_/100),
     _
