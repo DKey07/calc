@@ -192,40 +192,40 @@ function RefreshFields(_){
   //to deal with bad input
   var t,a,b,c,l;
   _==0?( //guild
-      t=parseInt(document.getElementById("tax").value),
-      t!=t||t<0?(t=0):t>50&&(t=50),
+      t=parseInt(document.getElementById("tax").value,10),
+      isNaN(t)||t<0?(t=0):t>50&&(t=50),
       document.getElementById("tax").value=n_Tax=t):
   _==1||_==3||_==6||_==8?( //base start,stop
       _==1||_==3?(c=document.exp_BAS,l=lv_Max):(c=document.exp_ADV,l=lvAdv_Max),
-      a=parseInt(c.startLvl.value),
-      b=parseInt(c.stopLvl.value),
+      a=parseInt(c.startLvl.value,10),
+      b=parseInt(c.stopLvl.value,10),
       _==1||_==6?
-          (a!=a||a<1?(a=1):a>l-1?(a=l-1,b=l):a>=b&&(b=a+1)):
-          (b!=b||b>l?(b=l):b<2?(b=2,a=1):a>=b&&(a=b-1)),
+          (isNaN(a)||a<1?(a=1):a>l-1?(a=l-1,b=l):a>=b&&(b=a+1)):
+          (isNaN(b)||b>l?(b=l):b<2?(b=2,a=1):a>=b&&(a=b-1)),
       c.startLvl.value=a,c.stopLvl.value=b):
   _==2||_==7||_==13?( //percent
       _==2?(c=document.exp_BAS):_==7?(c=document.exp_ADV):(c=document.exp_JOB),
-      t=parseInt(c.startLvlPerc.value),
-      t!=t||t<0?(t=0):t>99&&(t=99),
+      t=parseInt(c.startLvlPerc.value,10),
+      isNaN(t)||t<0?(t=0):t>99&&(t=99),
       c.startLvlPerc.value=t):
   _==4||_==9?( //base in6
       _==4?(c=document.exp_BAS):(c=document.exp_ADV),
-      t=parseInt(c.expIn6.value),
-      t!=t||t<0?(t=baseExp_NaN):t>baseExp_Max&&(t=baseExp_Max),
+      t=parseInt(c.expIn6.value,10),
+      isNaN(t)||t<0?(t=baseExp_NaN):t>baseExp_Max&&(t=baseExp_Max),
       c.expIn6.value=t):
   _==15?( //job in6
       c=document.exp_JOB,
-      t=parseInt(c.expIn6.value),
-      t!=t||t<0?(t=jobExp_NaN):t>jobExp_Max&&(t=jobExp_Max),
+      t=parseInt(c.expIn6.value,10),
+      isNaN(t)||t<0?(t=jobExp_NaN):t>jobExp_Max&&(t=jobExp_Max),
       c.expIn6.value=t):
   _==12||_==14?( //job start,stop
       c=document.exp_JOB,
       l=m_JobList[n_Job][2],
-      a=parseInt(c.startLvl.value),
-      b=parseInt(c.stopLvl.value),
+      a=parseInt(c.startLvl.value,10),
+      b=parseInt(c.stopLvl.value,10),
       _==12?
-          (a!=a||a<1?(a=1):a>l-1?(a=l-1,b=l):a>=b&&(b=a+1)):
-          (b!=b||b>l?(b=l):b<2?(b=2,a=1):a>=b&&(a=b-1)),
+          (isNaN(a)||a<1?(a=1):a>l-1?(a=l-1,b=l):a>=b&&(b=a+1)):
+          (isNaN(b)||b>l?(b=l):b<2?(b=2,a=1):a>=b&&(a=b-1)),
       c.startLvl.value=a,c.stopLvl.value=b):
   _==11?( //job
       document.exp_JOB.startLvl.value=1):
@@ -236,11 +236,11 @@ function ReCalc(_) {
   var m_List=[document.exp_BAS,document.exp_ADV,document.exp_JOB];
   RefreshFields(_);
   for(var l=0;l<3;l++) {
-    beg=m_List[l].startLvl.value;
-    end=m_List[l].stopLvl.value;
-    per=m_List[l].startLvlPerc.value;
-    in6=m_List[l].expIn6.value;
-    loot=m_List[l].lootSelect.value;
+    beg=parseInt(m_List[l].startLvl.value,10);
+    end=parseInt(m_List[l].stopLvl.value,10);
+    per=parseInt(m_List[l].startLvlPerc.value,10);
+    in6=parseInt(m_List[l].expIn6.value,10);
+    loot=parseInt(m_List[l].lootSelect.value,10);
     l==0?(vec=PC_BaseExp[0],typ=4,tax=n_Tax):
     l==1?(vec=PC_BaseExp[1],typ=4,tax=n_Tax):
          (vec=PC_JobExp[m_JobList[n_Job][3]],typ=5,tax=0);
