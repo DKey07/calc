@@ -65,8 +65,8 @@ SkillOBJ=[
   [62 ,10,"Pushcart"],
   [63 ,1 ,"Item Appraisal"],
   [64 ,10,"Vending"],
-  [65 ,10,"Mammonite"],
-  [66 ,1 ,"Cart Revolution"],
+  [65 ,10,"Mammonite (FreeRO)"],
+  [66 ,1 ,"Cart Revolution (FreeRO)"],
   [67 ,1 ,"Change Cart"],
   [68 ,1 ,"Loud Exclamation"],
   [69 ,10,"Spear Mastery"],
@@ -838,7 +838,8 @@ AutoSpellSkill=[
   [162,1,414,3 ,1  ,6], //Stucked Bolts (FreeRO)
   [163,1,376,7 ,3  ,10],//Oni Horns (FreeRO)
   [164,0,240,3 ,1  ,1], //SET: Witch Heels
-  [165,0,510,4 ,20 ,1]  //Spider Temptation
+  [165,0,510,4 ,20 ,1], //Spider Temptation
+  [166,1,128,2 ,7  ,1]  //[Phylla]
 //[autoID, selectable, skillID, maxLv, percentChance, trigger]
 //  trigger --> wNAME99 in Item_Setumei()
 ];

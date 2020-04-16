@@ -210,7 +210,7 @@ function BattleCalc999(){
       else if(19==n_A_ActiveSkill) not_use_card=1,wbairitu+=.3,n_A_Weapon_zokusei=2;
       else if(41==n_A_ActiveSkill) n_Enekyori=1,wbairitu+=.05*n_A_ActiveSkillLV-.25,n_Delay[2]=1;
       else if(44==n_A_ActiveSkill) n_Enekyori=1,wCast=1.5,wbairitu+=.5;
-      else if(65==n_A_ActiveSkill) wbairitu+=.5*n_A_ActiveSkillLV;
+      else if(65==n_A_ActiveSkill) wbairitu+=1.2*n_A_ActiveSkillLV;
       else if(71==n_A_ActiveSkill) wbairitu+=.2*n_A_ActiveSkillLV,n_Enekyori=1;
       else if(84==n_A_ActiveSkill) n_A_ActiveSkillLV>=3&&(n_Enekyori=1),wbairitu+=.2*n_A_ActiveSkillLV;
       else if(158==n_A_ActiveSkill) wbairitu+=.2*n_A_ActiveSkillLV,305==ItemOBJ[n_A_Equip[5]][0]&&(wbairitu=0);
@@ -561,7 +561,7 @@ function BattleCalc999(){
         wCR=100,n_PerHIT_DMG=Math.floor(2*BattleCalc2(0)*zokusei[n_B[3]][0]),
         SkillSearch(327)?wCR+=20*SkillSearch(327):(SkillSearch(154)&&(wCR+=5*SkillSearch(154)),
         0==SkillSearch(154)&&n_A_Buf2[8]&&(wCR+=5*n_A_Buf2[8])),
-        CR_n_A_DMG=[0,0,0],CRbai=eval(document.calcForm.SkillSubNum.value)/8e3,b=0;2>=b;b++
+        CR_n_A_DMG=[0,0,0],CRbai=eval(document.calcForm.SkillSubNum.value)/8e3*3,b=0;2>=b;b++
       ) CR_n_A_DMG[b]=Math.floor(n_A_DMG[b]*wCR/100);
       wbairitu+=.5,
       ATKbai02(wbairitu,0);
@@ -1139,7 +1139,7 @@ function BattleHiDam(){
   else if(55==n_B_AtkSkill) n_B_rangedMAtk=1,n_B_Weapon_zokusei=1,atkmod+=10*n_B_AtkSkillLV;
   else if(56==n_B_AtkSkill) n_B_rangedMAtk=1,n_B_Weapon_zokusei=4,BskillHitNum=n_B_AtkSkillLV;
   else if(57==n_B_AtkSkill) n_B_rangedMAtk=1,n_B_Weapon_zokusei=4,BskillHitNum=n_B_AtkSkillLV,atkmod-= 20;
-  else if(65==n_B_AtkSkill) atkmod+=50*n_B_AtkSkillLV;
+  else if(65==n_B_AtkSkill) atkmod+=120*n_B_AtkSkillLV;
   else if(66==n_B_AtkSkill) n_B_Weapon_zokusei=3,atkmod+=30*n_B_AtkSkillLV;
   else if(71==n_B_AtkSkill) atkmod+=20*n_B_AtkSkillLV,n_B_rangedAtk=1;
   else if(84==n_B_AtkSkill) n_B_AtkSkillLV>=3&&(n_B_rangedAtk=1),atkmod+=20*n_B_AtkSkillLV;
