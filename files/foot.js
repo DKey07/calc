@@ -396,6 +396,7 @@ function StAllCalc(){
       n_B_manual[54]=eval(BRG_RC39.value)
     );
     for(i=0;22>=i;i++) n_B[i]=MonsterOBJ[B_Enemy.value][i];
+    n_Ranged=(n_B[20]&0xFF)>=3;
     n_A_BodyZokusei=StPlusCard(198),
     0==n_A_BodyZokusei&&(n_A_BodyZokusei=StPlusCalc2(198)),
     13!=n_A_JOB&&27!=n_A_JOB||!CardNumSearch(456)||(n_A_BodyZokusei=6),
@@ -1142,11 +1143,7 @@ function StAllCalc(){
     1095==n_A_Equip[0]&&n_A_Weapon_ATKplus>=9&&(n_tok[74]+=5),
     AC_I=n_tok[74];
     var w=n_A_Buf3[2];
-    w?
-      10==w?
-        n_tok[74]=5*w+2*n_A_Buf3[32]+Math.floor(n_A_Buf3[29]/5):
-        n_tok[74]=3*w+2*n_A_Buf3[32]+Math.floor(n_A_Buf3[29]/5):
-      n_tok[74]=0,
+    w?10==w?n_tok[74]=5*w+2*n_A_Buf3[32]+Math.floor(n_A_Buf3[29]/5):n_tok[74]=3*w+2*n_A_Buf3[32]+Math.floor(n_A_Buf3[29]/5):n_tok[74]=0,
     AC_I>100&&(AC_I=100),
     n_tok[74]>100&&(n_tok[74]=100),
     n_A_HPR=Math.floor(n_A_VIT/5)+Math.floor(n_A_MaxHP/200),
@@ -1276,7 +1273,7 @@ function StAllCalc(){
       n_tok[58]-=200,
       n_tok[59]-=200
     );
-    if((0==n_B[20]&&0==n_B_rangedAtk&&0==n_B_rangedMAtk&&2!=document.calcForm.B_AtkRange.value||1==document.calcForm.B_AtkRange.value)&&957==n_A_Equip[7])
+    if((0==n_Ranged&&0==n_B_rangedAtk&&0==n_B_rangedMAtk&&2!=document.calcForm.B_AtkRange.value||1==document.calcForm.B_AtkRange.value)&&957==n_A_Equip[7])
       for(i=0;9>=i;i++) n_tok[60+i]+=30;
     if(n_A_HEAD_DEF_PLUS>=7&&1498==n_A_Equip[2])
       for(i=0;9>=i;i++) n_tok[60+i]+=5;
@@ -1307,10 +1304,10 @@ function StAllCalc(){
     (1082==n_A_Equip[0]||1087==n_A_Equip[0]||1094==n_A_Equip[0]||1096==n_A_Equip[0])&&n_A_Weapon_ATKplus>=6&&(n_tok[307]+=5),
     645==n_A_Equip[0]&&(n_tok[295]+=10+n_A_Weapon_ATKplus),
     9==n_A_WeaponType&&(n_tok[295]+=2*CardNumSearch(466)),
-    1==n_B[19]&&(n_tok[297]+=30*CardNumSearch(425)),
+    (MD_BOSS&n_B[19])&&(n_tok[297]+=30*CardNumSearch(425)),
     936==n_A_Equip[0]&&(n_tok[295]+=1*n_A_Weapon_ATKplus),
-    1==n_B[19]&&1228==n_A_Equip[2]&&n_A_HEAD_DEF_PLUS>=6&&(n_tok[297]+=n_A_HEAD_DEF_PLUS-5),
-    1==n_B[19]&&(n_tok[295]+=n_tok[297]),
+    (MD_BOSS&n_B[19])&&1228==n_A_Equip[2]&&n_A_HEAD_DEF_PLUS>=6&&(n_tok[297]+=n_A_HEAD_DEF_PLUS-5),
+    (MD_BOSS&n_B[19])&&(n_tok[295]+=n_tok[297]),
     (1084==n_A_Equip[0]||1095==n_A_Equip[0])&&n_A_Weapon_ATKplus>=6&&(n_tok[317]+=5),
     1085==n_A_Equip[0]&&n_A_Weapon_ATKplus>=6&&(n_tok[317]+=5),
     1083==n_A_Equip[0]&&n_A_Weapon_ATKplus>=6&&(n_tok[317]+=5+2*(n_A_Weapon_ATKplus-5)),
@@ -2886,13 +2883,27 @@ function SZ(_){
   return _
 }
 function MANUKU_MONSTER(){
-  for(var _=0;_<nMANUKU.length;_++)
-    if(n_B[0]==nMANUKU[_]) return 1;
+  for(var _=0;_<nMANUKU.length;_++) if(n_B[0]==nMANUKU[_]) return 1;
   return 0
 }
 function SUPURE_MONSTER(){
-  for(var _=0;_<nSUPURE.length;_++)
-    if(n_B[0]==nSUPURE[_]) return 1;
+  for(var _=0;_<nSUPURE.length;_++) if(n_B[0]==nSUPURE[_]) return 1;
+  return 0
+}
+function GOBLIN_MONSTER(){
+  for(var _=0;_<nGOBLIN.length;_++) if(n_B[0]==nGOBLIN[_]) return 1;
+  return 0
+}
+function ORC_MONSTER(){
+  for(var _=0;_<nORC.length;_++) if(n_B[0]==nORC[_]) return 1;
+  return 0
+}
+function KOBOLD_MONSTER(){
+  for(var _=0;_<nKOBOLD.length;_++) if(n_B[0]==nKOBOLD[_]) return 1;
+  return 0
+}
+function GOLEM_MONSTER(){
+  for(var _=0;_<nGOLEM.length;_++) if(n_B[0]==nGOLEM[_]) return 1;
   return 0
 }
 function SaveLocal(){
@@ -4063,8 +4074,14 @@ for(var i=1;22>=i;i++) with(document.calcForm) B_num.options[i-1]=new Option(i,i
 for(var i=1;20>=i;i++) with(document.calcForm) A8_Skill15.options[i]=new Option(5*i,i);
 for(w_ASSP0bk=new Array,i=0;20>i;i++) w_ASSP0bk[i]=999;
 for(wESx=new Array,i=0;i<=EnemyNum;i++) wESx[i]=new Array;
-var nMANUKU=[524,527,528,530,531,534,541,588,591,592,594,595,598,648],
-    nSUPURE=[525,526,529,532,533,537,589,590,593,596,597];
+var nMANUKU=[522,525,526,528,529,532],
+    nSUPURE=[523,524,527,530,531],
+    nGOBLIN=[108,109,110,111,112,113,115],
+    nORC   =[49,50,51,52,55,221],
+    nKOBOLD=[116,117,118,119,120],
+    nGOLEM =[106,152,308,32],
+    nEMPERIUM=44,
+    nPLAYER=560;
 for(
   n_NtoS=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],
   n_NtoS2=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"],

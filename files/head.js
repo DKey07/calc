@@ -124,7 +124,7 @@ function BattleCalc999(){
         for(var san=[0,0,0],i=0;2>=i;i++)
           san[i]=BattleCalc(n_A_DMG[i]*(wbairitu+wBC3_3danAtkBairitu),i)+EDP_DMG(i),
           san[i]=3*Math.floor(san[i]/3),
-          5==n_B[19]&&(san[i]=3);
+          (MD_PLANT&n_B[19])&&(san[i]=3);
         str_bSUBname+="Raging Trifecta Blow Damage<BR>",
         str_bSUB+=san[0]+"~"+san[2]+" ("+(30-SkillSearch(187))+"% Chance)<BR>",
         TyouEnkakuSousa3dan=0,n_Min_DMG>san[0]&&(n_Min_DMG=san[0]),n_Max_DMG<san[2]&&(n_Max_DMG=san[2])
@@ -255,9 +255,9 @@ function BattleCalc999(){
         var w; w=eval(document.calcForm.SkillSubNum.value),wbairitu+=w,wCast=.5*(w+1),wCast>1.5&&(wCast=1.5)
       } else
         317==n_A_ActiveSkill?
-          (n_Delay[0]=1,n_Delay[5]=.05,1==n_B[19]&&(n_Delay[5]=.1),1==Taijin&&(str_bSUBname+="SP damage<BR>",str_bSUB+="15<BR>")):
+          (n_Delay[0]=1,n_Delay[5]=.05,(MD_BOSS&n_B[19])&&(n_Delay[5]=.1),1==Taijin&&(str_bSUBname+="SP damage<BR>",str_bSUB+="15<BR>")):
         318==n_A_ActiveSkill?
-          (n_Delay[5]=.05,1==n_B[19]&&(n_Delay[5]=.1),1==Taijin&&(n_Delay[0]=1,str_bSUBname+="SP damage<BR>",str_bSUB+="15<BR>")):
+          (n_Delay[5]=.05,(MD_BOSS&n_B[19])&&(n_Delay[5]=.1),1==Taijin&&(n_Delay[0]=1,str_bSUBname+="SP damage<BR>",str_bSUB+="15<BR>")):
         326==n_A_ActiveSkill?(
           not_use_card=1,SRV?(
           eval(document.calcForm.SkillSubNum.value)>8e3?CT_WEIGHT=8e3:CT_WEIGHT=eval(document.calcForm.SkillSubNum.value),
@@ -352,7 +352,7 @@ function BattleCalc999(){
     }else if(118==n_A_ActiveSkill||271==n_A_ActiveSkill){
       n_PerHIT_DMG=0,n_A_Weapon_zokusei=0,n_Enekyori=1,wBT=80+2*Math.floor(n_A_DEX/10)+2*Math.floor(n_A_INT/2)+6*SkillSearch(119),
       271==n_A_ActiveSkill?(
-        wBT=Math.floor(wBT*(150+70*n_A_ActiveSkillLV)/100),wBT=Math.floor(wBT*zokusei[n_B[3]][0]),wBT=tPlusDamCut(wBT),wBT*=5,5==n_B[19]&&(wBT=1),
+        wBT=Math.floor(wBT*(150+70*n_A_ActiveSkillLV)/100),wBT=Math.floor(wBT*zokusei[n_B[3]][0]),wBT=tPlusDamCut(wBT),wBT*=5,(MD_PLANT&n_B[19])&&(wBT=1),
         wCast=1*n_A_CAST,n_Delay[2]=3
       ):(
         wBT=Math.floor(wBT*zokusei[n_B[3]][0]),wBT=tPlusDamCut(wBT),wBT*=n_A_ActiveSkillLV,
@@ -488,11 +488,11 @@ function BattleCalc999(){
       EDPplus(5),
       CastAndDelay(),BattleCalc998()
     }else if(88==n_A_ActiveSkill){
-      if(n_PerHIT_DMG=0,not_use_card=1,n_Delay[0]=1,wCast=1*n_A_CAST,0==n_B[19]){
+      if(n_PerHIT_DMG=0,not_use_card=1,n_Delay[0]=1,wCast=1*n_A_CAST,MASK_SPECIAL&n_B[19]==0){
         wbairitu+=(400+50*n_A_ActiveSkillLV+20*eval(document.calcForm.SkillSubNum.value))/100,
         ATKbai02(wbairitu,0);
         for(var i=0;2>=i;i++) w_DMG[i]=BattleCalc(n_A_DMG[i],i),w_DMG[i]=Math.floor(w_DMG[i])
-      }else 5==n_B[19]?w_DMG[0]=w_DMG[1]=w_DMG[2]=1:w_DMG[0]=w_DMG[1]=w_DMG[2]=0;
+      }else (MD_PLANT&n_B[19])?w_DMG[0]=w_DMG[1]=w_DMG[2]=1:w_DMG[0]=w_DMG[1]=w_DMG[2]=0;
       for(var i=0;2>=i;i++) Last_DMG_A[i]=Last_DMG_B[i]=w_DMG[i],InnStr[i]+=Last_DMG_A[i];
       w_HIT_HYOUJI=100,
       CastAndDelay(),BattleCalc998()
@@ -510,7 +510,7 @@ function BattleCalc999(){
         InnStr[i]+=Last_DMG_A[i]+" ("+w_DMG[i]+" + "+w_SBr[i]+")",
         w_DMG[i]=Last_DMG_A[i];
       var wX=BattleCalc2(0)*n_A_ActiveSkillLV;
-      if(n_PerHIT_DMG=wX+w_SBr[1],str_PerHIT_DMG=wX+w_SBr[0]+"~"+(wX+w_SBr[2]),5==n_B[19])
+      if(n_PerHIT_DMG=wX+w_SBr[1],str_PerHIT_DMG=wX+w_SBr[0]+"~"+(wX+w_SBr[2]),MD_PLANT&n_B[19])
         for(var i=0;2>=i;i++) Last_DMG_A[i]=Last_DMG_B[i]=w_DMG[i]=1,InnStr[i]+=Last_DMG_A[i];
       w_DMG[1]=(w_DMG[1]*w_HIT+n_PerHIT_DMG*(100-w_HIT))/100,
       CastAndDelay(),BattleCalc998()
@@ -578,7 +578,7 @@ function BattleCalc999(){
       CastAndDelay(),BattleCalc998()
     }else if(283==n_A_ActiveSkill){
       n_PerHIT_DMG=0,w_DMG[2]=500+300*n_A_ActiveSkillLV,
-      5==n_B[19]&&(w_DMG[2]=1),
+      (MD_PLANT&n_B[19])&&(w_DMG[2]=1),
       w_DMG[0]=w_DMG[1]=w_DMG[2];
       for (var i=0;2>=i;i++) Last_DMG_A[i]=Last_DMG_B[i]=w_DMG[i],InnStr[i]+=Last_DMG_A[i];
       wCast=(1.5+.5*n_A_ActiveSkillLV)*n_A_CAST,n_Delay[2]=1.5+.5*n_A_ActiveSkillLV,
@@ -766,7 +766,7 @@ function BattleCalc999(){
       n_Enekyori=2,
       n_B[3]<90?
         (w=0,w_DMG[2]=0,w_DMG[0]=0,w_DMG[1]=0):
-        (1!=n_B[19]?(w=(20*n_A_ActiveSkillLV+n_A_BaseLV+n_A_INT+n_A_LUK)/1e3,w_DMG[2]=n_B[6]):(w=0,w_DMG[2]=0),
+        (MD_BOSS&n_B[19]==0?(w=(20*n_A_ActiveSkillLV+n_A_BaseLV+n_A_INT+n_A_LUK)/1e3,w_DMG[2]=n_B[6]):(w=0,w_DMG[2]=0),
           w_DMG[0]=n_A_BaseLV+n_A_INT+10*n_A_ActiveSkillLV,
           w_DMG[0]=Math.floor(w_DMG[0]*zokusei[n_B[3]][n_A_Weapon_zokusei]),
           w_DMG[1]=Math.round(n_B[6]*w+w_DMG[0]*(100-w)/100)
@@ -785,8 +785,8 @@ function BattleCalc999(){
       wHITsuu=4+n_A_ActiveSkillLV,
       w_DMG[2]=200+200*n_A_ActiveSkillLV,
       w_DMG[2]=Math.floor(w_DMG[2]),
-      5==n_B[19]&&(w_DMG[2]=1),
-      44==n_B[0]&&(w_DMG[2]=400),
+      (MD_PLANT&n_B[19])&&(w_DMG[2]=1),
+      nEMPERIUM==n_B[0]&&(w_DMG[2]=400),
       w_DMG[0]=w_DMG[1]=w_DMG[2];
       for(var i=0;2>=i;i++) Last_DMG_A[i]=Last_DMG_B[i]=w_DMG[i]*wHITsuu,w_DMG[i]=Last_DMG_A[i];
       var wStrG=Last_DMG_A[0]+" ("+w_DMG[0]/wHITsuu+" x "+wHITsuu+"hit)";
@@ -961,7 +961,7 @@ function BattleTAKA(){
       wBT=Math.floor(wBT*zokusei[n_B[3]][0]),
       wBT=tPlusDamCut(wBT),
       wBTw3=Math.round(100*(1+.3*n_A_LUK))/100,
-      44==n_B[0]&&(wBT=0),
+      nEMPERIUM==n_B[0]&&(wBT=0),
       str_bSUBname+="Falcon Damage<BR>",
       n_TAKA_DMG=wBT*wBTw1,
       str_bSUB+=n_TAKA_DMG+" ("+wBT+" x "+wBTw1+"Hit)",
@@ -993,7 +993,7 @@ function BattleCalc998(){
     myInnerHtml("bSUBname",str_bSUBname,0),
     myInnerHtml("bSUB",str_bSUB,0),
     myInnerHtml("BattleHIT",w_HIT_HYOUJI,0),
-    44==n_B[0]&&0!=n_A_ActiveSkill&&325!=n_A_ActiveSkill
+    nEMPERIUM==n_B[0]&&0!=n_A_ActiveSkill&&325!=n_A_ActiveSkill
   ) for(i=0;2>=i;i++) w_DMG[i]=0,myInnerHtml("ATK_0"+i,0,0);
   tPlusAG();
   var _;
@@ -1246,10 +1246,10 @@ function BattleHiDam(){
     for(i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*wBHD/100);
   if(wBHD=n_tok[190+n_B[4]],0!=wBHD)
     for(i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*wBHD/100);
-  if(0==n_B[19])
+  if(MASK_SPECIAL&n_B[19]==0)
     for(wBHD=n_tok[79],i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*wBHD/100);
   if(
-    (n_B[20]||n_B_rangedAtk||n_B_rangedMAtk||2==document.calcForm.B_AtkRange.value)&&
+    (n_Ranged||n_B_rangedAtk||n_B_rangedMAtk||2==document.calcForm.B_AtkRange.value)&&
     1!=document.calcForm.B_AtkRange.value
   ){
     for(wBHD=n_tok[78],i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*wBHD/100);
@@ -1257,13 +1257,13 @@ function BattleHiDam(){
       for(wBHD=20,i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*wBHD/100)
   }
   if(
-    (n_B[20]||2==document.calcForm.B_AtkRange.value)&&
+    (n_Ranged||2==document.calcForm.B_AtkRange.value)&&
     1!=document.calcForm.B_AtkRange.value
   ){
     if(n_A_Buf2[15]) for(wBHD=5+15*n_A_Buf2[15],i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*wBHD/100);
     if(n_A_Buf6[3]) for(wBHD=75,i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*wBHD/100)
   }
-  if(1==n_B[19]) for(i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*n_tok[77]/100);
+  if(MD_BOSS&n_B[19]) for(i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*n_tok[77]/100);
   if(TimeItemNumSearch(9)) for(i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]/5);
   if(wBHD=n_tok[330+Math.floor(n_B[3]/10)],0!=wBHD)
     for(i=0;6>=i;i++) w_HiDam[i]-=Math.floor(w_HiDam[i]*wBHD/100);
@@ -1344,7 +1344,7 @@ function BattleHiDam(){
 function BattleMagicCalc(_){
   wBMC_MDEF=n_B[15];
   var n=0;
-  0==n_B[19]&&CardNumSearch(424)&&(n=1),
+  (MASK_SPECIAL&n_B[19]==0)&&CardNumSearch(424)&&(n=1),
   0!=n&&(wBMC_MDEF=0,n_B_MDEF2=0),
   122==n_A_ActiveSkill?wBMC2=Math.floor(_+50):wBMC2=Math.floor(_*(100-wBMC_MDEF)/100-n_B_MDEF2),
   wBMC2<1&&(wBMC2=1),
@@ -1367,7 +1367,7 @@ function BattleMagicCalc(_){
     wBMC2=wBMC2*(100+e)/100,
     n_A_Buf7[21]&&MANUKU_MONSTER()&&(wBMC2=110*wBMC2/100),
     n_A_Buf7[24]&&SUPURE_MONSTER()&&(wBMC2=110*wBMC2/100),
-    131==n_A_ActiveSkill&&n_B_IJYOU[4]&&0==n_B[19]&&n_B[3]<90&&(wBMC2=0),
+    131==n_A_ActiveSkill&&n_B_IJYOU[4]&&(MASK_SPECIAL&n_B[19]==0)&&n_B[3]<90&&(wBMC2=0),
     wBMC2=Math.floor(wBMC2),
     wBMC2
 }
@@ -3049,7 +3049,7 @@ function AK(_){
 function ClickB_Enemy(){
   with(document.calcForm){
     for(n_B=new Array,n_B2=new Array,i=0;22>=i;i++) n_B[i]=MonsterOBJ[B_Enemy.value][i],n_B2[i]=n_B[i];
-    586==n_B[0]?Taijin=1:Taijin=0,
+    nPLAYER==n_B[0]?Taijin=1:Taijin=0,
     n_B[6]+=n_B_manual[30],
     n_B[6]+=Math.floor(n_B[6]*n_B_manual[31]/100),
     n_B[7]+=n_B_manual[49],
@@ -3076,10 +3076,25 @@ function ClickB_Enemy(){
     myInnerHtml("B_int",n_B[9],0),
     myInnerHtml("B_dex",n_B[10],0),
     myInnerHtml("B_luk",n_B[11],0),
-    n_B[19]==0&&myInnerHtml("B_Boss","Normal",0),
-    n_B[19]==1&&myInnerHtml("B_Boss","<b style='color:red'>Boss</b>",0),
-    n_B[19]==5&&myInnerHtml("B_Boss","<b style='color:green'>'1' damage</b>",0),
-    n_B[19]==6&&myInnerHtml("B_Boss","<b style='color:blue'>Emperium</b>",0),
+    myInnerHtml("B_Boss","",0),
+    (MD_CANMOVE           &n_B[19])&&myInnerHtml("B_Boss","<br>Can Move",1),
+    (MD_LOOTER            &n_B[19])&&myInnerHtml("B_Boss","<br><font color=blue>Looter</font>",1),
+    (MD_AGGRESSIVE        &n_B[19])&&myInnerHtml("B_Boss","<br><font color=red>Aggressive</font>",1),
+    (MD_ASSIST            &n_B[19])&&myInnerHtml("B_Boss","<br>Assist",1),
+    (MD_CASTSENSOR_IDLE   &n_B[19])&&myInnerHtml("B_Boss","<br>Cast Sensor Idle",1),
+    (MD_BOSS              &n_B[19])&&myInnerHtml("B_Boss","<br><font color=red><b>Boss</b></font>",1),
+    (MD_PLANT             &n_B[19])&&myInnerHtml("B_Boss","<br><font color=green><b>Plant</b></font>",1),
+    (MD_CANATTACK         &n_B[19])&&myInnerHtml("B_Boss","<br>Can Attack",1),
+    (MD_DETECTOR          &n_B[19])&&myInnerHtml("B_Boss","<br><b>Detector</b>",1),
+    (MD_CASTSENSOR_CHASE  &n_B[19])&&myInnerHtml("B_Boss","<br>Cast Sensor Chase",1),
+    (MD_CHANGECHASE       &n_B[19])&&myInnerHtml("B_Boss","<br>Change Chase",1),
+    (MD_ANGRY             &n_B[19])&&myInnerHtml("B_Boss","<br>Angry",1),
+    (MD_CHANGETARGET_MELEE&n_B[19])&&myInnerHtml("B_Boss","<br>Change Target Melee",1),
+    (MD_CHANGETARGET_CHASE&n_B[19])&&myInnerHtml("B_Boss","<br>Change Target Chase",1),
+    (MD_TARGETWEAK        &n_B[19])&&myInnerHtml("B_Boss","<br>Target Weak",1),
+    nEMPERIUM==n_B[0]&&myInnerHtml("B_Boss","<br><b style='color:blue'>Emperium Skill Resist</b>",1),
+    range1=n_B[20]&0xFF,range2=(n_B[20]>>8)&0xFF,range3=(n_B[20]>>16)&0xFF,
+    myInnerHtml("B_Range",range1+" ~ "+range2+" ~ "+range3,0),
     Taijin?(
       n_B[23]=Math.floor(.5*n_B[7])+Math.floor(.3*n_B[7]),
       n_B[24]=Math.floor(.5*n_B[7])+Math.floor(n_B[7]*n_B[7]/150)-1,
@@ -3140,16 +3155,16 @@ function ClickB_Enemy(){
     ),
     n_B_KYOUKA[6]&&(n_B[3]=n_B_KYOUKA[6]),
     n_B_IJYOU[23]&&(n_B[3]=10*n_B_IJYOU[23]+n_B[3]%10),
-    0==n_B[19]&&n_B[3]<90&&n_B_IJYOU[4]&&(n_B[3]=11),
-    0==n_B[19]&&n_B[3]<90&&n_B_IJYOU[9]&&(n_B[3]=21),
+    (MASK_SPECIAL&n_B[19]==0)&&n_B[3]<90&&n_B_IJYOU[4]&&(n_B[3]=11),
+    (MASK_SPECIAL&n_B[19]==0)&&n_B[3]<90&&n_B_IJYOU[9]&&(n_B[3]=21),
     n_B_KYOUKA[3]&&(n_B[12]=n_B[13]),
-    0==n_B[19]&&n_B_IJYOU[10]&&(
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[10]&&(
       n_B[12]-=Math.floor(25*n_B[12]/100),
       n_B[13]-=Math.floor(25*n_B[13]/100)
     );
     var wATK=0;
     if(
-      0==n_B[19]&&0!=n_B_IJYOU[0]&&n_B[3]<90&&(wATK+=2+3*n_B_IJYOU[0]),
+      (MASK_SPECIAL&n_B[19]==0)&&0!=n_B_IJYOU[0]&&n_B[3]<90&&(wATK+=2+3*n_B_IJYOU[0]),
       0==Taijin&&n_B_IJYOU[22]&&(wATK+=300),
       n_B_KYOUKA[4]&&(wATK+=200),
       n_B[12]+=Math.floor(n_B[12]*wATK/100),
@@ -3168,7 +3183,7 @@ function ClickB_Enemy(){
       w>w2?n_B[8]-=w2:n_B[8]-= w
     }
     if(
-      0==n_B[19]&&n_B_IJYOU[11]&&(n_B[8]-=n_B_IJYOU[11]+2,n_B[8]<0&&(n_B[8]=0)),
+      (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[11]&&(n_B[8]-=n_B_IJYOU[11]+2,n_B[8]<0&&(n_B[8]=0)),
       n_B_IJYOU[1]
     ){
       var w,w2;
@@ -3177,11 +3192,11 @@ function ClickB_Enemy(){
       (w2=10*n_B_IJYOU[1],w=Math.floor(n_B[10]/2)),
       w>w2?n_B[10]-=w2:n_B[10]-= w
     }
-    0==n_B[19]&&n_B_IJYOU[5]&&(6==n_B[2]||n_B[3]>=90)&&(n_B[10]=n_B[10]-Math.floor(n_B[10]/2)),
-    0==n_B[19]&&n_B_IJYOU[5]&&(6==n_B[2]||n_B[3]>=90)&&(n_B[9]=n_B[9]-Math.floor(n_B[9]/2)),
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[5]&&(6==n_B[2]||n_B[3]>=90)&&(n_B[10]=n_B[10]-Math.floor(n_B[10]/2)),
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[5]&&(6==n_B[2]||n_B[3]>=90)&&(n_B[9]=n_B[9]-Math.floor(n_B[9]/2)),
     n_B_IJYOU[15]&&0==Taijin&&(n_B[7]-=Math.floor(40*n_B[7]/100)),
     n_B_IJYOU[16]&&0==Taijin&&(n_B[9]-=Math.floor(40*n_B[9]/100)),
-    0==n_B[19]&&n_B_IJYOU[10]&&(n_B[11]=0),
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[10]&&(n_B[11]=0),
     0==Taijin&&(
       n_B[23]=n_B[7],
       n_B[24]=n_B[7]+(Math.floor(n_B[7]/20)*Math.floor(n_B[7]/20)- 1),
@@ -3196,17 +3211,17 @@ function ClickB_Enemy(){
     n_B[26]=n_B[5]+n_B[10],
     n_B[27]=n_B[5]+n_B[8];
     var wDEF=0;
-    0==n_B[19]&&0!=n_B_IJYOU[0]&&n_B[3]<90&&(wDEF+=5+5*n_B_IJYOU[0]),
+    (MASK_SPECIAL&n_B[19]==0)&&0!=n_B_IJYOU[0]&&n_B[3]<90&&(wDEF+=5+5*n_B_IJYOU[0]),
     0==Taijin&&n_B_IJYOU[22]&&(wDEF+=50),
     0==Taijin&&n_B_IJYOU[24]&&(wDEF+=5*n_B_IJYOU[24]),
     wDEF>100&&(wDEF=100),
     0==Taijin&&(n_B[14]-=Math.floor(n_B[14]*wDEF/100)),
-    0==n_B[19]&&n_B_IJYOU[2]&&(n_B[14]-=Math.floor(25*n_B[14]/100));
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[2]&&(n_B[14]-=Math.floor(25*n_B[14]/100));
     var w=0;
     w+=n_tok[290],
     SRV?(
-      0==n_B[19]&&(w+=n_tok[291]),
-      1==n_B[19]&&(w+=n_tok[292]),
+      (MASK_SPECIAL&n_B[19]==0)&&(w+=n_tok[291]),
+      (MD_BOSS&n_B[19])&&(w+=n_tok[292]),
       w+=n_tok[300+n_B[2]],(
         324==n_A_ActiveSkill||159==n_A_ActiveSkill||384==n_A_ActiveSkill||162==n_A_ActiveSkill||
         193==n_A_ActiveSkill||405==n_A_ActiveSkill||438==n_A_ActiveSkill
@@ -3220,22 +3235,22 @@ function ClickB_Enemy(){
     w&&(0>w&&(w=0),
     n_B[14]-=Math.floor(n_B[14]*w/100)),
     n_B_IJYOU[14]&&0==Taijin&&(n_B[14]-=Math.floor(15*n_B[14]/100)),
-    0==n_B[19]&&n_B_IJYOU[4]&&n_B[3]<90&&(n_B[14]-=Math.floor(50*n_B[14]/100)),
-    0==n_B[19]&&n_B_IJYOU[9]&&n_B[3]<90&&(n_B[14]-=Math.floor(50*n_B[14]/100)),
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[4]&&n_B[3]<90&&(n_B[14]-=Math.floor(50*n_B[14]/100)),
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[9]&&n_B[3]<90&&(n_B[14]-=Math.floor(50*n_B[14]/100)),
     n_B_KYOUKA[9]&&(SRV?n_B[14]=90:n_B[14]*=2),
     n_B_IJYOU[12]&&(6==n_B[2]||n_B[3]>=90)&&(n_B[14]-=Math.floor(n_B[14]*(10+4*n_B_IJYOU[12])/100)),
     n_B_IJYOU[20]&&0==Taijin&&(n_B[14]=0),
     n_B[23]-=Math.floor(n_B[23]*wDEF/100),
     n_B[24]-=Math.floor(n_B[24]*wDEF/100),
-    0==n_B[19]&&n_B_IJYOU[2]&&(
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[2]&&(
       n_B[23]-=Math.floor(25*n_B[23]/100),
       n_B[24]-=Math.floor(25*n_B[24]/100)
     ),
-    0==n_B[19]&&n_B_IJYOU[4]&&n_B[3]<90&&(
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[4]&&n_B[3]<90&&(
       n_B[23]-=Math.floor(50*n_B[23]/100),
       n_B[24]-=Math.floor(50*n_B[24]/100)
     ),
-    0==n_B[19]&&n_B_IJYOU[9]&&n_B[3]<90&&(
+    (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[9]&&n_B[3]<90&&(
       n_B[23]-=Math.floor(50*n_B[23]/100),
       n_B[24]-=Math.floor(50*n_B[24]/100)
     ),
@@ -3256,31 +3271,31 @@ function ClickB_Enemy(){
         0>w&&(w=0),
         n_B[15]-=Math.floor(n_B[15]*w/100)
       ),
-      0==n_B[19]&&n_B_IJYOU[4]&&n_B[3]<90&&(n_B[15]+=Math.floor(25*n_B[15]/100)),
-      0==n_B[19]&&n_B_IJYOU[9]&&n_B[3]<90&&(n_B[15]+=Math.floor(25*n_B[15]/100)),
-      0==n_B[19]&&n_B_IJYOU[18]&&n_B[3]<90&&(n_B[25]-=Math.floor(12*n_B[25]*n_B_IJYOU[18]/100)),
+      (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[4]&&n_B[3]<90&&(n_B[15]+=Math.floor(25*n_B[15]/100)),
+      (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[9]&&n_B[3]<90&&(n_B[15]+=Math.floor(25*n_B[15]/100)),
+      (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[18]&&n_B[3]<90&&(n_B[25]-=Math.floor(12*n_B[25]*n_B_IJYOU[18]/100)),
       0==Taijin&&n_B_KYOUKA[7]&&(n_B[25]-=Math.floor(20*n_B[25]*n_B_KYOUKA[7]/100)),
       0==Taijin&&n_B_IJYOU[21]&&(n_B[25]=90),
       n_B[26]+=n_B_manual[36],
-      0==n_B[19]&&n_B_IJYOU[3]&&(
+      (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[3]&&(
         n_B[26]-=25,
         n_B[26]<1&&(n_B[26]=1)
       ),
-      !n_B[20]&&2!=document.calcForm.B_AtkRange.value||1==document.calcForm.B_AtkRange.value||n_A_Buf6[3]&&(
+      !n_Ranged&&2!=document.calcForm.B_AtkRange.value||1==document.calcForm.B_AtkRange.value||n_A_Buf6[3]&&(
         n_B[26]-=50,
         n_B[26]<1&&(n_B[26]=1)
       ),
       n_B_KYOUKA[4]&&(n_B[26]=2*n_B[26]),
       n_B[27]+=n_B_manual[37],
-      0==n_B[19]&&n_B_IJYOU[3]&&(n_B[27]-=Math.floor(25*n_B[27]/100)),
+      (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[3]&&(n_B[27]-=Math.floor(25*n_B[27]/100)),
       0!=n_B_KYOUKA[5]&&(n_B[27]=Math.floor(n_B[27]*(1+.2*n_B_KYOUKA[5]))),
       n_B_IJYOU[17]&&(
         n_B[27]-=50,
         n_B[27]<0&&(n_B[27]=0)
       ),
-      0==n_B[19]&&n_B_IJYOU[4]&&n_B[3]<90&&(n_B[27]=-19),
-      0==n_B[19]&&n_B_IJYOU[9]&&n_B[3]<90&&(n_B[27]=-19),
-      0==n_B[19]&&(n_B_IJYOU[7]||n_B_IJYOU[8])&&(n_B[27]=-19),
+      (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[4]&&n_B[3]<90&&(n_B[27]=-19),
+      (MASK_SPECIAL&n_B[19]==0)&&n_B_IJYOU[9]&&n_B[3]<90&&(n_B[27]=-19),
+      (MASK_SPECIAL&n_B[19]==0)&&(n_B_IJYOU[7]||n_B_IJYOU[8])&&(n_B[27]=-19),
       0==Taijin
     ){
       var w1_Exp=100;
@@ -3312,7 +3327,7 @@ function ClickB_Enemy(){
       ),
       n_A_Buf8[7]&&(n_B[17]=Math.floor(n_B[17]*(1+n_A_Buf8[7]))),
       n_A_Buf8[3]&&(n_B[16]=Math.floor(n_B[16]*(1+n_A_Buf8[3]))),
-      0==n_B[19]&&n_A_Buf3[8]&&(
+      (MASK_SPECIAL&n_B[19]==0)&&n_A_Buf3[8]&&(
         n_B[16]=Math.floor(n_B[16]*(125+11*n_A_Buf3[8])/100),
         n_B[17]=Math.floor(n_B[17]*(125+11*n_A_Buf3[8])/100)
       )
@@ -3345,6 +3360,7 @@ function ClickB_Enemy(){
       myInnerHtml("B_3","<b>"+wFront2+(ZokuseiOBJ[w]+n_B[3]%10)+wBack+"</b>",0) :
       myInnerHtml("B_3","<b>"+(ZokuseiOBJ[w]+n_B[3]%10)+"</b>",0),
     myInnerHtml("B_4",SizeOBJ[n_B[4]],0),
+    myInnerHtml("B_LEVEL",n_B[5],0),
     n_B[27]+=n_B_manual[37],
     1==document.calcForm.A8_Skill14.value?(n_Ses=1):(n_Ses=0),
     n_Ses&&(n_B[27]=Math.floor(.8*n_B[27])),
@@ -3580,14 +3596,14 @@ function BaiCI(_){
     _=Math.floor(_*(100+n)/100),
     1==n_Enekyori&&-1!=TyouEnkakuSousa3dan&&(n=n_tok[25],_=Math.floor(_*(100+n)/100)),
     n=0,
-    1==n_B[19]&&(n+=n_tok[26]),
+    (MD_BOSS&n_B[19])&&(n+=n_tok[26]),
     n+=n_tok[80],
     _=Math.floor(_*(100+n)/100),
     1==wCriTyuu&&401!=n_A_ActiveSkill&&(_=Math.floor(_*(100+n_tok[70])/100)),
-    (108<=n_B[0]&&n_B[0]<=115||319==n_B[0])&&(_=Math.floor(_*(100+n_tok[81])/100)),
-    116<=n_B[0]&&n_B[0]<=120&&(_=Math.floor(_*(100+n_tok[82])/100)),
-    (49<=n_B[0]&&n_B[0]<=52||55==n_B[0]||221==n_B[0])&&(_=Math.floor(_*(100+n_tok[83])/100)),
-    (106==n_B[0]||152==n_B[0]||308==n_B[0]||32==n_B[0]||541==n_B[0])&&(_=Math.floor(_*(100+n_tok[84])/100)),
+    GOBLIN_MONSTER()&&(_=Math.floor(_*(100+n_tok[81])/100)),
+    KOBOLD_MONSTER()&&(_=Math.floor(_*(100+n_tok[82])/100)),
+    ORC_MONSTER()&&(_=Math.floor(_*(100+n_tok[83])/100)),
+    GOLEM_MONSTER()&&(_=Math.floor(_*(100+n_tok[84])/100)),
     _=Math.floor(_*(100+StPlusCalc2(1e3+n_B[0])+StPlusCard(1e3+n_B[0]))/100),
     SkillSearch(258)&&(_=2*_),
     SkillSearch(266)&&(_=Math.floor(_*(150+50*SkillSearch(266))/100)),
@@ -3651,7 +3667,7 @@ function BattleCalc4(_,n,e){
     275==n_A_ActiveSkill?Math.floor(_*(100-n_B[14])/100)-n_B_DEF2[n]+e:
     432==n_A_ActiveSkill?_+e:
     n_tok[180+n_B[2]]>=1?_+e:
-    n_tok[22]>=1&&0==n_B[19]?_+e:
+    n_tok[22]>=1&&(MASK_SPECIAL&n_B[19]==0)?_+e:
     n_tok[22]>=10?_+e:
     SkillSearch(364)?_+e:
     _=0==n_tok[23]?Math.floor(_*(100-n_B[14])/100)-n_B_DEF2[n]+e:
@@ -3782,7 +3798,7 @@ function tPlusDamCut(wPDC){
     n_B_KYOUKA[1]&&1==Taijin&&(wPDC=Math.floor(2*wPDC/3)),
     n_B_KYOUKA[7]&&2!=n_Enekyori&&(wPDC-=Math.floor(20*wPDC*n_B_KYOUKA[7]/100)),
     n_B_KYOUKA[8]&&2==n_Enekyori&&(wPDC-=Math.floor(20*wPDC*n_B_KYOUKA[8]/100)),
-    5==n_B[19]&&(wPDC=1,122==n_A_ActiveSkill&&(wPDC=0)),
+    (MD_PLANT&n_B[19])&&(wPDC=1,122==n_A_ActiveSkill&&(wPDC=0)),
     wPDC
 }
 function tPlusEnemyClick(){

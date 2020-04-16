@@ -451,7 +451,7 @@ cardOBJ=[
  ,[448,100,"[SET]",0,13,300,14,60,0]
  ,[449,100,"[SET]",0,221,86,0]
  ,[450,100,"[SET]","5% chance to obtain a [Red Potion] item when killing a monster.<BR><b>[Swordman Class]</b><br>+50% HP restoration with [Red Potion], [Yellow potion], and [White Potion] items.",1,10,15,20,75,50,221,87,0]
- ,[451,100,"[SET]","Movement Speed +5%<BR>Disables the auto casting of [Snatch].<BR>Recover 1 SP when dealing ATK based damage.<BR><b>[Thief Class]</b><br>Removes the consumption of gemstones from skills that usually would.",1,5,2,5,12,5,209,5,0]
+ ,[451,100,"[SET]","Disables the auto casting of [Snatch].<BR>Recover 1 SP when dealing ATK based damage.<BR><b>[Thief Class]</b><br>Removes the consumption of gemstones from skills that usually would.",1,5,2,5,12,5,209,25,0]
  ,[452,100,"[SET]","All skill's SP cost -10%<BR><b>[Acolyte Class]</b><br>-30% damage from ["+SyuzokuOBJ[6]+"] and ["+SyuzokuOBJ[1]+"] race monsters.<BR>+5% experience from ["+SyuzokuOBJ[6]+"] and ["+SyuzokuOBJ[1]+"] race monsters.",3,10,73,-10,0]
  ,[453,100,"[SET]","<b>[Archer Class]</b><br>10% chance to cause [Coma] status effect on ["+SyuzokuOBJ[2]+"] race monsters.<BR>+5% experience from ["+SyuzokuOBJ[2]+"] race monsters.",25,20,2,5,5,3,86,20,0]
  ,[454,100,"[SET]","<b>[Mage Class]</b><br>MATK +3%, Casting Time -15%",13,500,18,5,19,5,5051,10,5054,10,5056,10,0]
