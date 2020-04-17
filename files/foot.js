@@ -487,7 +487,7 @@ function StAllCalc(){
     SU_STR>=95&&1160==n_A_Equip[0]&&(w+=20),
     SU_LUK>=90&&1164==n_A_Equip[0]&&(w+=20),
     (n_A_Weapon_ATKplus>=9)&&(526==n_A_card[0]&&(w+=35),526==n_A_card[1]&&(w+=35),526==n_A_card[2]&&(w+=35),526==n_A_card[3]&&(w+=35)),
-    n_Nitou&&(n_A_Weapon2_ATKplus>=9)&&(526==n_A_card[4]&&(w+=35),526==n_A_card[5]&&(w+=35),526==n_A_card[6]&&(w+=35),526==n_A_card[7]&&(w+=35)),    
+    n_Nitou&&(n_A_Weapon2_ATKplus>=9)&&(526==n_A_card[4]&&(w+=35),526==n_A_card[5]&&(w+=35),526==n_A_card[6]&&(w+=35),526==n_A_card[7]&&(w+=35)),
     (953==n_A_Equip[2]||1261==n_A_Equip[2])&&(w+=Math.floor(2*n_A_JobLV/7)),
     n_A_HEAD_DEF_PLUS>=5&&1218==n_A_Equip[2]&&(w+=n_A_HEAD_DEF_PLUS-4),
     n_A_HEAD_DEF_PLUS>=5&&1495==n_A_Equip[2]&&(w+=n_A_HEAD_DEF_PLUS-4),
@@ -528,47 +528,20 @@ function StAllCalc(){
     myInnerHtml("A_ATK2",Math.floor(wImp+V_ATK)+"+"+(n_A_WeaponLV_seirenATK+n_A_Weapon2LV_seirenATK),0),
     myInnerHtml("A_RealATK",wImp+Math.floor(V_ATK*(100+w)/100)+n_A_WeaponLV_seirenATK+n_A_Weapon2LV_seirenATK+n_A_WeaponLV_Minplus+"~"+(wImp+Math.floor(V_ATK*(100+w)/100)+n_A_WeaponLV_seirenATK+n_A_Weapon2LV_seirenATK+n_A_WeaponLV_Maxplus),0),
     //HP calculation
-    JobHP_A=new Array(0,70,50,40,50,30,40,150,110,75,85,55,90,110,85,90 ,75,75,75,90,0,150,110,75,85,55,90,110,85,90 ,75,75,75,90,0,0,0,0,0,0,0,70,90 ,75,75,84),
-    JobHP_B=new Array(5,5 ,5 ,5 ,5 ,5 ,5 ,5  ,5  ,5 ,5 ,5 ,5 ,7  ,5 ,6.5,3 ,3 ,5 ,5 ,5,5  ,5  ,5 ,5 ,5 ,5 ,7  , 5,6.5, 3, 3, 5, 5,0,0,0,0,0,0,0, 5,6.5, 5, 3,3.5),
-    wHPSL=0,
-    43==n_A_JOB&&n_A_BaseLV>=70&&(
-      n_A_BaseLV<=79?wHPSL=40*(n_A_BaseLV-70):
-      n_A_BaseLV<=84?wHPSL=50*(n_A_BaseLV-80):
-      n_A_BaseLV<=89?wHPSL=50*(n_A_BaseLV-80)-10:
-      n_A_BaseLV<=92?wHPSL=50*(n_A_BaseLV-90):
-      n_A_BaseLV<=97?wHPSL=50*(n_A_BaseLV-90)-10:
-      n_A_BaseLV==98?wHPSL=375:wHPSL=4
-    ),
-    w=0; for(i=2;i<=n_A_BaseLV;i++) w+=Math.round(JobHP_A[n_A_JOB]*i/100);
-    n_A_MaxHP=Math.floor(JobHP_B[n_A_JOB]*n_A_BaseLV+35+w),
-    44==n_A_JOB&&(
-      NinHP=new Array(131,137,144,151,159,167,175,184,193,202,212,222,232,243,254,265,277,289,301,316,331,346,364,382,400,420,440,460,482,504,526,548,572,596,620,646,672,698,
-        726,754,784,814,844,876,908,940,975,1010,1100,1140,1180,1220,1260,1300,1340,1385,1430,1475,1520,1565,1615,1665,1715,1765,1815,1880,1935,1990,2045,2100,2160,2200,2280,
-        2340,2400,2460,2520,2580,2640,2705,2770,2835,2900,2965,3030,3100,3170,3240,3310,3380,3455,3530,3605,3680,3760,3840,3920,4e3,4080),
-      n_A_MaxHP=NinHP[n_A_BaseLV-1]
-    ),
-    45==n_A_JOB&&n_A_BaseLV>=10&&(
-      GunHP=new Array(202,212,222,232,243,254,265,277,289,301,316,331,346,364,382,400,420,440,460,490,520,550,580,610,650,680,710,740,770,800,830,860,890,920,950,990,1020,1050,
-        1080,1110,1140,1180,1230,1280,1330,1395,1455,1515,1575,1635,1695,1760,1820,1885,1950,2015,2080,2145,2210,2275,2340,2410,2480,2550,2620,2690,2760,2830,2900,2970,3040,3115,
-        3190,3265,3340,3415,3490,3565,3640,3715,3790,3870,3950,4030,4110,4190,4270,4350,4430,4510),
-      n_A_MaxHP=GunHP[n_A_BaseLV-10]
-    ),
-    20==n_A_JOB&&99==n_A_BaseLV&&(n_A_MaxHP+=2e3),
-    n_Tensei&&(n_A_MaxHP=Math.floor(125*n_A_MaxHP/100));
+    JobHP_A=new Array(0,70,50,40,50,30,40,150,110,75,85,55,90,110,85,90,75,75,75,90,0,150,110,75,85,55,90,110,85,90,75,75,75,90,0,70,50,40,50,30,40,70,90,75,80,88),
+    JobHP_B=new Array(500,500,500,500,500,500,500,500,500,500,500,500,500,700,500,650,300,300,500,500,500,500,500,500,500,500,500,700,500,650,300,300,500,500,500,500,500,500,500,500,500,500,650,500,0,0),
+    //>>status_base_pc_maxhp (eathena-master)
+    sigma=0; for(i=2;i<=n_A_BaseLV;i++) sigma+=Math.floor((JobHP_A[n_A_JOB]*i+50)/100);
+    w=Math.floor( 35+n_A_BaseLV*JobHP_B[n_A_JOB]/100 + sigma);
+    (n_A_BaseLV>=10)&&(n_A_JOB==44||n_A_JOB==45)&&(w+=100);
+    n_A_MaxHP=Math.floor(w);
+    41==n_A_JOB&&n_A_BaseLV>=90&&SkillSearch(345)&&(n_A_MaxHP*=3),
+    20==n_A_JOB&&n_A_BaseLV==99&&(n_A_MaxHP+=2e3),
+    n_A_MaxHP+=Math.floor(n_A_MaxHP*n_A_VIT/100),
+    n_Tensei&&(n_A_MaxHP+=Math.floor(n_A_MaxHP*25/100));
     var n_Baby=eval(A_youshi.checked);
-    n_Baby?(n_A_MaxHP=Math.floor(70*n_A_MaxHP/100),myInnerHtml("A_BodySIZE","Demi-Human & Small",0)):myInnerHtml("A_BodySIZE","Demi-Human & Medium",0);
-    n_A_MaxHP=Math.floor((n_A_MaxHP-wHPSL)*(100+n_A_VIT)/100),
-    41==n_A_JOB&&n_A_BaseLV>=70&&(
-      n_A_BaseLV<=79?n_A_MaxHP=Math.floor((2127+10*(n_A_BaseLV-70))*(100+n_A_VIT)/100):
-      n_A_BaseLV<=89?n_A_MaxHP=Math.floor((2200+50*(n_A_BaseLV-80))*(100+n_A_VIT)/100):
-      n_A_BaseLV<=99&&(n_A_MaxHP=(2700+50*(n_A_BaseLV-90))*(100+n_A_VIT)/100, SkillSearch(345)&&(n_A_MaxHP=3*n_A_MaxHP), n_A_MaxHP=Math.floor(n_A_MaxHP))
-    ),
-    42==n_A_JOB&&n_A_BaseLV>=70&&(
-      wKenseiHP=[3455,3524,3593,3663,3834,3806,3878,3951,4025,4500],
-      n_A_BaseLV<=79?n_A_MaxHP=Math.floor((2670+10*(n_A_BaseLV-70))*(100+n_A_VIT)/100):
-      n_A_BaseLV<=89?n_A_MaxHP=Math.floor((3e3+20*(n_A_BaseLV-80))*(100+n_A_VIT)/100):
-      n_A_BaseLV<=99&&(n_A_MaxHP=Math.floor(wKenseiHP[n_A_BaseLV-90]*(100+n_A_VIT)/100))
-    ),
+    n_Baby?(n_A_MaxHP-=Math.floor(n_A_MaxHP*30/100),myInnerHtml("A_BodySIZE","Demi-Human & Small",0)):myInnerHtml("A_BodySIZE","Demi-Human & Medium",0);
+    //<<status_base_pc_maxhp
     1==n_A_Buf7[39]?n_A_MaxHP+=Math.floor(500+10*n_A_BaseLV/3):
     2==n_A_Buf7[39]?n_A_MaxHP+=Math.floor(1500+10*n_A_BaseLV/3):
     3==n_A_Buf7[39]&&(n_A_MaxHP+=Math.floor(2500+10*n_A_BaseLV/3)),
@@ -617,45 +590,17 @@ function StAllCalc(){
     n_A_MaxHP=Math.floor(n_A_MaxHP),
     n_A_MaxHP>=100?n_A_MaxHP>=1e4?myInnerHtml("A_MaxHP"," "+n_A_MaxHP,0):myInnerHtml("A_MaxHP",n_A_MaxHP,0):myInnerHtml("A_MaxHP"," "+n_A_MaxHP,0);
     //SP calculation
-    JobSP_A=new Array(1,2,2,5,2,6,3,3,4,8,4,9,4,4.7,5,4.7,6,6,7,4,1,3,4,8,4,9,4,4.7,5,4.7,6,6,7,4,0,0,0,0,0,0,0,2,4.7,9,3.75,3.75),
-    wSPSL=0,
-    43==n_A_JOB&&n_A_BaseLV>=70&&(
-      n_A_BaseLV<80?wSPSL=4*(n_A_BaseLV-70)+5:
-      n_A_BaseLV<90?wSPSL=4*(n_A_BaseLV-80):
-      n_A_BaseLV<93?wSPSL=4*(n_A_BaseLV-90):
-      n_A_BaseLV<99?wSPSL=4*(n_A_BaseLV-90)-10:wSPSL=1
-    ),
-    n_A_MaxSP=10+n_A_BaseLV*JobSP_A[n_A_JOB]-wSPSL,
-    44==n_A_JOB&&(
-      n_A_BaseLV<=20?n_A_MaxSP=11+3*n_A_BaseLV:
-      n_A_BaseLV<=40?n_A_MaxSP=71+4*(n_A_BaseLV-20):
-      n_A_BaseLV<=60?n_A_MaxSP=151+5*(n_A_BaseLV-40):
-      n_A_BaseLV<=80?n_A_MaxSP=251+6*(n_A_BaseLV-60):n_A_MaxSP=370+8*(n_A_BaseLV-80)
-    ),
-    45==n_A_JOB&&(
-      n_A_BaseLV<=25?n_A_MaxSP=10+3*n_A_BaseLV:
-      n_A_BaseLV<=35?n_A_MaxSP=85+4*(n_A_BaseLV-25):
-      n_A_BaseLV<=40?n_A_MaxSP=126+3*(n_A_BaseLV-35):
-      n_A_BaseLV<=50?n_A_MaxSP=141+4*(n_A_BaseLV-40):
-      n_A_BaseLV<=75?n_A_MaxSP=181+5*(n_A_BaseLV-50):
-      n_A_BaseLV<=78?n_A_MaxSP=306+6*(n_A_BaseLV-75):n_A_MaxSP=330+6*(n_A_BaseLV-78)
-    ),
-    n_Tensei&&(n_A_MaxSP=Math.floor(125*n_A_MaxSP/100)),
-    n_Baby&&(n_A_MaxSP=Math.floor(70*n_A_MaxSP/100)),
-    n_A_MaxSP=Math.floor(n_A_MaxSP*(100+n_A_INT)/100),
+    JobSP_A=new Array(100,200,200,500,200,600,300,300,400,800,400,900,400,470,500,470,600,600,700,400,100,300,400,800,400,900,400,470,500,470,600,600,700,400,100,200,200,500,200,600,300,200,470,900,515,450),
+    //>>status_base_pc_maxsp (eathena-master)
+    n_A_MaxSP=Math.floor(10+n_A_BaseLV*JobSP_A[n_A_JOB]/100),
+    n_A_MaxSP+=Math.floor(n_A_MaxSP*n_A_INT/100),
+    n_Tensei&&(n_A_MaxSP+=Math.floor(n_A_MaxSP*25/100)),
+    n_Baby&&(n_A_MaxSP-=Math.floor(n_A_MaxSP*30/100)),
+    41==n_A_JOB&&n_A_BaseLV>=90&&SkillSearch(345)&&(n_A_MaxSP*=3),
+    //<<status_base_pc_maxsp
     1==n_A_Buf7[40]?n_A_MaxSP=Math.floor(n_A_MaxSP*(95+n_A_BaseLV/10)/100):
     2==n_A_Buf7[40]?n_A_MaxSP=Math.floor(n_A_MaxSP*(100+n_A_BaseLV/10)/100):
     3==n_A_Buf7[40]&&(n_A_MaxSP=Math.floor(n_A_MaxSP*(105+n_A_BaseLV/10)/100)),
-    41==n_A_JOB&&n_A_BaseLV>=70&&(
-      n_A_BaseLV<=79?n_A_MaxSP=Math.floor((150+1*(n_A_BaseLV-70))*(100+n_A_INT)/100):
-      n_A_BaseLV<=89?n_A_MaxSP=Math.floor((160+1*(n_A_BaseLV-70))*(100+n_A_INT)/100):
-      n_A_BaseLV<=99&&(n_A_MaxSP=190*(100+n_A_INT)/100, SkillSearch(345)&&(n_A_MaxSP=3*n_A_MaxSP), n_A_MaxSP=Math.floor(n_A_MaxSP))
-    ),
-    42==n_A_JOB&&n_A_BaseLV>=70&&(
-      n_A_BaseLV<=79?n_A_MaxSP=Math.floor((339+2*(n_A_BaseLV-70))*(100+n_A_INT)/100):
-      n_A_BaseLV<=89?n_A_MaxSP=Math.floor((386+2*(n_A_BaseLV-80))*(100+n_A_INT)/100):
-      n_A_BaseLV<=99&&(n_A_MaxSP=Math.floor((430+3*(n_A_BaseLV-90))*(100+n_A_INT)/100))
-    ),
     w=0,
     w+=n_tok[14],
     w+=StPlusCalc2(4),
