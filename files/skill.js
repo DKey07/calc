@@ -65,7 +65,7 @@ SkillOBJ=[
   [62 ,10,"Pushcart"],
   [63 ,1 ,"Item Appraisal"],
   [64 ,10,"Vending"],
-  [65 ,10,"Mammonite (FreeRO)"],
+  [65 ,10,"Mammonite"],
   [66 ,1 ,"Cart Revolution (FreeRO)"],
   [67 ,1 ,"Change Cart"],
   [68 ,1 ,"Loud Exclamation"],
@@ -159,7 +159,7 @@ SkillOBJ=[
   [156,10,"Faith"],
   [157,10,"Auto-Guard"],
   [158,5 ,"Shield Charge"],
-  [159,5 ,"Shield Boomerang"],
+  [159,5 ,"Shield Boomerang (FreeRO)"],
   [160,10,"Shield Reflect"],
   [161,10,"Holy Cross"],
   [162,10,"Grand Cross"],
@@ -169,7 +169,7 @@ SkillOBJ=[
   [166,10,"Spear Quicken"],
   [167,10,"Intimidate"],
   [168,10,"Steal Coin"],
-  [169,10,"Back Stab"],
+  [169,10,"Back Stab (FreeRO)"],
   [170,5 ,"Tunnel Drive"],
   [171,5 ,"Raid"],
   [172,5 ,"Strip Weapon"],
@@ -384,7 +384,7 @@ SkillOBJ=[
   [381,1 ,"Sonic Acceleration"],
   [382,1 ,"Ki Explosion"],
   [383,1 ,"Close Confine"],
-  [384,5 ,"Shield Boomerang [Soul Linked]"],
+  [384,5 ,"Shield Boomerang [Soul Linked] (FreeRO)"],
   [385,1 ,"Super Novice Spirit"],
   [386,1 ,"One Hand Quicken [Soul Linked]"],
   [387,1 ,"Holy Light [Soul Linked]"],
@@ -684,7 +684,7 @@ AutoSpellSkill=[
   [8  ,1,52 ,3 ,10 ,1], //Hellfire
   [9  ,1,126,1 ,10 ,1], //Electric Guitar
   [10 ,0,8  ,1 ,3  ,1], //Banana Hat
-  [11 ,0,100,1 ,1  ,1], //Puppy Hat
+  [11 ,0,100,1 ,3  ,1], //Puppy Hat
   [12 ,0,25 ,1 ,5  ,6], //Decorative Geographer
   [13 ,0,25 ,1 ,1  ,1], //Hakujin
   [14 ,1,52 ,5 ,3  ,1], //Huuma Blaze Shuriken
@@ -728,7 +728,7 @@ AutoSpellSkill=[
   [52 ,1,125,3 ,3  ,1], //Violet Fear
   [53 ,1,162,3 ,3  ,6], //Little Angel Doll
   [54 ,0,172,1 ,5  ,1], //[Metaling]
-  [55 ,0,28 ,3 ,5  ,1], //[Maero of Thanatos]
+  [55 ,0,28 ,3 ,5  ,1], //[Maero of Thanatos], Maero Mask (FreeRO)
   [56 ,0,42 ,1 ,3  ,6], //[Anolian]
   [57 ,0,98 ,10,3  ,6], //[Amon Ra]
   [58 ,0,35 ,1 ,50 ,6], //[Antonio]
@@ -839,7 +839,11 @@ AutoSpellSkill=[
   [163,1,376,7 ,3  ,10],//Oni Horns (FreeRO)
   [164,0,240,3 ,1  ,1], //SET: Witch Heels
   [165,0,510,4 ,20 ,1], //Spider Temptation
-  [166,1,128,2 ,7  ,1]  //[Phylla]
+  [166,1,128,2 ,7  ,1], //[Phylla]
+  [167,0,101,5 ,0.5,5], //Drooping Cruel Kitty
+  [168,0,478,2 ,10 ,1], //Drooping Morocc Incarnation
+  [169,0,103,1 ,1  ,6], //Lude Hood
+  [170,0,9  ,1 ,2  ,6], //Lude Mask
 //[autoID, selectable, skillID, maxLv, percentChance, trigger]
 //  trigger --> wNAME99 in Item_Setumei()
 ];

@@ -210,7 +210,7 @@ function BattleCalc999(){
       else if(19==n_A_ActiveSkill) not_use_card=1,wbairitu+=.3,n_A_Weapon_zokusei=2;
       else if(41==n_A_ActiveSkill) n_Enekyori=1,wbairitu+=.05*n_A_ActiveSkillLV-.25,n_Delay[2]=1;
       else if(44==n_A_ActiveSkill) n_Enekyori=1,wCast=1.5,wbairitu+=.5;
-      else if(65==n_A_ActiveSkill) wbairitu+=1.2*n_A_ActiveSkillLV;
+      else if(65==n_A_ActiveSkill) wbairitu+=.5*n_A_ActiveSkillLV;
       else if(71==n_A_ActiveSkill) wbairitu+=.2*n_A_ActiveSkillLV,n_Enekyori=1;
       else if(84==n_A_ActiveSkill) n_A_ActiveSkillLV>=3&&(n_Enekyori=1),wbairitu+=.2*n_A_ActiveSkillLV;
       else if(158==n_A_ActiveSkill) wbairitu+=.2*n_A_ActiveSkillLV,305==ItemOBJ[n_A_Equip[5]][0]&&(wbairitu=0);
@@ -229,7 +229,7 @@ function BattleCalc999(){
         388==n_A_ActiveSkill&&1==Taijin&&(n_Ses?wbairitu*=1.25:wbairitu*=2),
         n_Delay[3]=2;
       else if(111==n_A_ActiveSkill) n_Delay[0]=1,not_use_card=1,n_A_Weapon_zokusei=1;
-      else if(169==n_A_ActiveSkill) wbairitu+=.4*n_A_ActiveSkillLV+2,n_Delay[2]=.5,w_HIT=100,w_HIT_HYOUJI=100;
+      else if(169==n_A_ActiveSkill) wbairitu+=.4*n_A_ActiveSkillLV+2,n_Delay[2]=.5,w_HIT=100,w_HIT_HYOUJI=100,n_Delay[3]=1.5,(1==n_A_WeaponType)&&(wActiveHitNum=2);
       else if(176==n_A_ActiveSkill) wbairitu+=.3*n_A_ActiveSkillLV,n_Delay[2]=1;
       else if(188==n_A_ActiveSkill) wActiveHitNum=4,wbairitu+=.5+.5*n_A_ActiveSkillLV,n_Delay[0]=1,n_Delay[1]=.1,n_Delay[3]=1-.004*n_A_AGI-.002*n_A_DEX;
       else if(189==n_A_ActiveSkill) wbairitu+=1.4+.6*n_A_ActiveSkillLV,n_Delay[0]=1,n_Delay[1]=.1,n_Delay[3]=.7-.004*n_A_AGI-.002*n_A_DEX;
@@ -272,8 +272,8 @@ function BattleCalc999(){
         382==n_A_ActiveSkill?(not_use_card=1,wbairitu+=2):
         331==n_A_ActiveSkill||333==n_A_ActiveSkill?(n_Delay[0]=1,wbairitu+=.6+.2*n_A_ActiveSkillLV):
         335==n_A_ActiveSkill||337==n_A_ActiveSkill?(n_Delay[0]=1,wbairitu+=.9+.3*n_A_ActiveSkillLV,337==n_A_ActiveSkill&&(wActiveHitNum=3)):
-        339==n_A_ActiveSkill?(n_Delay[0]=1,wbairitu+=-.7+.1*n_A_ActiveSkillLV,SkillSearch(338)&&(wbairitu+=.1*n_A_BaseLV/3)):
-        305==n_A_ActiveSkill?(n_Delay[0]=1,                                   SkillSearch(338)&&(wbairitu+=.1*n_A_BaseLV/3),0==n_A_WeaponType&&(wbairitu+=.1*n_A_BaseLV/3,SkillSearch(379)&&(wbairitu*=2))):
+        339==n_A_ActiveSkill?(wActiveHitNum=3,n_Delay[0]=1,wbairitu+=-.7+.1*n_A_ActiveSkillLV,SkillSearch(338)&&(wbairitu+=.1*n_A_BaseLV/3)):
+        305==n_A_ActiveSkill?(wActiveHitNum=3,n_Delay[0]=1,                                   SkillSearch(338)&&(wbairitu+=.1*n_A_BaseLV/3),0==n_A_WeaponType&&(wbairitu+=.1*n_A_BaseLV/3,SkillSearch(379)&&(wbairitu*=2))):
 //        339==n_A_ActiveSkill?(n_Delay[0]=1,wbairitu+=-.7+.1*n_A_ActiveSkillLV):
 //        305==n_A_ActiveSkill?(n_Delay[0]=1,SkillSearch(379)&&0==n_A_WeaponType?wbairitu+=.08*n_A_BaseLV-1:wbairitu+=.04*n_A_BaseLV-1):
         398==n_A_ActiveSkill?(wbairitu+=.1*n_A_ActiveSkillLV,n_Delay[2]=3):
@@ -297,8 +297,9 @@ function BattleCalc999(){
         437==n_A_ActiveSkill&&(n_Enekyori=1,not_use_card=1,wCast=1,n_Delay[2]=1);
       ATKbai02(wbairitu,0),0==cast_kotei&&(SRV&&430==n_A_ActiveSkill?wCast=wCast:wCast*=n_A_CAST);
       for(var i=0;2>=i;i++)
+        0==n_A_WeaponType&&SkillSearch(329)&&(305==n_A_ActiveSkill||331==n_A_ActiveSkill||333==n_A_ActiveSkill||335==n_A_ActiveSkill||337==n_A_ActiveSkill||339==n_A_ActiveSkill)&&(n_A_DMG[i]+=10*SkillSearch(329)),
         w_MagiclBulet=i,w_DMG[i]=BattleCalc(n_A_DMG[i],i),
-        wActiveHitNum>1&&(w_DMG[i]=Math.floor(w_DMG[i]/wActiveHitNum)*wActiveHitNum),
+        wActiveHitNum>1&&(hit1=Math.floor(w_DMG[i]/wActiveHitNum),hit1==0&&(hit1=1),w_DMG[i]=hit1*wActiveHitNum),
         Last_DMG_A[i]=Last_DMG_B[i]=w_DMG[i]+EDP_DMG(i),
         InnStr[i]+=Last_DMG_A[i],
         wActiveHitNum>1&&(InnStr[i]+=" ("+w_DMG[i]/wActiveHitNum+" x "+wActiveHitNum+"Hit)");
@@ -381,9 +382,10 @@ function BattleCalc999(){
       n_PerHIT_DMG=0,
       n_Enekyori=1,
       n_A_Weapon_zokusei=0,
-      n_Delay[2]=.7,
+      n_Delay[2]=.5,
       wbairitu2=1+.3*n_A_ActiveSkillLV,
-      384==n_A_ActiveSkill&&(n_Delay[2]=.35);
+      384==n_A_ActiveSkill&&(n_Delay[2]=.25);
+      n_Delay[3]=.7;
       if(SRV){
         wSBr=10*n_A_LEFT_DEF_PLUS,
         EquipNumSearch(620)||EquipNumSearch(409)||CardNumSearch(255)||EquipNumSearch(43)?(M_DEF1=n_B[14],M_DEF2=n_B_DEF2[0]):
@@ -396,12 +398,18 @@ function BattleCalc999(){
         n_A_Buf6[5]&&(SB_ATK+=Math.floor((.02+.03*n_A_Buf6[5])*SB_ATK)),
         n_A_Buf6[5]&&n_A_Buf7[31]?SB_ATK+=0:n_A_Buf7[31]&&(SB_ATK+=Math.floor(.05*SB_ATK));
         for(var i=0;i<=2;i++)
-          0<n_tok[23]?(n_A_ATK_IP=Math.round((SB_ATK+ItemOBJ[n_A_Equip[5]][6])*(n_B_DEF2[2-i]+n_B[14])/100),w_DMG[i]=n_A_ATK_IP*wbairitu):w_DMG[i]=(SB_ATK+ItemOBJ[n_A_Equip[5]][6])*wbairitu,
+          0<n_tok[23]?(
+            n_A_ATK_IP=Math.round((SB_ATK+ItemOBJ[n_A_Equip[5]][6])*(n_B_DEF2[2-i]+n_B[14])/100),
+            w_DMG[i]=n_A_ATK_IP*wbairitu
+          ):(
+            w_DMG[i]=(SB_ATK+ItemOBJ[n_A_Equip[5]][6])*wbairitu,
+            w_DMG[i]=Math.floor(w_DMG[i]*(100-(n_B[14]-M_DEF1))/100-(n_B_DEF2[i]-M_DEF2))
+          ),
           w_DMG[i]=Math.floor(w_DMG[i]*wbairitu2),
-          384==n_A_ActiveSkill&&(w_DMG[i]=Math.floor(2*w_DMG[i])),
-          w_DMG[i]=w_DMG[i]*(100+StPlusCalc2(5384)+StPlusCard(5384))/100,
-          w_DMG[i]=Math.floor(w_DMG[i]*(100-(n_B[14]-M_DEF1))/100-(n_B_DEF2[i]-M_DEF2)),
-          w_DMG[i]=BaiCI(w_DMG[i])+wSBr,0!=M_DEF1&&(w_DMG[2]=w_DMG[1]=w_DMG[0]),
+          w_DMG[i]=w_DMG[i]*(100+StPlusCalc2(5384))/100,
+          /*384==n_A_ActiveSkill&&*/(w_DMG[i]=Math.floor(2*w_DMG[i])),
+          w_DMG[i]=BaiCI(w_DMG[i])+wSBr,
+          0!=M_DEF1&&(w_DMG[2]=w_DMG[1]=w_DMG[0]),
           w_DMG[i]<1&&(w_DMG[i]=1),
           305==ItemOBJ[n_A_Equip[5]][0]&&(w_DMG[i]=0),
           w_DMG[i]=Math.floor(w_DMG[i]*zokusei[n_B[3]][0]),
@@ -669,7 +677,7 @@ function BattleCalc999(){
       for(var b=0;2>=b;b++)
         w_DMG[b]=BattleCalc(n_A_DMG[b],b),
         w_DMG[b]=Math.floor(w_DMG[b]*zokusei[n_B[3]][0]),
-        wActiveHitNum>1&&(w_DMG[b]=Math.floor(w_DMG[b]/wActiveHitNum)*wActiveHitNum),
+        wActiveHitNum>1&&(hit1=Math.floor(w_DMG[b]/wActiveHitNum),hit1==0&&(hit1=1),w_DMG[b]=hit1*wActiveHitNum),
         Last_DMG_A[b]=Last_DMG_B[b]=w_DMG[b],
         InnStr[b]+=Last_DMG_A[b],InnStr[b]+=" ("+Last_DMG_A[b]/wActiveHitNum+" x "+wActiveHitNum+"Hit)";
       w_DMG[1]=(w_DMG[1]*w_HIT+BattleCalc2(0)*zokusei[n_B[3]][0]*(100-w_HIT))/100,
@@ -764,9 +772,9 @@ function BattleCalc999(){
         (n_A_Weapon_zokusei=6,wCast=1*n_A_CAST):
         (n_A_Weapon_zokusei=0,wCast=8-2*n_A_ActiveSkillLV,wCast*=n_A_CAST),
       n_Enekyori=2,
-      n_B[3]<90?
+      ((n_B[3]<90)&&(n_B[2]!=1))?
         (w=0,w_DMG[2]=0,w_DMG[0]=0,w_DMG[1]=0):
-        (MD_BOSS&n_B[19]==0?(w=(20*n_A_ActiveSkillLV+n_A_BaseLV+n_A_INT+n_A_LUK)/1e3,w_DMG[2]=n_B[6]):(w=0,w_DMG[2]=0),
+        ((MD_BOSS&n_B[19])==0?(w=(20*n_A_ActiveSkillLV+n_A_BaseLV+n_A_INT+n_A_LUK)/1e3,w_DMG[2]=n_B[6]):(w=0,w_DMG[2]=0),
           w_DMG[0]=n_A_BaseLV+n_A_INT+10*n_A_ActiveSkillLV,
           w_DMG[0]=Math.floor(w_DMG[0]*zokusei[n_B[3]][n_A_Weapon_zokusei]),
           w_DMG[1]=Math.round(n_B[6]*w+w_DMG[0]*(100-w)/100)
@@ -921,6 +929,7 @@ function BattleCalc999(){
 }
 function ATKbai01(){
   var _=100;
+  n_A_Buf7[17]&&(_+=5); // Rune Strawberry Cake
   193!=n_A_ActiveSkill&&
   197!=n_A_ActiveSkill&&
   321!=n_A_ActiveSkill&&(
@@ -1139,7 +1148,7 @@ function BattleHiDam(){
   else if(55==n_B_AtkSkill) n_B_rangedMAtk=1,n_B_Weapon_zokusei=1,atkmod+=10*n_B_AtkSkillLV;
   else if(56==n_B_AtkSkill) n_B_rangedMAtk=1,n_B_Weapon_zokusei=4,BskillHitNum=n_B_AtkSkillLV;
   else if(57==n_B_AtkSkill) n_B_rangedMAtk=1,n_B_Weapon_zokusei=4,BskillHitNum=n_B_AtkSkillLV,atkmod-= 20;
-  else if(65==n_B_AtkSkill) atkmod+=120*n_B_AtkSkillLV;
+  else if(65==n_B_AtkSkill) atkmod+=50*n_B_AtkSkillLV;
   else if(66==n_B_AtkSkill) n_B_Weapon_zokusei=3,atkmod+=30*n_B_AtkSkillLV;
   else if(71==n_B_AtkSkill) atkmod+=20*n_B_AtkSkillLV,n_B_rangedAtk=1;
   else if(84==n_B_AtkSkill) n_B_AtkSkillLV>=3&&(n_B_rangedAtk=1),atkmod+=20*n_B_AtkSkillLV;
@@ -2315,7 +2324,7 @@ function Buf7SW(v){
         myInnerHtml("EN726",'<input type="checkbox" name="A7_Skill30" onClick="A7(1)">Tasty White Ration [MATK +15]',0),
         myInnerHtml("EN727",'<input type="checkbox" name="A7_Skill17" onClick="A7(1)">Rune Strawberry Cake [ATK, MATK +5%]',0),
         myInnerHtml("EN728",'<input type="checkbox" name="A7_Skill18" onClick="A7(1)">Schwartzwald Pine Jubilee [HIT +10, FLEE +20]',0),
-        myInnerHtml("EN729",'<input type="checkbox" name="A7_Skill19" onClick="A7(1)">Arunafeltz Desert Sandwich [CRIT +7]',0),
+        myInnerHtml("EN729",'<input type="checkbox" name="A7_Skill19" onClick="A7(1)">Arunafeltz Desert Sandwich [CRIT +9]',0),
         myInnerHtml("EN730",'<input type="checkbox" name="A7_Skill20" onClick="A7(1)">Manuk\'s Sturdiness [ATK based damage on Manuk maps +10%]',0),
         myInnerHtml("EN731",'<input type="checkbox" name="A7_Skill21" onClick="A7(1)">Manuk\'s Faith [MATK based damage on Manuk maps +10%]',0),
         myInnerHtml("EN732",'<input type="checkbox" name="A7_Skill22" onClick="A7(1)">Manuk\'s Will [Received damage on Manuk maps -10%]',0),
@@ -3564,7 +3573,6 @@ function BattleCalc2(w999){
     w999>0&&(w999_AB=1),
     w999+=2*SkillSearch(148),
     0==wBCEDPch&&(w999=Math.floor(w999*zokusei[n_B[3]][n_A_Weapon_zokusei])),
-    0==n_A_WeaponType&&SkillSearch(329)&&(305==n_A_ActiveSkill||331==n_A_ActiveSkill||333==n_A_ActiveSkill||335==n_A_ActiveSkill||337==n_A_ActiveSkill||339==n_A_ActiveSkill)&&(w999+=10*SkillSearch(329)),
     w999+=3*n_A_Buf2[12],
     w999+=3*SkillSearch(416),
     0!=n_A_WeaponType&&1==w999_AB&&(w999+=20*SkillSearch(254)),
@@ -3579,6 +3587,7 @@ function BattleCalc2(w999){
     395==n_A_ActiveSkill&&(w999+=3*KunaiOBJ[eval(document.calcForm.SkillSubNum.value)][0]),
     w999=BaiCI(w999),
     169==n_A_ActiveSkill&&10==n_A_WeaponType&&(w999=Math.floor(w999/2)),
+    169==n_A_ActiveSkill&&1==n_A_WeaponType&&(w999=Math.floor(w999*4)), // yes x4
     n_Nitou&&0==n_A_ActiveSkill&&0!=n_A_WeaponType&&(w999=Math.floor(w999*(50+10*SkillSearch(79))/100)),
     423==n_A_ActiveSkill&&(w999*=zokusei[n_B[3]][8]),
     437==n_A_ActiveSkill&&(w999*=zokusei[n_B[3]][0]),
@@ -3611,12 +3620,14 @@ function BaiCI(_){
     11==n_A_WeaponType&&SkillSearch(262)&&(_=Math.floor(_*(110+2*SkillSearch(262))/100)),
     n=0,
     0==Taijin?
-      SkillSearch(354)&&SkillSearch(365)?n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
-      SkillSearch(354)&&2==n_B[4]&&17392<=n_B[6]?n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
-      SkillSearch(352)&&0==n_B[4]?n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(352)):SkillSearch(353)&&1==n_B[4]&&5218<=n_B[6]&&(n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(353))):
-    SkillSearch(354)?n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
-    SkillSearch(352)?n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(352)):SkillSearch(353)&&(n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(353))),
-    _=Math.floor(_*(100+n)/100);
+        SkillSearch(354)&&SkillSearch(365)?         n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
+        SkillSearch(354)&&2==n_B[4]&&17392<=n_B[6]? n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
+        SkillSearch(352)&&0==n_B[4]?                n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(352)):
+        SkillSearch(353)&&1==n_B[4]&&5218<=n_B[6]&&(n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(353))):
+      SkillSearch(354)?                           n+=(n_A_BaseLV+n_A_STR+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(354)):
+      SkillSearch(352)?                           n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(352)):
+      SkillSearch(353)&&                         (n+=(n_A_BaseLV+n_A_LUK+n_A_DEX)/(12-3*SkillSearch(353))),
+    _+=Math.floor(_*Math.floor(n)/100);
   }
   return _=Math.floor(tPlusDamCut(_)),
     n=0,

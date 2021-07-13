@@ -464,9 +464,9 @@
       <select name="Conf01">
         <option value="10">0.1s (10 per second) [eAthena's Default]</option>
         <option value="15">0.15s</option>
-        <option value="20">0.2s (5 per second)</option>
+        <option value="20" selected="selected">0.2s (5 per second)</option>
         <option value="25">0.25s (4 per second)</option>
-        <option value="30" selected="selected">0.3s</option>
+        <option value="30">0.3s</option>
         <option value="33">0.33s (3 per second)</option>
         <option value="40">0.4s</option>
         <option value="50">0.5s (2 per second)</option>
@@ -491,13 +491,17 @@
               <select name="ENEMY_SORT2" onchange="EnemySort()|calc()" style="width:150px;"></select>
               <select name="ENEMY_SORT" onchange="EnemySort()|calc()">
                 <option value="0">Alphabetical</option>
-                <option value="1">By attribute</option>
+                <option value="1">By element</option>
                 <option value="2">By race</option>
-                <option value="3">By 100%Hit</option>
-                <option value="4">By 95%Flee</option>
+                <option value="3">By 100% Hit</option>
+                <option value="4">By 95% Flee</option>
                 <option value="5">By BaseExp</option>
                 <option value="6">By JobExp</option>
                 <option value="7">By MaxATK</option>
+                <option value="8">By level</option>
+                <option value="9">By HP</option>
+                <option value="10">By range</option>
+                <option value="11">By size</option>
               </select>
             </td>
           </tr>

@@ -506,7 +506,7 @@ function StAllCalc(){
     !SkillSearch(433)||20!=n_A_WeaponType&&0!=n_A_WeaponType||(w+=20+10*SkillSearch(433)),
     0==n_A_Buf6[0]&&n_A_Buf6[1]>=1&&3==n_A_BodyZokusei&&(w+=10*n_A_Buf6[1]),
     n_A_ATK+=w,
-    V_ATK=Math.floor(n_A_Weapon_ATK+n_A_Weapon2_ATK+n_A_ATK)-Math.floor(n_A_LUK/5),
+    V_ATK=Math.floor(n_A_Weapon_ATK+n_A_Weapon2_ATK+n_A_ATK)/*-Math.floor(n_A_LUK/5)*/,
     //ATKADD percent damage calculation
     SkillSearch(256)&&(V_ATK+=.05*V_ATK*SkillSearch(256)),
     SkillSearch(12)&&(V_ATK+=.32*V_ATK),
@@ -850,12 +850,14 @@ function StAllCalc(){
     w+=Math.floor(n_A_JobLV/10)*CardNumSearch(492),
     24==n_A_JOB&&(w+=SkillSearch(270)),
     SkillSearch(253)&&(w+=50),
-    (n_A_Buf7[16]||n_A_Buf7[19])&&(w+=7),
+    n_A_Buf7[16]&&(w+=7),
+    n_A_Buf7[19]&&(w+=9),
+    (n_A_Buf7[16]&&n_A_Buf7[19])&&(w-=7),
     2==n_A_JobClass()&&(w+=4*CardNumSearch(328)),
     2==n_A_JobClass()&&(w+=CardNumSearch(550)*Math.floor(n_A_HEAD_DEF_PLUS/2)),
     10==n_A_WeaponType&&(w+=5*CardNumSearch(465)),
     402==n_A_card[12]&&(w+=n_A_SHOULDER_DEF_PLUS),
-    (n_A_Weapon_ATKplus>=7)&&(526==n_A_card[0]&&(w+=5),526==n_A_card[1]&&(w+=5),526==n_A_card[2]&&(w+=5),526==n_A_card[3]&&(w+=5)),
+    (n_A_Weapon_ATKplus>=7)&&(526==n_A_card[0]&&(w+=10),526==n_A_card[1]&&(w+=10),526==n_A_card[2]&&(w+=10),526==n_A_card[3]&&(w+=10)),
     n_Nitou&&(n_A_Weapon2_ATKplus>=7)&&(526==n_A_card[4]&&(w+=5),526==n_A_card[5]&&(w+=5),526==n_A_card[6]&&(w+=5),526==n_A_card[7]&&(w+=5)),
     640==n_A_Equip[0]&&(w+=Math.floor(SU_LUK/5)),
     689==n_A_Equip[6]&&(w+=Math.floor(SU_LUK/10)),
@@ -1082,6 +1084,7 @@ function StAllCalc(){
     (321==n_A_ActiveSkill||197==n_A_ActiveSkill)&&SkillSearch(195)&&n_A_Weapon_ATKplus>=9&&EquipNumSearch(1097)&&(w-=100),
     430==n_A_ActiveSkill&&n_A_Weapon_ATKplus>=9&&1100==n_A_Equip[0]&&0==SRV&&(w-=25),
     131==n_A_ActiveSkill&&n_A_Weapon_ATKplus>=10&&1169==n_A_Equip[0]&&0==SRV&&(w-=8),
+    455==n_A_Equip[2]&&(5==n_A_JobClass()||43==n_A_JOB)&&(w-=5),
     0>w&&(w=0),
     n_A_CAST*=w/100,
     n_A_Buf2[10]&&(n_A_CAST*=(100-15*n_A_Buf2[10])/100),
@@ -1188,6 +1191,7 @@ function StAllCalc(){
     101==n_A_Equip[0]&&17==n_A_Arrow&&(n_tok[25]+=50),
     1491==n_A_Equip[0]&&18==n_A_Arrow&&(n_tok[25]+=50),
     1792==n_A_Equip[0]&&18==n_A_Arrow&&(n_tok[25]+=50),
+    n_A_HEAD_DEF_PLUS>=5&&1753==n_A_Equip[2]&&(n_tok[25]+=n_A_HEAD_DEF_PLUS-4),
     n_A_HEAD_DEF_PLUS>=9&&543==n_A_card[8]&&(n_tok[54]+=5),
     n_A_LEFT_DEF_PLUS>=6&&1622==n_A_Equip[5]&&(n_tok[60]+=n_A_LEFT_DEF_PLUS-5),
     n_A_HEAD_DEF_PLUS>=8&&1244==n_A_Equip[2]&&(n_tok[61]+=5),
@@ -2797,7 +2801,20 @@ function SetCardShortLeft(){
 }
 function EnemySort(){
   for(var len=document.calcForm.B_Enemy.length,i=0;len>i;i++) document.calcForm.B_Enemy.options[0]=null;
-  ESNum=[1,3,2,21,22,16,17,13,100];
+  ESNum=[
+    1, // Alphabetical
+    3, // By element
+    2, // By race
+    21,// By 100% Hit
+    22,// By 95% Flee
+    16,// By BaseExp
+    17,// By JobExp
+    13,// By MaxATK
+    5, // By level
+    6, // By HP
+    20,// By range
+    4  // By size
+  ];
   var wES2=eval(document.calcForm.ENEMY_SORT.value);
   if(0!=wES2){
     for(wES=ESNum[eval(document.calcForm.ENEMY_SORT.value)],wESx[0][0]="S",wESx[0][1]="E",STERTw=0,ENDw=0,i=1;i<=EnemyNum;i++)
@@ -2810,12 +2827,16 @@ function EnemySort(){
     var x=new Array,i;
     x[0]=i=STERTw;
     for(var j=1;"E"!=wESx[i][1];j++) x[j]=wESx[i][1],i=wESx[i][1];
-    if(x=SZ(x),ESwork2=new Array,21==wES||22==wES)
+    if(x=SZ(x),ESwork2=new Array,21==wES||22==wES||5==wES)
       for(i=0;i<=EnemyNum;i++) ESwork2[i]="["+MonsterOBJ[i][wES]+"] ";
     else if(2==wES)
       for(i=0;i<=EnemyNum;i++) ESwork2[i]="["+SyuzokuOBJ2[MonsterOBJ[i][2]]+"] ";
     else if(3==wES)
       for(i=0;i<=EnemyNum;i++) ESwork2[i]="["+ZokuseiOBJ2[Math.floor(MonsterOBJ[i][3]/10)]+MonsterOBJ[i][3]%10+"] ";
+    else if(4==wES)
+      for(i=0;i<=EnemyNum;i++) ESwork2[i]="["+SizeOBJ[MonsterOBJ[i][4]]+"] ";
+    else if(20==wES)
+      for(i=0;i<=EnemyNum;i++) ESwork2[i]="["+Math.floor(MonsterOBJ[i][20]&0xFF)+"] ";
     else
       for(i=0;i<=EnemyNum;i++) ESwork2[i]="";
     var j=0;
